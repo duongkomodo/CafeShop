@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CafeShop.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,19 +14,24 @@ namespace CafeShop {
         public fLogin() {
             InitializeComponent();
         }
+
+      
+
         #region Function
-        bool Login(string username,string password) {
+
+
+        Account Login(string username,string password) {
 
             return DAO.AccountDAO.Instance.Login(username,password);
         }
         #endregion
 
-        #region Function
+        #region Event
         private void btnLogin_Click(object sender,EventArgs e) {
             string username = tbUserName.Text;
             string password = tbPassWord.Text;
-
-            if (Login(username,password)) {
+            Account logined = Login(username,password);
+            if (logined != null) {
                 //fTableManager fTable = new fTableManager();
 
                 //this.Hide();
@@ -42,7 +48,20 @@ namespace CafeShop {
                 e.Cancel = true;
             }
         }
+
+        private void btnClear_Click(object sender,EventArgs e) {
+            tbPassWord.Text = "";
+            tbUserName.Text = "";
+        }
+
+
+
+
+
         #endregion
+
+
+
 
     }
 }

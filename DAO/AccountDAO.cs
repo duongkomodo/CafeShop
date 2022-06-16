@@ -1,4 +1,5 @@
 ﻿using CafeShop.DAO;
+using CafeShop.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,14 +23,17 @@ namespace CafeShop.DAO {
         private AccountDAO() {
         }
 
-       public bool Login(string username,string password) {
+       public Account Login(string username,string password) {
 
-            string sql = "EXEC dbo.USP_Login @username , @password ";
-            DataTable data = DataProvider.Instance.ExecuteQuery(sql, new object[] {username,password} );
-
-
-
-            return data.Rows.Count > 0;
+            string sql = $"EXEC dbo.USP_Login {username} , {password} ";
+            DataTable data = DataProvider.Instance.ExecuteQuery(sql);
+            if (data !=null && data.Rows.Count > 0) {      
+                    Account account = new Account(data.Rows[0]);
+                    return account;           
+            } else {
+                return null;
+            }
+        
         }
     }
 }

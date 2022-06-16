@@ -36,8 +36,43 @@ namespace CafeShop.DAO {
         public DataTable ExecuteQuery(String sql,object[] parameters = null) {
 
             DataTable dataTable = new DataTable();
-            using (SqlConnection connection = GetConnection()) {
+            try {
+                using (SqlConnection connection = GetConnection()) {
+                    SqlCommand command = new SqlCommand(sql,connection);
+                    if (parameters != null) {
+                        string[] listPara = sql.Split(' ');
+                        int i = 0;
+                        foreach (String item in listPara) {
+
+                            if (item.Contains('@')) {
+                                command.Parameters.AddWithValue(item,parameters[i]);
+                                i++;
+                            }
+                        }
+                    }
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+                    adapter.Fill(dataTable);
+
+
+                }
+            } catch (Exception) {
+
+                return null;
+            }
+      
+
+            return dataTable;
+
+        }
+
+        public int ExecuteNonQuery(String sql,object[] parameters = null) {
+            int dataLineSuccess;
+            try {
+                SqlConnection connection = GetConnection();
                 SqlCommand command = new SqlCommand(sql,connection);
+                connection.Open();
                 if (parameters != null) {
                     string[] listPara = sql.Split(' ');
                     int i = 0;
@@ -49,37 +84,13 @@ namespace CafeShop.DAO {
                         }
                     }
                 }
+                dataLineSuccess = command.ExecuteNonQuery();
+                connection.Close();
+            } catch (Exception) {
 
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                adapter.Fill(dataTable);
-
-
+                return -1;
             }
-
-            return dataTable;
-
-        }
-
-        public int ExecuteNonQuery(String sql,object[] parameters = null) {
-            int dataLineSuccess;
-
-            SqlConnection connection = GetConnection();
-            SqlCommand command = new SqlCommand(sql,connection);
-            connection.Open();
-            if (parameters != null) {
-                string[] listPara = sql.Split(' ');
-                int i = 0;
-                foreach (String item in listPara) {
-
-                    if (item.Contains('@')) {
-                        command.Parameters.AddWithValue(item,parameters[i]);
-                        i++;
-                    }
-                }
-            }
-            dataLineSuccess = command.ExecuteNonQuery();
-            connection.Close();
+      
             return dataLineSuccess;
         }
 
