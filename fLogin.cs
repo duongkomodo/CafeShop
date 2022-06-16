@@ -13,37 +13,36 @@ namespace CafeShop {
         public fLogin() {
             InitializeComponent();
         }
+        #region Function
+        bool Login(string username,string password) {
 
-        private void pictureBox1_Click(object sender,EventArgs e) {
-
+            return DAO.AccountDAO.Instance.Login(username,password);
         }
+        #endregion
 
-        private void label1_Click(object sender,EventArgs e) {
-
-        }
-
-        private void tbUserName_TextChanged(object sender,EventArgs e) {
-
-        }
-
-        private void tbPassWord_TextChanged(object sender,EventArgs e) {
-
-        }
-
-        private void btnClear_Click(object sender,EventArgs e) {
-
-        }
-
+        #region Function
         private void btnLogin_Click(object sender,EventArgs e) {
+            string username = tbUserName.Text;
+            string password = tbPassWord.Text;
 
+            if (Login(username,password)) {
+                //fTableManager fTable = new fTableManager();
+
+                //this.Hide();
+                //fTable.ShowDialog();
+                //this.Show();
+                MessageBox.Show("Success");
+            } else {
+                MessageBox.Show("Wrong username or password!");
+            }
         }
 
-        private void cbxRememberMe_CheckedChanged(object sender,EventArgs e) {
-
+        private void fLogin_FormClosing(object sender,FormClosingEventArgs e) {
+            if (MessageBox.Show("Do you really want to quit ?","Quit",MessageBoxButtons.YesNo, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes) {
+                e.Cancel = true;
+            }
         }
+        #endregion
 
-        private void label2_Click(object sender,EventArgs e) {
-
-        }
     }
 }

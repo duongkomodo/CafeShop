@@ -16,7 +16,7 @@ namespace CafeShop.DTO {
             this.dateCheckIn = dateCheckIn;
             this.dateCheckOut = dateCheckOut;
             this.status = status;
-            this.discount = discount;
+            this.Discount = discount;
         }
         public Bill(DataRow row) {
             this.Id =  (int)row["id"];

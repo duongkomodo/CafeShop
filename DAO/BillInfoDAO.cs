@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,13 @@ namespace CafeShop.DAO {
         }
 
         public void InsertBillInfo(int idBill,int idFood,int count) {
-            DataProvider.Instance.ExecuteNonQuery("USP_InsertBillInfo @idBill , @idFood , @count",new object[] { idBill,idFood,count });
+            SqlParameter p1 = new SqlParameter("@idBill",SqlDbType.Int);
+            p1.Value = idBill;
+            SqlParameter p2 = new SqlParameter("@idFood",SqlDbType.Int);
+            p2.Value = idFood;
+            SqlParameter p3= new SqlParameter("@count",SqlDbType.Int);
+            p3.Value = count;
+            DataProvider.Instance.ExecuteNonQuery("USP_InsertBillInfo @idBill , @idFood , @count",new SqlParameter[] { p1, p2, p3 });
         }
     }
 }

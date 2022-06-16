@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CafeShop.DAO;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace departmentList.DAO {
+namespace CafeShop.DAO {
     public class AccountDAO {
 
         private static AccountDAO instance;

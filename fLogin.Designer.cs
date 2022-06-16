@@ -72,7 +72,6 @@ namespace CafeShop {
             this.pictureBox1.Size = new System.Drawing.Size(455, 302);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // cbxRememberMe
             // 
@@ -83,7 +82,6 @@ namespace CafeShop {
             this.cbxRememberMe.TabIndex = 6;
             this.cbxRememberMe.Text = "Remember Me";
             this.cbxRememberMe.UseVisualStyleBackColor = true;
-            this.cbxRememberMe.CheckedChanged += new System.EventHandler(this.cbxRememberMe_CheckedChanged);
             // 
             // btnClear
             // 
@@ -93,7 +91,6 @@ namespace CafeShop {
             this.btnClear.TabIndex = 5;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnLogin
             // 
@@ -112,7 +109,6 @@ namespace CafeShop {
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(270, 27);
             this.tbUserName.TabIndex = 2;
-            this.tbUserName.TextChanged += new System.EventHandler(this.tbUserName_TextChanged);
             // 
             // tbPassWord
             // 
@@ -122,7 +118,6 @@ namespace CafeShop {
             this.tbPassWord.Size = new System.Drawing.Size(270, 27);
             this.tbPassWord.TabIndex = 3;
             this.tbPassWord.UseSystemPasswordChar = true;
-            this.tbPassWord.TextChanged += new System.EventHandler(this.tbPassWord_TextChanged);
             // 
             // label1
             // 
@@ -133,7 +128,6 @@ namespace CafeShop {
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -144,7 +138,6 @@ namespace CafeShop {
             this.label2.Size = new System.Drawing.Size(97, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Password:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // fLogin
             // 
@@ -157,6 +150,7 @@ namespace CafeShop {
             this.MaximizeBox = false;
             this.Name = "fLogin";
             this.Text = "Cafe Shop Management";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fLogin_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
