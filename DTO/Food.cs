@@ -11,12 +11,17 @@ namespace CafeShop.DTO {
         private string name;
         private int idCategory;
         private double price;
+        private string image;
 
-        public Food(int id,string name,int idCategory,double price) {
+        public Food(int id,string name,int idCategory,double price,string image) {
             this.id = id;
             this.name = name;
             this.idCategory = idCategory;
             this.price = price;
+            this.image = image;
+        }
+
+        public Food() {
         }
 
         public Food(DataRow row) {
@@ -24,6 +29,7 @@ namespace CafeShop.DTO {
             this.name = row["name"].ToString();
             this.idCategory = (int)row["idCategory"];
             this.price = (double)row["price"];
+            this.image = row["image"].ToString();
         }
 
         public int Id {
@@ -41,6 +47,10 @@ namespace CafeShop.DTO {
         public double Price {
             get => price;
             set => price = value;
+        }
+        public string Image {
+            get => image;
+            set => image = value;
         }
     }
 }

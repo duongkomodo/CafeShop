@@ -26,15 +26,18 @@ namespace CafeShop.DAO {
 
         public  List<Table> LoadTableList() {
             String sql = "EXEC dbo.USP_GetTableList";
-            List<Table> tableList = new List<Table>();
-                DataTable dataTable = DAO.DataProvider.Instance.ExecuteQuery(sql);
-            tableList = (from DataRow row in dataTable.Rows
-                         select new Table() {
-                             Id = Convert.ToInt32(row[0]),
-                             Name = row[1].ToString(),
-                             Status = row[2].ToString()
 
-                         }).ToList() ;
+            List<Table> tableList = new List<Table>();
+          
+                DataTable dataTable = DAO.DataProvider.Instance.ExecuteQuery(sql);
+                tableList = (from DataRow row in dataTable.Rows
+                             select new Table() {
+                                 Id = Convert.ToInt32(row[0]),
+                                 Name = row[1].ToString(),
+                                 Status = row[2].ToString()
+
+                             }).ToList();
+      
 
             return tableList;
         }

@@ -28,13 +28,14 @@ namespace CafeShop {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.accountInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpTables = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.btnAddfoodtoTable = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.btnSubtract = new System.Windows.Forms.Button();
+            this.lbxFoods = new System.Windows.Forms.ListBox();
+            this.nmrQuantity = new System.Windows.Forms.NumericUpDown();
+            this.btnAddFood = new System.Windows.Forms.Button();
             this.ptbFood = new System.Windows.Forms.PictureBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbCategory = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lsvBill = new System.Windows.Forms.ListView();
             this.FoodName = new System.Windows.Forms.ColumnHeader();
@@ -42,25 +43,26 @@ namespace CafeShop {
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnCheckout = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.nmrDiscount = new System.Windows.Forms.NumericUpDown();
             this.tbTotalPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnDiscount = new System.Windows.Forms.Button();
             this.btnSwapTable = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbTableName = new System.Windows.Forms.Label();
             this.lbTableStatus = new System.Windows.Forms.Label();
             this.label = new System.Windows.Forms.Label();
             this.lbDisplayTable = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFood)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmrDiscount)).BeginInit();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,55 +89,78 @@ namespace CafeShop {
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             this.adminToolStripMenuItem.Text = "Admin";
-            this.adminToolStripMenuItem.Click += new System.EventHandler(this.adminToolStripMenuItem_Click);
             // 
-            // flowLayoutPanel1
+            // flpTables
             // 
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 114);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 729);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flpTables.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flpTables.Location = new System.Drawing.Point(12, 114);
+            this.flpTables.Name = "flpTables";
+            this.flpTables.Size = new System.Drawing.Size(749, 729);
+            this.flpTables.TabIndex = 1;
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.numericUpDown1);
-            this.panel1.Controls.Add(this.btnAddfoodtoTable);
-            this.panel1.Controls.Add(this.listView1);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.btnSubtract);
+            this.panel1.Controls.Add(this.lbxFoods);
+            this.panel1.Controls.Add(this.nmrQuantity);
+            this.panel1.Controls.Add(this.btnAddFood);
             this.panel1.Controls.Add(this.ptbFood);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.cbCategory);
             this.panel1.Location = new System.Drawing.Point(767, 31);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(713, 197);
             this.panel1.TabIndex = 2;
             // 
-            // numericUpDown1
+            // btnSubtract
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(429, 82);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(124, 27);
-            this.numericUpDown1.TabIndex = 5;
+            this.btnSubtract.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSubtract.Location = new System.Drawing.Point(570, 121);
+            this.btnSubtract.Name = "btnSubtract";
+            this.btnSubtract.Size = new System.Drawing.Size(124, 68);
+            this.btnSubtract.TabIndex = 7;
+            this.btnSubtract.Text = "Subtract Food";
+            this.btnSubtract.UseVisualStyleBackColor = true;
+            this.btnSubtract.Click += new System.EventHandler(this.btnRemove_Click);
             // 
-            // btnAddfoodtoTable
+            // lbxFoods
             // 
-            this.btnAddfoodtoTable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddfoodtoTable.Location = new System.Drawing.Point(429, 121);
-            this.btnAddfoodtoTable.Name = "btnAddfoodtoTable";
-            this.btnAddfoodtoTable.Size = new System.Drawing.Size(124, 68);
-            this.btnAddfoodtoTable.TabIndex = 3;
-            this.btnAddfoodtoTable.Text = "AddFood";
-            this.btnAddfoodtoTable.UseVisualStyleBackColor = true;
+            this.lbxFoods.FormattingEnabled = true;
+            this.lbxFoods.ItemHeight = 20;
+            this.lbxFoods.Location = new System.Drawing.Point(193, 45);
+            this.lbxFoods.Name = "lbxFoods";
+            this.lbxFoods.Size = new System.Drawing.Size(230, 144);
+            this.lbxFoods.TabIndex = 6;
+            this.lbxFoods.SelectedIndexChanged += new System.EventHandler(this.lbxFoods_SelectedIndexChanged);
             // 
-            // listView1
+            // nmrQuantity
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(192, 37);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(231, 152);
-            this.listView1.TabIndex = 4;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.nmrQuantity.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nmrQuantity.Location = new System.Drawing.Point(429, 82);
+            this.nmrQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nmrQuantity.Name = "nmrQuantity";
+            this.nmrQuantity.Size = new System.Drawing.Size(124, 31);
+            this.nmrQuantity.TabIndex = 5;
+            this.nmrQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // btnAddFood
+            // 
+            this.btnAddFood.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddFood.Location = new System.Drawing.Point(429, 121);
+            this.btnAddFood.Name = "btnAddFood";
+            this.btnAddFood.Size = new System.Drawing.Size(124, 68);
+            this.btnAddFood.TabIndex = 3;
+            this.btnAddFood.Text = "AddFood";
+            this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
             // 
             // ptbFood
             // 
@@ -148,13 +173,14 @@ namespace CafeShop {
             this.ptbFood.TabIndex = 2;
             this.ptbFood.TabStop = false;
             // 
-            // comboBox1
+            // cbCategory
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(192, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(231, 28);
-            this.comboBox1.TabIndex = 0;
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Location = new System.Drawing.Point(192, 3);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(231, 28);
+            this.cbCategory.TabIndex = 0;
+            this.cbCategory.SelectedIndexChanged += new System.EventHandler(this.cbCategory_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -177,10 +203,11 @@ namespace CafeShop {
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(3, 3);
             this.lsvBill.Name = "lsvBill";
-            this.lsvBill.Size = new System.Drawing.Size(703, 504);
+            this.lsvBill.Size = new System.Drawing.Size(708, 504);
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
+            this.lsvBill.SelectedIndexChanged += new System.EventHandler(this.lsvBill_SelectedIndexChanged);
             // 
             // FoodName
             // 
@@ -205,9 +232,10 @@ namespace CafeShop {
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.btnCheckout);
             this.panel3.Controls.Add(this.comboBox2);
-            this.panel3.Controls.Add(this.numericUpDown2);
+            this.panel3.Controls.Add(this.nmrDiscount);
             this.panel3.Controls.Add(this.tbTotalPrice);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.btnDiscount);
@@ -216,6 +244,16 @@ namespace CafeShop {
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(713, 89);
             this.panel3.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(477, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 28);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "VNĐ";
             // 
             // btnCheckout
             // 
@@ -236,25 +274,26 @@ namespace CafeShop {
             this.comboBox2.Size = new System.Drawing.Size(122, 28);
             this.comboBox2.TabIndex = 6;
             // 
-            // numericUpDown2
+            // nmrDiscount
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(159, 55);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(119, 27);
-            this.numericUpDown2.TabIndex = 5;
+            this.nmrDiscount.Location = new System.Drawing.Point(144, 55);
+            this.nmrDiscount.Name = "nmrDiscount";
+            this.nmrDiscount.Size = new System.Drawing.Size(122, 27);
+            this.nmrDiscount.TabIndex = 5;
             // 
             // tbTotalPrice
             // 
-            this.tbTotalPrice.Location = new System.Drawing.Point(301, 40);
+            this.tbTotalPrice.Location = new System.Drawing.Point(284, 40);
             this.tbTotalPrice.Name = "tbTotalPrice";
-            this.tbTotalPrice.Size = new System.Drawing.Size(240, 27);
+            this.tbTotalPrice.ReadOnly = true;
+            this.tbTotalPrice.Size = new System.Drawing.Size(187, 27);
             this.tbTotalPrice.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(301, 6);
+            this.label2.Location = new System.Drawing.Point(284, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(119, 31);
             this.label2.TabIndex = 3;
@@ -263,7 +302,7 @@ namespace CafeShop {
             // btnDiscount
             // 
             this.btnDiscount.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDiscount.Location = new System.Drawing.Point(156, 3);
+            this.btnDiscount.Location = new System.Drawing.Point(144, 4);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(122, 45);
             this.btnDiscount.TabIndex = 2;
@@ -283,7 +322,7 @@ namespace CafeShop {
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.lbTableName);
             this.panel4.Controls.Add(this.lbTableStatus);
             this.panel4.Controls.Add(this.label);
             this.panel4.Controls.Add(this.lbDisplayTable);
@@ -292,24 +331,24 @@ namespace CafeShop {
             this.panel4.Size = new System.Drawing.Size(749, 77);
             this.panel4.TabIndex = 5;
             // 
-            // label1
+            // lbTableName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(175, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 23);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
+            this.lbTableName.AutoSize = true;
+            this.lbTableName.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbTableName.ForeColor = System.Drawing.Color.Olive;
+            this.lbTableName.Location = new System.Drawing.Point(175, 11);
+            this.lbTableName.Name = "lbTableName";
+            this.lbTableName.Size = new System.Drawing.Size(0, 35);
+            this.lbTableName.TabIndex = 3;
             // 
             // lbTableStatus
             // 
             this.lbTableStatus.AutoSize = true;
-            this.lbTableStatus.Location = new System.Drawing.Point(175, 49);
+            this.lbTableStatus.Font = new System.Drawing.Font("Segoe UI", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lbTableStatus.Location = new System.Drawing.Point(175, 47);
             this.lbTableStatus.Name = "lbTableStatus";
-            this.lbTableStatus.Size = new System.Drawing.Size(50, 20);
+            this.lbTableStatus.Size = new System.Drawing.Size(0, 23);
             this.lbTableStatus.TabIndex = 2;
-            this.lbTableStatus.Text = "label1";
             // 
             // label
             // 
@@ -330,7 +369,6 @@ namespace CafeShop {
             this.lbDisplayTable.Size = new System.Drawing.Size(179, 38);
             this.lbDisplayTable.TabIndex = 0;
             this.lbDisplayTable.Text = "Table Name:";
-            this.lbDisplayTable.Click += new System.EventHandler(this.lbDisplayTable_Click);
             // 
             // fTableManager
             // 
@@ -341,7 +379,7 @@ namespace CafeShop {
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flpTables);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -353,12 +391,12 @@ namespace CafeShop {
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFood)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmrDiscount)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
@@ -371,20 +409,19 @@ namespace CafeShop {
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem accountInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flpTables;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lbDisplayTable;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbTableName;
         private System.Windows.Forms.Label lbTableStatus;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.PictureBox ptbFood;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button btnAddfoodtoTable;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox cbCategory;
+        private System.Windows.Forms.Button btnAddFood;
+        private System.Windows.Forms.NumericUpDown nmrQuantity;
         private System.Windows.Forms.ListView lsvBill;
         private System.Windows.Forms.ColumnHeader FoodName;
         private System.Windows.Forms.ColumnHeader count;
@@ -392,10 +429,13 @@ namespace CafeShop {
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown nmrDiscount;
         private System.Windows.Forms.TextBox tbTotalPrice;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDiscount;
         private System.Windows.Forms.Button btnSwapTable;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox lbxFoods;
+        private System.Windows.Forms.Button btnSubtract;
     }
 }

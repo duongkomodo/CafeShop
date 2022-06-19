@@ -63,19 +63,9 @@ namespace CafeShop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap placeholder {
+        internal static System.Drawing.Bitmap TableLogo {
             get {
-                object obj = ResourceManager.GetObject("placeholder", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Traditional_Coffee_Shop_Logo_Maker {
-            get {
-                object obj = ResourceManager.GetObject("Traditional Coffee Shop Logo Maker", resourceCulture);
+                object obj = ResourceManager.GetObject("TableLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

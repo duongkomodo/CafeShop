@@ -1,7 +1,7 @@
 	USE [QuanLyQuanCafe]
 GO
 
-
+SELECT * FROM Food
 
 drop proc USP_InsertBillInfo
 ALTER PROC USP_InsertBill
@@ -45,7 +45,7 @@ BEGIN
 		ELSE
 			DELETE dbo.BillInfo WHERE idBill = @idBill AND idFood = @idFood
 	END
-	ELSE
+	ELSE IF(@count > 0)
 	BEGIN
 		INSERT	dbo.BillInfo
         ( idBill, idFood, count )
@@ -56,8 +56,11 @@ BEGIN
 	END
 END
 GO
-
-
+select * from bill
+select * from billinfo
+select * from tablefood
+USP_InsertBillInfo 3 , 5 , 2
+USP_InsertBillInfo 3 , 4 , 2
 Alter TRIGGER UTG_UpdateBillInfo
 ON dbo.BillInfo FOR INSERT, UPDATE
 AS
@@ -76,21 +79,52 @@ BEGIN
 	IF (@count > 0)
 	BEGIN
 	
-	
+		PRINT @idTable
+		PRINT @idBill
+		PRINT @count
 		
 		UPDATE dbo.TableFood SET status = N'Taken' WHERE id = @idTable		
 		
-	END		
-	ELSE
-	BEGIN
+	END			
+END
+GO
+
+alter TRIGGER UTG_DeleteBillInfo
+ON dbo.BillInfo FOR Delete
+AS
+BEGIN
+	DECLARE @idBill INT
 	
-	UPDATE dbo.TableFood SET status = N'Empty' WHERE id = @idTable	
+	SELECT @idBill = idBill FROM Deleted
+	
+	DECLARE @idTable INT
+	
+	SELECT @idTable = idTable FROM dbo.Bill WHERE id = @idBill AND status = 0	
+	
+	DECLARE @count INT
+	SELECT  @count = COUNT(*) FROM dbo.BillInfo WHERE idBill = @idBill
+	
+	   Print'id table' 
+	    PRINT  @idTable
+		 Print ' id Bill'
+		PRINT  @idBill
+		 Print'count'
+		PRINT  @count
+ IF (@count < 2)
+	BEGIN
+	   Print'id table' 
+	    PRINT  @idTable
+		 Print ' id Bill'
+		PRINT  @idBill
+		 Print'count'
+		PRINT  @count
+	UPDATE dbo.TableFood SET status = N'Empty' WHERE id = @idTable
 	end
 	
 END
 GO
 
-Alter TRIGGER UTG_UpdateTable
+drop TRIGGER UTG_UpdateTable
 ON dbo.TableFood FOR UPDATE
 AS
 BEGIN
@@ -120,7 +154,7 @@ AS
 BEGIN
 	DECLARE @idBill INT
 	
-	SELECT @idBill = id FROM Inserted	
+	SELECT @idBill = id FROM Inserted
 	
 	DECLARE @idTable INT
 	
@@ -135,7 +169,7 @@ BEGIN
 END
 GO
 
-DROP TRIGGER UTG_UpdateBillInfo,UTG_UpdateBill
+DROP TRIGGER UTG_UpdateBillInfo,UTG_UpdateBill 
 
 SELECT * FROM dbo.Bill
 
@@ -233,6 +267,9 @@ EXEC USP_SwitchTable 3, 2
 SELECT * FROM dbo.TableFood
 
 
-DBCC CHECKIDENT (Billinfo , RESEED, 0)
+DBCC CHECKIDENT (Bill , RESEED, 0)
+DBCC CHECKIDENT (BillInfo , RESEED, 0)
 GO
 UPDATE dbo.TableFood SET status = N'Empty'
+Delete Bill
+Delete Billinfo

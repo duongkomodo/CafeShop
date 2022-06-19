@@ -66,7 +66,7 @@ namespace CafeShop {
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(139, 437);
+            this.label3.Location = new System.Drawing.Point(3, 437);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(226, 20);
             this.label3.TabIndex = 6;

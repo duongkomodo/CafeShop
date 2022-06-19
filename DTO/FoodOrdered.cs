@@ -6,25 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CafeShop.DTO {
-   public class ListFoodOnTable {
+   public class FoodOrdered {
 
+        private int foodId;
         private string foodName;
         private int count;
         private double price;
         private double totalPrice;
 
-        public ListFoodOnTable(string foodName,int count,double price,double totalPrice = 0  ) {
+
+        public FoodOrdered(int foodId,string foodName,int count,double price,double totalPrice = 0) {
+            this.foodId = foodId;
             this.foodName = foodName;
             this.count = count;
             this.price = price;
             this.totalPrice = totalPrice;
         }
 
-        public ListFoodOnTable(DataRow row) {
+        public FoodOrdered(DataRow row) {
+            this.foodId = (int)row["id"];
             this.foodName = row["name"].ToString();
             this.count = (int)row["count"];
             this.price = (double)row["price"];
-            this.totalPrice = (double)row["total"] ;
+            this.totalPrice = (double)row["total"];
         }
 
         public string FoodName {
@@ -42,6 +46,10 @@ namespace CafeShop.DTO {
         public double TotalPrice {
             get => totalPrice;
             set => totalPrice = value;
+        }
+        public int FoodId {
+            get => foodId;
+            set => foodId = value;
         }
     }
 }

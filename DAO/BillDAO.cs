@@ -33,17 +33,12 @@ namespace CafeShop.DAO {
             return -1;
         }
 
-        public void InsertBill(int id) {
-            DataProvider.Instance.ExecuteNonQuery("exec USP_InsertBill @idTable",new object[] { id });
+        public int InsertBill(int idTable) {
+            int result = (int)DataProvider.Instance.ExecuteScalar($"exec USP_InsertBill {idTable}");
+            return result;
         }
 
-        public int GetMaxIDBill() {
-            try {
-                return (int)DataProvider.Instance.ExecuteScalar("SELECT MAX(id) FROM dbo.Bill");
-            } catch {
-                return 1;
-            }
-        }
+
 
         public void CheckOut(int billId, int discount) {
             string sql = $"Update Bill SET status = 1, discount = {discount} where Bill.id = {billId}" ;

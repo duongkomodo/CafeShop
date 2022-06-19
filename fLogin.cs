@@ -32,11 +32,11 @@ namespace CafeShop {
             string password = tbPassWord.Text;
             Account logined = Login(username,password);
             if (logined != null) {
-                //fTableManager fTable = new fTableManager();
+                fTableManager fTable = new fTableManager();
 
-                //this.Hide();
-                //fTable.ShowDialog();
-                //this.Show();
+                this.Hide();
+                fTable.ShowDialog();
+                this.Show();
                 MessageBox.Show("Success");
             } else {
                 MessageBox.Show("Wrong username or password!");
@@ -53,9 +53,6 @@ namespace CafeShop {
             tbPassWord.Text = "";
             tbUserName.Text = "";
         }
-
-
-
 
 
         #endregion

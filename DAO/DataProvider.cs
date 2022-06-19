@@ -36,7 +36,7 @@ namespace CafeShop.DAO {
         public DataTable ExecuteQuery(String sql,object[] parameters = null) {
 
             DataTable dataTable = new DataTable();
-            try {
+            
                 using (SqlConnection connection = GetConnection()) {
                     SqlCommand command = new SqlCommand(sql,connection);
                     if (parameters != null) {
@@ -57,10 +57,7 @@ namespace CafeShop.DAO {
 
 
                 }
-            } catch (Exception) {
-
-                return null;
-            }
+    
       
 
             return dataTable;
@@ -114,10 +111,11 @@ namespace CafeShop.DAO {
 
         public object ExecuteScalar(String sql,object[] parameters = null) {
             object dataRow;
+            try {
 
-            using (SqlConnection connection = GetConnection()) {
+                SqlConnection connection = GetConnection();
                 SqlCommand command = new SqlCommand(sql,connection);
-
+                connection.Open();
                 if (parameters != null) {
                     string[] listPara = sql.Split(' ');
                     int i = 0;
@@ -130,7 +128,12 @@ namespace CafeShop.DAO {
                     }
                 }
                 dataRow = command.ExecuteScalar();
+                connection.Close();
+            } catch (Exception) {
+
+                throw;
             }
+
             return dataRow;
 
         }

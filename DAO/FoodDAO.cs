@@ -41,7 +41,7 @@ namespace CafeShop.DAO {
 
         public List<Food> LoadAllFoodById(int id) {
 
-            string sql =  $"select * from food where IdCategory = {id}";
+            string sql =  $"select * from food where IdCategory = {id} ;";
             List<Food> list = new List<Food>();
             DataTable data = DataProvider.Instance.ExecuteQuery(sql);
             foreach (DataRow item in data.Rows) {
@@ -51,6 +51,22 @@ namespace CafeShop.DAO {
             }
 
             return list;
+        }
+
+        public Food getFoodById(int id) {
+
+            string sql = $"select * from food where id = {id} ;";
+            Food food = new Food();
+            DataTable data = DataProvider.Instance.ExecuteQuery(sql);
+            if (data.Rows.Count > 0) {
+                food = new Food(data.Rows[0]);
+                return food;
+            } else {
+
+                return null;
+            }
+
+          
         }
     }
 }
