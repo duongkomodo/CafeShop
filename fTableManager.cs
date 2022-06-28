@@ -150,41 +150,49 @@ namespace CafeShop {
 
         private void btnAddFood_Click(object sender,EventArgs e) {
             Table table = lsvBill.Tag as Table;
+            if (table != null) {
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+                int foodID = (lbxFoods.SelectedItem as Food).Id;
+                int addCount = (int)nmrQuantity.Value;
 
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
-            int foodID = (lbxFoods.SelectedItem as Food).Id;
-            int addCount = (int)nmrQuantity.Value;
+                if (idBill == -1) {
+                    int idBillMax = BillDAO.Instance.InsertBill(table.Id);
 
-            if (idBill == -1) {
-                int idBillMax = BillDAO.Instance.InsertBill(table.Id);
+                    BillInfoDAO.Instance.InsertBillInfo(idBillMax,foodID,addCount);
+                } else {
+                    BillInfoDAO.Instance.InsertBillInfo(idBill,foodID,addCount);
+                }
 
-                BillInfoDAO.Instance.InsertBillInfo(idBillMax,foodID,addCount);
+                LoadBill(table.Id);
+                LoadTable();
             } else {
-                BillInfoDAO.Instance.InsertBillInfo(idBill,foodID,addCount);
+                MessageBox.Show("Choose a table first !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
 
-            LoadBill(table.Id);
-            LoadTable();
 
         }
 
         private void btnRemove_Click(object sender,EventArgs e) {
             Table table = lsvBill.Tag as Table;
+            if (table != null) {
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+                int foodID = (lbxFoods.SelectedItem as Food).Id;
+                int subtractCount = (int)nmrQuantity.Value * (-1);
 
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
-            int foodID = (lbxFoods.SelectedItem as Food).Id;
-            int subtractCount = (int)nmrQuantity.Value * (-1);
-           
-            if (idBill == -1) {
-                int idBillMax = BillDAO.Instance.InsertBill(table.Id);
+                if (idBill == -1) {
+                    int idBillMax = BillDAO.Instance.InsertBill(table.Id);
 
-                BillInfoDAO.Instance.InsertBillInfo(idBillMax,foodID,subtractCount);
+                    BillInfoDAO.Instance.InsertBillInfo(idBillMax,foodID,subtractCount);
+                } else {
+                    BillInfoDAO.Instance.InsertBillInfo(idBill,foodID,subtractCount);
+                }
+
+                LoadBill(table.Id);
+                LoadTable();
             } else {
-                BillInfoDAO.Instance.InsertBillInfo(idBill,foodID,subtractCount);
+                MessageBox.Show("Choose a table first !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
 
-            LoadBill(table.Id);
-            LoadTable();
         }
 
         private void lsvBill_SelectedIndexChanged(object sender,EventArgs e) {
@@ -199,21 +207,34 @@ namespace CafeShop {
 
         private void btnCheckout_Click(object sender,EventArgs e) {
             Table table = lsvBill.Tag as Table;
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
-            int discount = (int)nmrDiscount.Value;
+            if (table != null) {
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+                int discount = (int)nmrDiscount.Value;
 
-            double totalPrice = Convert.ToDouble(tbTotalPrice.Text);
+                decimal totalPrice = Convert.ToDecimal(tbTotalPrice.Text);
 
-            double finalTotalPrice = totalPrice - (totalPrice / 100) * discount;
-            if (idBill != -1) {
+                decimal finalTotalPrice = totalPrice - (totalPrice / 100) * discount;
+                if (idBill != -1) {
 
-                if (MessageBox.Show($"Do you really want to checkout {table.Name}\n {totalPrice} - ({totalPrice} / 100) x {discount} = {finalTotalPrice}","Caution",MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK) {
-                    BillDAO.Instance.CheckOut(idBill,discount);
-                    LoadBill(table.Id);
-                    LoadTable();
+                    if (MessageBox.Show($"Do you really want to checkout {table.Name}\n {totalPrice} - ({totalPrice} / 100) x {discount} = {finalTotalPrice}","Caution",MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK) {
+                        BillDAO.Instance.CheckOut(idBill,discount,finalTotalPrice);
+                        LoadBill(table.Id);
+                        LoadTable();
+                    }
+                } else {
+                    MessageBox.Show($"This {table.Name} is empty !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
+            } else {
+                MessageBox.Show("Choose a table first !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
+   
 
+        }
+        private void billToolStripMenuItem_Click(object sender,EventArgs e) {
+            fBillManager fBill = new fBillManager();
+            this.Hide();
+            fBill.ShowDialog();
+            this.Show();
         }
 
 

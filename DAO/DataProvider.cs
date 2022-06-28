@@ -109,24 +109,14 @@ namespace CafeShop.DAO {
             return dataLineSuccess;
         }
 
-        public object ExecuteScalar(String sql,object[] parameters = null) {
+        public object ExecuteScalar(String sql) {
             object dataRow;
             try {
 
                 SqlConnection connection = GetConnection();
                 SqlCommand command = new SqlCommand(sql,connection);
                 connection.Open();
-                if (parameters != null) {
-                    string[] listPara = sql.Split(' ');
-                    int i = 0;
-                    foreach (String item in listPara) {
-
-                        if (item.Contains('@')) {
-                            command.Parameters.AddWithValue(item,parameters[i]);
-                            i++;
-                        }
-                    }
-                }
+            
                 dataRow = command.ExecuteScalar();
                 connection.Close();
             } catch (Exception) {

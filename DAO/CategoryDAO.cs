@@ -28,7 +28,7 @@ namespace CafeShop.DAO {
 
 
         public List<Category> LoadAllCategory() {
-            string sql = "select * from FoodCategory";
+            string sql = "select * from FoodCategory where inUse = 1";
             List<Category> list = new List<Category>();
             DataTable data = DataProvider.Instance.ExecuteQuery(sql);
             foreach (DataRow item in data.Rows) {

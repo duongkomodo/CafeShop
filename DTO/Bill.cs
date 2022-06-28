@@ -8,16 +8,11 @@ namespace CafeShop.DTO {
         private DateTime? dateCheckOut;
         private int status;
         private int discount;
+        private decimal total;
 
       
 
-        public Bill(int id,DateTime? dateCheckIn,DateTime? dateCheckOut,int status) {
-            this.id = id;
-            this.dateCheckIn = dateCheckIn;
-            this.dateCheckOut = dateCheckOut;
-            this.status = status;
-            this.Discount = discount;
-        }
+
         public Bill(DataRow row) {
             this.Id =  (int)row["id"];
             this.DateCheckIn = (DateTime?)row["dateCheckIn"];
@@ -30,7 +25,7 @@ namespace CafeShop.DTO {
             if (row["discount"].ToString() != "") {
                 this.Discount = (int)row["discount"];
             }
-            
+            this.total = (decimal)row["total"];
         }
 
         public int Id {
@@ -52,6 +47,10 @@ namespace CafeShop.DTO {
         public int Discount {
             get => discount;
             set => discount = value;
+        }
+        public decimal Total {
+            get => total;
+            set => total = value;
         }
     }
 }

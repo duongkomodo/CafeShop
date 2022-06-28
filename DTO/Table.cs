@@ -10,6 +10,7 @@ namespace CafeShop.DTO {
         private int id;
         private string name;
         private string status;
+        private bool inUse;
 
         public Table(int id,string name,string status) {
             this.id = id;
@@ -31,6 +32,10 @@ namespace CafeShop.DTO {
         public string Status {
             get => status;
             set => status = value;
+        }
+        public bool InUse {
+            get => inUse;
+            set => inUse = value;
         }
     }
 }

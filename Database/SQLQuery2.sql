@@ -13,16 +13,24 @@ BEGIN
 	          DateCheckOut ,
 	          idTable ,
 	          status,
-			  discount
+			  discount,
+			  total
 	        )
 	VALUES  ( GETDATE() , -- DateCheckIn - date
 	          NULL , -- DateCheckOut - date
 	          @idTable , -- idTable - int
 	          0,
+			  0,
 			  0  -- status - int
 	        )
+   select MAX(id) from Bill
 END
 GO
+
+
+
+
+exec USP_InsertBill 2
 
 go
 ALTER PROC USP_InsertBillInfo
@@ -188,7 +196,7 @@ GO
 
 
 go
-ALter PROC USP_SwitchTable
+Drop PROC USP_SwitchTable
 @idTable1 int , @idTable2 int
 AS
 BEGIN
@@ -264,6 +272,23 @@ GO
 
 EXEC USP_SwitchTable 3, 2
 
+
+exec USP_GetAllCheckOutBill '06-01-2022' ,'06-30-2022' 
+DBCC useroptions
+
+
+Alter PROC USP_GetAllCheckOutBill
+@fromDate datetime,
+@toDate datetime
+AS
+BEGIN
+
+Select bill.id as [ID], DateCheckIn as [Checkin], DateCheckOut as [Checkout], TableFood.Name as [Table Name], discount as Discount, FORMAT (bill.total, '###.##')  as [Total Price] from bill 
+join TableFood on TableFood.id = Bill.idTable where bill.status = 1 and DateCheckIn between @fromDate and @toDate
+
+END
+GO
+
 SELECT * FROM dbo.TableFood
 
 
@@ -273,3 +298,5 @@ GO
 UPDATE dbo.TableFood SET status = N'Empty'
 Delete Bill
 Delete Billinfo
+
+select * from bill

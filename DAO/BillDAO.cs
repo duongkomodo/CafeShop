@@ -34,14 +34,20 @@ namespace CafeShop.DAO {
         }
 
         public int InsertBill(int idTable) {
-            int result = (int)DataProvider.Instance.ExecuteScalar($"exec USP_InsertBill {idTable}");
+            int result = (int)DataProvider.Instance.ExecuteScalar($"exec USP_InsertBill {idTable} ; ");
             return result;
         }
 
+        public DataTable GetBillsCheckOut(String fromDate, String toDate) {
+         
+            DataTable data = DataProvider.Instance.ExecuteQuery($"exec USP_GetAllCheckOutBill '{fromDate}' , '{toDate}'");
 
+            return data;
+        
+        }
 
-        public void CheckOut(int billId, int discount) {
-            string sql = $"Update Bill SET status = 1, discount = {discount} where Bill.id = {billId}" ;
+        public void CheckOut(int billId, int discount,decimal total) {
+            string sql = $"Update Bill SET status = 1, discount = {discount}, DateCheckOut = GETDATE(), total = {total} where Bill.id = {billId}" ;
             DataProvider.Instance.ExecuteNonQuery(sql);
         }
     }

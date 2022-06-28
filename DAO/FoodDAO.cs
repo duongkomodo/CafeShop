@@ -62,11 +62,9 @@ namespace CafeShop.DAO {
                 food = new Food(data.Rows[0]);
                 return food;
             } else {
-
                 return null;
             }
 
-          
         }
     }
 }

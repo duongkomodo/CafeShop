@@ -16,4 +16,4 @@ EXEC dbo.USP_GetTableBill
   select * from BillInfo
 
  select * from TableFood
-
+ select * from FoodCategory
