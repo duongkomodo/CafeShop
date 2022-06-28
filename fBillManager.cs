@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,15 +15,16 @@ namespace CafeShop {
             InitializeComponent();
         }
 
+        DataTable currDataTable = new DataTable();
         #region Function
 
-        public void DisplayBills(DateTime fromDate, DateTime toDate) {
+        public void DisplayBills(DateTime fromDate,DateTime toDate) {
 
-            DataTable data = DAO.BillDAO.Instance.GetBillsCheckOut(fromDate.ToString("yyyy-MM-dd"),toDate.ToString("yyyy-MM-dd"));
-            dgvBill.DataSource = data;
+            currDataTable = DAO.BillDAO.Instance.GetBillsCheckOut(fromDate.ToString("yyyy-MM-dd"),toDate.ToString("yyyy-MM-dd"));
+            dgvBill.DataSource = currDataTable;
             decimal revenue = 0;
-            foreach (DataRow row in data.Rows) {
-                revenue +=  Convert.ToDecimal( row["Total Price"]);
+            foreach (DataRow row in currDataTable.Rows) {
+                revenue += Convert.ToDecimal(row["Total Price"]);
             }
             tbTotal.Text = revenue.ToString("#,###.##");
             dgvBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -44,10 +46,48 @@ namespace CafeShop {
             Setup();
         }
 
-        #endregion
-
         private void btnSearch_Click(object sender,EventArgs e) {
             DisplayBills(dtpFromDate.Value,dtpToDate.Value);
         }
+
+        #endregion
+
+        private void btnExport_Click(object sender,EventArgs e) {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel Files|*.xlsx;*.xlsm;*.xltx;*.xltm";
+            sfd.FileName = "Doanh_thu_thang_.xlsx";
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                if (!(dgvBill.RowCount == 0)) {
+                    using (var wb = new XLWorkbook()) {
+                        wb.Worksheets.Add("Sheet1");
+                        var wbSheet = wb.Worksheet(1);
+
+                        var title1 = wbSheet.Cell("A1");
+                        title1.Value = $"BÁO CÁO DOANH THU";
+                        title1.Style.Font.Bold = true;
+                        title1.Style.Font.FontName = "Times New Roman";
+                        title1.Style.Font.FontSize = 16;
+                        title1.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        title1.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                        wbSheet.Range("A1:F1").Merge();
+
+                        var title2 = wbSheet.Cell("A2");
+                        title2.Value = $"Từ ngày {dtpFromDate.Value}      Đến ngày{dtpToDate.Value}";
+                        title2.Style.Font.FontName = "Times New Roman";
+                        title2.Style.Font.FontSize = 12;
+                        title2.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        title2.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                        wbSheet.Range("A2:F2").Merge();
+
+                        var data = wbSheet.Cell("A5");
+                        data.InsertTable(currDataTable);
+                        wbSheet.Columns("A","O").AdjustToContents();
+                        wb.SaveAs(sfd.FileName);
+
+                    }
+                }
+            }
+        }
     }
+    
 }
