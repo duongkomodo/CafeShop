@@ -29,7 +29,6 @@ namespace CafeShop {
             this.accountInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flpTables = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSubtract = new System.Windows.Forms.Button();
             this.lbxFoods = new System.Windows.Forms.ListBox();
@@ -55,6 +54,7 @@ namespace CafeShop {
             this.lbTableStatus = new System.Windows.Forms.Label();
             this.label = new System.Windows.Forms.Label();
             this.lbDisplayTable = new System.Windows.Forms.Label();
+            this.flpTables = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
@@ -67,6 +67,7 @@ namespace CafeShop {
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Tan;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.accountInfoToolStripMenuItem,
@@ -92,18 +93,11 @@ namespace CafeShop {
             // 
             // billToolStripMenuItem
             // 
+            this.billToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.billToolStripMenuItem.Name = "billToolStripMenuItem";
             this.billToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.billToolStripMenuItem.Text = "Bill";
             this.billToolStripMenuItem.Click += new System.EventHandler(this.billToolStripMenuItem_Click);
-            // 
-            // flpTables
-            // 
-            this.flpTables.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flpTables.Location = new System.Drawing.Point(12, 114);
-            this.flpTables.Name = "flpTables";
-            this.flpTables.Size = new System.Drawing.Size(749, 729);
-            this.flpTables.TabIndex = 1;
             // 
             // panel1
             // 
@@ -122,11 +116,12 @@ namespace CafeShop {
             // btnSubtract
             // 
             this.btnSubtract.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSubtract.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSubtract.Location = new System.Drawing.Point(570, 121);
             this.btnSubtract.Name = "btnSubtract";
             this.btnSubtract.Size = new System.Drawing.Size(124, 68);
             this.btnSubtract.TabIndex = 7;
-            this.btnSubtract.Text = "Subtract Food";
+            this.btnSubtract.Text = "Subtract";
             this.btnSubtract.UseVisualStyleBackColor = true;
             this.btnSubtract.Click += new System.EventHandler(this.btnRemove_Click);
             // 
@@ -142,15 +137,15 @@ namespace CafeShop {
             // 
             // nmrQuantity
             // 
-            this.nmrQuantity.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nmrQuantity.Location = new System.Drawing.Point(429, 82);
+            this.nmrQuantity.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nmrQuantity.Location = new System.Drawing.Point(429, 77);
             this.nmrQuantity.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nmrQuantity.Name = "nmrQuantity";
-            this.nmrQuantity.Size = new System.Drawing.Size(124, 31);
+            this.nmrQuantity.Size = new System.Drawing.Size(124, 38);
             this.nmrQuantity.TabIndex = 5;
             this.nmrQuantity.Value = new decimal(new int[] {
             1,
@@ -161,11 +156,12 @@ namespace CafeShop {
             // btnAddFood
             // 
             this.btnAddFood.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddFood.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAddFood.Location = new System.Drawing.Point(429, 121);
             this.btnAddFood.Name = "btnAddFood";
             this.btnAddFood.Size = new System.Drawing.Size(124, 68);
             this.btnAddFood.TabIndex = 3;
-            this.btnAddFood.Text = "AddFood";
+            this.btnAddFood.Text = "Add";
             this.btnAddFood.UseVisualStyleBackColor = true;
             this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
             // 
@@ -183,7 +179,7 @@ namespace CafeShop {
             // cbCategory
             // 
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(192, 3);
+            this.cbCategory.Location = new System.Drawing.Point(193, 9);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(231, 28);
             this.cbCategory.TabIndex = 0;
@@ -253,17 +249,18 @@ namespace CafeShop {
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(371, 53);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(386, 53);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 28);
+            this.label1.Size = new System.Drawing.Size(66, 29);
             this.label1.TabIndex = 8;
             this.label1.Text = "VNĐ";
             // 
             // btnCheckout
             // 
             this.btnCheckout.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCheckout.Location = new System.Drawing.Point(547, 11);
+            this.btnCheckout.Font = new System.Drawing.Font("Pristina", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCheckout.Location = new System.Drawing.Point(535, 12);
             this.btnCheckout.Name = "btnCheckout";
             this.btnCheckout.Size = new System.Drawing.Size(159, 70);
             this.btnCheckout.TabIndex = 7;
@@ -280,7 +277,7 @@ namespace CafeShop {
             // 
             // tbTotalPrice
             // 
-            this.tbTotalPrice.Location = new System.Drawing.Point(178, 54);
+            this.tbTotalPrice.Location = new System.Drawing.Point(193, 53);
             this.tbTotalPrice.Name = "tbTotalPrice";
             this.tbTotalPrice.ReadOnly = true;
             this.tbTotalPrice.Size = new System.Drawing.Size(187, 27);
@@ -289,16 +286,17 @@ namespace CafeShop {
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(178, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 31);
+            this.label2.Size = new System.Drawing.Size(148, 29);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Total Price";
+            this.label2.Text = "Total Price:";
             // 
             // btnDiscount
             // 
             this.btnDiscount.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDiscount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDiscount.Location = new System.Drawing.Point(3, 3);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(122, 45);
@@ -357,16 +355,28 @@ namespace CafeShop {
             this.lbDisplayTable.TabIndex = 0;
             this.lbDisplayTable.Text = "Table Name:";
             // 
+            // flpTables
+            // 
+            this.flpTables.BackColor = System.Drawing.Color.White;
+            this.flpTables.BackgroundImage = global::CafeShop.Properties.Resources.background;
+            this.flpTables.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.flpTables.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flpTables.Location = new System.Drawing.Point(12, 115);
+            this.flpTables.Name = "flpTables";
+            this.flpTables.Size = new System.Drawing.Size(749, 728);
+            this.flpTables.TabIndex = 1;
+            // 
             // fTableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(1492, 855);
+            this.Controls.Add(this.flpTables);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.flpTables);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -396,7 +406,6 @@ namespace CafeShop {
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem accountInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel flpTables;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
@@ -423,5 +432,6 @@ namespace CafeShop {
         private System.Windows.Forms.ListBox lbxFoods;
         private System.Windows.Forms.Button btnSubtract;
         private System.Windows.Forms.ToolStripMenuItem billToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel flpTables;
     }
 }

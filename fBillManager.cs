@@ -50,14 +50,13 @@ namespace CafeShop {
             DisplayBills(dtpFromDate.Value,dtpToDate.Value);
         }
 
-        #endregion
-
         private void btnExport_Click(object sender,EventArgs e) {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Excel Files|*.xlsx;*.xlsm;*.xltx;*.xltm";
-            sfd.FileName = "Doanh_thu_thang_.xlsx";
-            if (sfd.ShowDialog() == DialogResult.OK) {
-                if (!(dgvBill.RowCount == 0)) {
+            if (currDataTable.Rows.Count != 0) {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Excel Files|*.xlsx;*.xlsm;*.xltx;*.xltm";
+                sfd.FileName = "Doanh_thu_thang_.xlsx";
+                if (sfd.ShowDialog() == DialogResult.OK) {
+
                     using (var wb = new XLWorkbook()) {
                         wb.Worksheets.Add("Sheet1");
                         var wbSheet = wb.Worksheet(1);
@@ -85,9 +84,16 @@ namespace CafeShop {
                         wb.SaveAs(sfd.FileName);
 
                     }
+
                 }
+            } else {
+                MessageBox.Show("No bill exists in the table!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
             }
         }
+        #endregion
+
+
     }
     
 }
