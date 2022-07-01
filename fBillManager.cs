@@ -26,16 +26,29 @@ namespace CafeShop {
             foreach (DataRow row in currDataTable.Rows) {
                 revenue += Convert.ToDecimal(row["Total Price"]);
             }
+
+            if (dgvBill.Columns.Contains("Detail")) {
+                dgvBill.Columns.Remove("Detail");
+            }
+
+            DataGridViewButtonColumn detailcol = new DataGridViewButtonColumn() {
+                Name = "Detail",
+                Text = "Detail",
+                Width = 100,
+                FlatStyle = FlatStyle.Standard,
+                UseColumnTextForButtonValue = true
+            };
+            dgvBill.Columns.Add(detailcol);
             tbTotal.Text = revenue.ToString("#,###.##");
             dgvBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         public void Setup() {
             DateTime myDate = DateTime.Now;
-            DateTime startOfMonth = new DateTime(myDate.Year,myDate.Month,1);
-            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
-            dtpFromDate.Value = startOfMonth;
-            dtpToDate.Value = endOfMonth;
+            DateTime startOfYear = new DateTime(myDate.Year,1,1);
+            DateTime endOfYear = new DateTime(myDate.Year,12,31);
+            dtpFromDate.Value = startOfYear;
+            dtpToDate.Value = endOfYear;
 
             DisplayBills(dtpFromDate.Value,dtpToDate.Value);
         }
@@ -89,6 +102,21 @@ namespace CafeShop {
             } else {
                 MessageBox.Show("No bill exists in the table!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
+            }
+        }
+
+
+        private void dgvBill_CellContentClick(object sender,DataGridViewCellEventArgs e) {
+            var senderGrid = (DataGridView)sender;
+
+
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Detail")) {
+                //TODO - Button Clicked - Execute Code Here
+                fBillDetail view = new fBillDetail((int)senderGrid.Rows[e.RowIndex].Cells[0].Value);
+              
+                view.ShowDialog();
+       
             }
         }
         #endregion

@@ -50,6 +50,7 @@ namespace CafeShop {
             this.dgvBill.ShowEditingIcon = false;
             this.dgvBill.Size = new System.Drawing.Size(1085, 491);
             this.dgvBill.TabIndex = 0;
+            this.dgvBill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBill_CellContentClick);
             // 
             // dtpFromDate
             // 

@@ -42,16 +42,16 @@ namespace CafeShop.DAO {
             return tableList;
         }
 
-        public void ChangeTableStatus(int tableId) {
-            String sql = "EXEC dbo.USP_ChangeTableStatus @tableid ";
-            int result = DAO.DataProvider.Instance.ExecuteNonQuery(sql, new object[] { tableId });
+        //public void ChangeTableStatus(int tableId) {
+        //    String sql = $"EXEC dbo.USP_ChangeTableStatus @tableid = {tableId} ";
+        //    int result = DAO.DataProvider.Instance.ExecuteNonQuery(sql);
 
-        }
+        //}
 
-        public void SwitchTable(int id1,int id2) {
-            String sql = "EXEC dbo.USP_SwitchTable @idTable1 , @idTable2 ";
-            int result = DAO.DataProvider.Instance.ExecuteNonQuery(sql,new object[] { id1, id2 });
-        }
+        //public void SwitchTable(int id1,int id2) {
+        //    String sql = $"EXEC dbo.USP_SwitchTable @idTable1 ={id1} , @idTable2 ={id2}";
+        //    int result = DAO.DataProvider.Instance.ExecuteNonQuery(sql);
+        //}
     }
 
 }

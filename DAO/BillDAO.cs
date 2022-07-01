@@ -33,12 +33,24 @@ namespace CafeShop.DAO {
             return -1;
         }
 
+        public Bill GetBill(int billId) {
+            DataTable data = DataProvider.Instance.ExecuteQuery($"SELECT * FROM dbo.Bill WHERE id = {billId} AND status = 1");
+
+            if (data.Rows.Count > 0) {
+                Bill bill = new Bill(data.Rows[0]);
+                return bill;
+            }
+
+            return null;
+        }
+
         public int InsertBill(int idTable) {
             int result = (int)DataProvider.Instance.ExecuteScalar($"exec USP_InsertBill {idTable} ; ");
             return result;
         }
 
         public DataTable GetBillsCheckOut(String fromDate, String toDate) {
+
          
             DataTable data = DataProvider.Instance.ExecuteQuery($"exec USP_GetAllCheckOutBill '{fromDate}' , '{toDate}'");
 

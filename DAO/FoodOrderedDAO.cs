@@ -31,5 +31,18 @@ namespace CafeShop.DAO {
 
             return listMenu;
         }
+
+        public List<FoodOrdered> GetBillDetail(int billId) {
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery($"EXEC dbo.USP_GetCheckoutBill @billId = {billId}");
+            List<FoodOrdered> listBillDetail = new List<FoodOrdered>();
+
+            foreach (DataRow item in dataTable.Rows) {
+                FoodOrdered detail = new FoodOrdered(item);
+                listBillDetail.Add(detail);
+            }
+
+            return listBillDetail;
+
+        }
     }
 }
