@@ -35,7 +35,7 @@ namespace CafeShop {
         }
 
         void loadFoodbyCategoryId(int id) {
-            List<Food> foods = DAO.FoodDAO.Instance.LoadAllFoodById(id);
+            List<Food> foods = DAO.FoodDAO.Instance.LoadAllFoodByCategoryId(id);
             lbxFoods.DataSource = foods;
             lbxFoods.DisplayMember = "name";
             lbxFoods.ValueMember = "id";
@@ -237,6 +237,12 @@ namespace CafeShop {
             this.Show();
         }
 
+        private void adminToolStripMenuItem_Click(object sender,EventArgs e) {
+            fAdmin fAdmin = new fAdmin();
+            this.Hide();
+            fAdmin.ShowDialog();
+            this.Show();
+        }
 
         #endregion
 

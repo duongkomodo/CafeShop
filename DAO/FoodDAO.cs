@@ -27,7 +27,7 @@ namespace CafeShop.DAO {
 
         public List<Food> LoadAllFood() {
 
-            string sql = $"select * from food and inUse = 1";
+            string sql = $"select * from food where inUse = 1";
             List<Food> list = new List<Food>();
             DataTable data = DataProvider.Instance.ExecuteQuery(sql);
             foreach (DataRow item in data.Rows) {
@@ -39,7 +39,7 @@ namespace CafeShop.DAO {
             return list;
         }
 
-        public List<Food> LoadAllFoodById(int id) {
+        public List<Food> LoadAllFoodByCategoryId(int id) {
 
             string sql =  $"select * from food where IdCategory = {id} and inUse = 1 ;";
             List<Food> list = new List<Food>();
@@ -63,14 +63,14 @@ namespace CafeShop.DAO {
 
 
         public int addFood(Food food) {
-            string sql = $"INSERT INTO [dbo].[Food]([name],[idCategory],[price],[image]) VALUES({food.Name},{food.IdCategory},{food.Price},{food.Image})";
+            string sql = $"INSERT INTO [dbo].[Food]([name],[idCategory],[price],[image]) VALUES('{food.Name}',{food.IdCategory},{food.Price},'{food.Image}')";
 
             return   DataProvider.Instance.ExecuteNonQuery(sql);
         
         }
 
         public int updateFood(Food food) {
-            string sql = $"UPDATE [dbo].[Food] SET [name] = {food.Name},[idCategory] = {food.IdCategory},[price] = {food.Price},[image] = {food.Image}  WHERE food.id = {food.Id}";
+            string sql = $"UPDATE [dbo].[Food] SET [name] = '{food.Name}', [idCategory] = {food.IdCategory}, [price] = {food.Price} ,[image] = '{food.Image}'  WHERE food.id = {food.Id}";
    
 
             return DataProvider.Instance.ExecuteNonQuery(sql);
@@ -79,7 +79,7 @@ namespace CafeShop.DAO {
 
         public Food getFoodById(int id) {
 
-            string sql = $"select * from food where id = {id} and inUse = 1 ;";
+            string sql = $"select * from food where id = '{id}' and inUse = 1 ;";
             Food food = new Food();
             DataTable data = DataProvider.Instance.ExecuteQuery(sql);
             if (data.Rows.Count > 0) {

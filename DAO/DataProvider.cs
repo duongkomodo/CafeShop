@@ -73,7 +73,7 @@ namespace CafeShop.DAO {
                 dataLineSuccess = command.ExecuteNonQuery();
                 connection.Close();
             } catch (Exception) {
-
+                throw;
                 return -1;
             }
       

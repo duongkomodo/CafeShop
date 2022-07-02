@@ -33,10 +33,10 @@ namespace CafeShop {
             this.tbTotalPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbCheckout = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbCheckin = new System.Windows.Forms.TextBox();
-            this.tbCheckout = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,6 +122,14 @@ namespace CafeShop {
             this.tableLayoutPanel2.Size = new System.Drawing.Size(553, 68);
             this.tableLayoutPanel2.TabIndex = 12;
             // 
+            // tbCheckout
+            // 
+            this.tbCheckout.Location = new System.Drawing.Point(121, 37);
+            this.tbCheckout.Name = "tbCheckout";
+            this.tbCheckout.ReadOnly = true;
+            this.tbCheckout.Size = new System.Drawing.Size(291, 27);
+            this.tbCheckout.TabIndex = 7;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -150,14 +158,6 @@ namespace CafeShop {
             this.tbCheckin.Size = new System.Drawing.Size(291, 27);
             this.tbCheckin.TabIndex = 6;
             // 
-            // tbCheckout
-            // 
-            this.tbCheckout.Location = new System.Drawing.Point(121, 37);
-            this.tbCheckout.Name = "tbCheckout";
-            this.tbCheckout.ReadOnly = true;
-            this.tbCheckout.Size = new System.Drawing.Size(291, 27);
-            this.tbCheckout.TabIndex = 7;
-            // 
             // fBillDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -168,7 +168,9 @@ namespace CafeShop {
             this.Controls.Add(this.tbTotalPrice);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lsvBill);
+            this.MaximizeBox = false;
             this.Name = "fBillDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detail";
             this.Load += new System.EventHandler(this.fBillDetail_Load);
             this.tableLayoutPanel2.ResumeLayout(false);

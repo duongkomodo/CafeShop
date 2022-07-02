@@ -15,6 +15,8 @@ namespace CafeShop.DTO {
             this.name = name;
         }
 
+        public Category() {
+        }
 
         public Category(DataRow row) {
             this.id = (int)row["id"];
