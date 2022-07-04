@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,12 +36,20 @@ namespace CafeShop {
                 cbCategory.SelectedValue = currFood.IdCategory;
 
                 nmrFoodPrice.Value = (int)currFood.Price;
+                if (File.Exists(currFood.Image)) {
+                    ptbFood.BackgroundImage = Image.FromFile(currFood.Image);
+                    ptbFood.Tag = currFood.Image;
+                } else {
+                    ptbFood.BackgroundImage = Image.FromFile(@"D:\.Net Project\CafeShop\Image\Food\placeholder (Custom).png");
 
-                ptbFood.BackgroundImage = Image.FromFile(currFood.Image);
-                ptbFood.Tag = currFood.Image;
+                }
+           
+
+                
                 ptbFood.BackgroundImageLayout = ImageLayout.Stretch;
 
             } else {
+                this.Text = $"Add Food";
                 cbCategory.DataSource = DAO.CategoryDAO.Instance.LoadAllCategory();
                 cbCategory.ValueMember = "id";
                 cbCategory.DisplayMember = "name";
@@ -60,13 +69,29 @@ namespace CafeShop {
 
 
         private void btnSaveChanges_Click(object sender,EventArgs e) {
+
+
+            if (txbFoodName.Text =="") {
+                MessageBox.Show("Food's name cannot leave blank!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error );
+                return;
+            }
+
+            if (ptbFood.Tag == null) {
+                MessageBox.Show("Food's image is not set!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            
             if (currFood != null) {
+
                 if (MessageBox.Show($"Do you want save the changes for this food ?","Save changes",MessageBoxButtons.YesNo,MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.Yes) {
 
                     Food updFood = new Food() { Id = currFood.Id,Name = txbFoodName.Text,IdCategory = (int)cbCategory.SelectedValue,Price = (double)nmrFoodPrice.Value,Image = ptbFood.Tag.ToString() };
                     int result = DAO.FoodDAO.Instance.updateFood(updFood);
                     if (result < 0) {
                         MessageBox.Show("Save changes fail !","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        this.DialogResult = DialogResult.Cancel;
+                    } else {
+                        this.DialogResult = DialogResult.OK;
                     }
                 }
             } else {
@@ -76,11 +101,15 @@ namespace CafeShop {
                     int result = DAO.FoodDAO.Instance.addFood(updFood);
                     if (result < 0) {
                         MessageBox.Show("Save changes fail !","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        this.DialogResult = DialogResult.Cancel;
+                    } else {
+                        this.DialogResult = DialogResult.OK;
                     }
 
                 }
 
             }
+            this.Close();
         }
         private void btnUploadImage_Click(object sender,EventArgs e) {
             //Create a new instance of openFileDialog
@@ -100,6 +129,10 @@ namespace CafeShop {
               
 
             }
+        }
+
+        private void fFoodAction_FormClosing(object sender,FormClosingEventArgs e) {
+    
         }
         #endregion
 

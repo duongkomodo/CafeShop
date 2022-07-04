@@ -33,7 +33,7 @@ namespace CafeShop.DAO {
         }
 
         public List<FoodOrdered> GetBillDetail(int billId) {
-            DataTable dataTable = DataProvider.Instance.ExecuteQuery($"EXEC dbo.USP_GetCheckoutBill @billId = {billId}");
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery($"EXEC dbo.[USP_GetCheckoutBillDetail] @billId = {billId}");
             List<FoodOrdered> listBillDetail = new List<FoodOrdered>();
 
             foreach (DataRow item in dataTable.Rows) {

@@ -155,7 +155,9 @@ namespace CafeShop {
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.dgvBill);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "fBillManager";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View Bill";
             this.Load += new System.EventHandler(this.fBillManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();

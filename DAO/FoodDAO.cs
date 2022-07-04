@@ -55,7 +55,7 @@ namespace CafeShop.DAO {
 
 
         public int removeFood(int id) {
-            string sql = $"EXEC dbo.USP_RemoveFood @idFood = {id}";
+            string sql = $"UPDATE [dbo].[Food] SET [inUse] = 0 WHERE dbo.Food.id = {id}";
 
             return DataProvider.Instance.ExecuteNonQuery(sql);
 
@@ -72,6 +72,13 @@ namespace CafeShop.DAO {
         public int updateFood(Food food) {
             string sql = $"UPDATE [dbo].[Food] SET [name] = '{food.Name}', [idCategory] = {food.IdCategory}, [price] = {food.Price} ,[image] = '{food.Image}'  WHERE food.id = {food.Id}";
    
+
+            return DataProvider.Instance.ExecuteNonQuery(sql);
+
+        }
+        public int updateFoodCategory(int categoryId, int foodId) {
+            string sql = $"UPDATE [dbo].[Food] SET [idCategory] = {categoryId} WHERE id = {foodId}";
+
 
             return DataProvider.Instance.ExecuteNonQuery(sql);
 

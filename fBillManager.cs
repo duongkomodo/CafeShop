@@ -20,7 +20,7 @@ namespace CafeShop {
 
         public void DisplayBills(DateTime fromDate,DateTime toDate) {
 
-            currDataTable = DAO.BillDAO.Instance.GetBillsCheckOut(fromDate.ToString("yyyy-MM-dd"),toDate.ToString("yyyy-MM-dd"));
+            currDataTable = DAO.BillDAO.Instance.GetCheckOutBillsByDate(fromDate.ToString("yyyy-MM-dd"),toDate.ToString("yyyy-MM-dd"));
             dgvBill.DataSource = currDataTable;
             decimal revenue = 0;
             foreach (DataRow row in currDataTable.Rows) {
@@ -84,7 +84,7 @@ namespace CafeShop {
                         wbSheet.Range("A1:F1").Merge();
 
                         var title2 = wbSheet.Cell("A2");
-                        title2.Value = $"Từ ngày {dtpFromDate.Value}      Đến ngày{dtpToDate.Value}";
+                        title2.Value = $"Từ ngày {dtpFromDate.Value}      Đến ngày {dtpToDate.Value}";
                         title2.Style.Font.FontName = "Times New Roman";
                         title2.Style.Font.FontSize = 12;
                         title2.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
@@ -94,6 +94,14 @@ namespace CafeShop {
                         var data = wbSheet.Cell("A5");
                         data.InsertTable(currDataTable);
                         wbSheet.Columns("A","O").AdjustToContents();
+
+                        var total = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(), "D");
+                        var total2 = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"E");
+                       
+                        wbSheet.Range(total,total2).Merge();
+                        var total3 = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"F");
+                        total.Value = $"Tổng doanh thu:";
+                        total3.Value = $"{tbTotal.Text}";
                         wb.SaveAs(sfd.FileName);
 
                     }

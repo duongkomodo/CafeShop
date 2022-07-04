@@ -110,6 +110,11 @@ namespace CafeShop {
             // 
             // nmrFoodPrice
             // 
+            this.nmrFoodPrice.Increment = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.nmrFoodPrice.Location = new System.Drawing.Point(270, 71);
             this.nmrFoodPrice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.nmrFoodPrice.Maximum = new decimal(new int[] {
@@ -117,9 +122,19 @@ namespace CafeShop {
             23283,
             0,
             0});
+            this.nmrFoodPrice.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nmrFoodPrice.Name = "nmrFoodPrice";
             this.nmrFoodPrice.Size = new System.Drawing.Size(221, 27);
             this.nmrFoodPrice.TabIndex = 11;
+            this.nmrFoodPrice.Value = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             // 
             // label3
             // 
@@ -151,6 +166,7 @@ namespace CafeShop {
             // ptbFood
             // 
             this.ptbFood.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ptbFood.ErrorImage = ((System.Drawing.Image)(resources.GetObject("ptbFood.ErrorImage")));
             this.ptbFood.Location = new System.Drawing.Point(3, 4);
             this.ptbFood.Name = "ptbFood";
             this.ptbFood.Size = new System.Drawing.Size(183, 177);
@@ -168,6 +184,7 @@ namespace CafeShop {
             this.Name = "fFoodAction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fFoodAction";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fFoodAction_FormClosing);
             this.Load += new System.EventHandler(this.fFoodAction_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

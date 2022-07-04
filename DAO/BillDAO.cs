@@ -49,10 +49,10 @@ namespace CafeShop.DAO {
             return result;
         }
 
-        public DataTable GetBillsCheckOut(String fromDate, String toDate) {
+        public DataTable GetCheckOutBillsByDate(String fromDate, String toDate) {
 
          
-            DataTable data = DataProvider.Instance.ExecuteQuery($"exec USP_GetAllCheckOutBill '{fromDate}' , '{toDate}'");
+            DataTable data = DataProvider.Instance.ExecuteQuery($"exec USP_GetAllCheckoutBillByDate '{fromDate}' , '{toDate}'");
 
             return data;
         

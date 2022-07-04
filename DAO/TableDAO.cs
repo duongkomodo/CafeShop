@@ -29,7 +29,7 @@ namespace CafeShop.DAO {
 
             List<Table> tableList = new List<Table>();
           
-                DataTable dataTable = DAO.DataProvider.Instance.ExecuteQuery(sql);
+                DataTable dataTable = DataProvider.Instance.ExecuteQuery(sql);
                 tableList = (from DataRow row in dataTable.Rows
                              select new Table() {
                                  Id = Convert.ToInt32(row[0]),

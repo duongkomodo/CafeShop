@@ -17,7 +17,7 @@ namespace CafeShop {
             InitializeComponent();
             try {
              LoadTable();
-            loadCategory();
+             loadCategory();
             } catch (Exception) {
 
                 throw;
@@ -28,14 +28,15 @@ namespace CafeShop {
 
         #region Function
         void loadCategory() {
-            List<Category> categories = DAO.CategoryDAO.Instance.LoadAllCategory();
+            List<Category> categories = CategoryDAO.Instance.LoadAllCategory();
             cbCategory.DataSource = categories;
             cbCategory.DisplayMember = "name";
             cbCategory.ValueMember = "id";
         }
 
         void loadFoodbyCategoryId(int id) {
-            List<Food> foods = DAO.FoodDAO.Instance.LoadAllFoodByCategoryId(id);
+
+            List<Food> foods = FoodDAO.Instance.LoadAllFoodByCategoryId(id);
             lbxFoods.DataSource = foods;
             lbxFoods.DisplayMember = "name";
             lbxFoods.ValueMember = "id";
@@ -66,7 +67,6 @@ namespace CafeShop {
             flpTables.Controls.Clear();
             List<Table> tables = DAO.TableDAO.Instance.LoadTableList();
             foreach (var item in tables) {
-
                 Button btn = new Button() {
                     Width = 143,
                     Height = 143,

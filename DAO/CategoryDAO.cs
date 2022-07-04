@@ -28,7 +28,7 @@ namespace CafeShop.DAO {
 
 
         public List<Category> LoadAllCategory() {
-            string sql = "select * from FoodCategory where inUse = 1";
+            string sql = "select * from FoodCategory";
             List<Category> list = new List<Category>();
             DataTable data = DataProvider.Instance.ExecuteQuery(sql);
             foreach (DataRow item in data.Rows) {
@@ -37,8 +37,22 @@ namespace CafeShop.DAO {
 
             }
 
-
             return list;
+        }
+
+
+        public int removeCategory(int id) {
+            string sql = $"EXECUTE  [dbo].[USP_RemoveCategory]  @categoryId = {id} ;";
+
+            return DataProvider.Instance.ExecuteNonQuery(sql);
+
+        }
+
+        public int addCategory(string name) {
+            string sql = $"INSERT INTO [dbo].[FoodCategory] ([name]) VALUES ('{name}') ;";
+
+            return DataProvider.Instance.ExecuteNonQuery(sql);
+
         }
     }
   
