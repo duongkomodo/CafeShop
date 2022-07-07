@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,13 @@ namespace CafeShop.DTO {
         }
 
         public Table() {
+        }
+
+        public Table(DataRow row) {
+            this.id = (int)row["id"];
+            this.name = row["name"].ToString();
+            this.status = row["status"].ToString();
+            this.InUse = (bool)row["inUse"];
         }
 
         public int Id {

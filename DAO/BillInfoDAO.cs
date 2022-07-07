@@ -37,7 +37,7 @@ namespace CafeShop.DAO {
             return listBillInfo;
         }
 
-        public void InsertBillInfo(int idBill,int idFood,int count) {
+        public int InsertBillInfo(int idBill,int idFood,int count) {
             //SqlParameter p1 = new SqlParameter("@idBill",SqlDbType.Int);
             //p1.Value = idBill;
             //SqlParameter p2 = new SqlParameter("@idFood",SqlDbType.Int);
@@ -46,7 +46,19 @@ namespace CafeShop.DAO {
             //p3.Value = count;
             //DataProvider.Instance.ExecuteNonQuery("USP_InsertBillInfo @idBill , @idFood , @count",new SqlParameter[] { p1, p2, p3 });
 
-            int resuslt = DataProvider.Instance.ExecuteNonQuery($"USP_InsertBillInfo {idBill} , {idFood} , {count} ;");
+          return  DataProvider.Instance.ExecuteNonQuery($"USP_InsertBillInfo {idBill} , {idFood} , {count} ;");
+        }
+
+        public int RemoveAllBillInfoByBillId(int idBill) {
+            //SqlParameter p1 = new SqlParameter("@idBill",SqlDbType.Int);
+            //p1.Value = idBill;
+            //SqlParameter p2 = new SqlParameter("@idFood",SqlDbType.Int);
+            //p2.Value = idFood;
+            //SqlParameter p3= new SqlParameter("@count",SqlDbType.Int);
+            //p3.Value = count;
+            //DataProvider.Instance.ExecuteNonQuery("USP_InsertBillInfo @idBill , @idFood , @count",new SqlParameter[] { p1, p2, p3 });
+
+            return DataProvider.Instance.ExecuteNonQuery($"delete billinfo where idBill =  {idBill} ;");
         }
     }
 }

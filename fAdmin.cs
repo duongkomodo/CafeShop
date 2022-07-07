@@ -1,14 +1,10 @@
 ﻿using CafeShop.DTO;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CafeShop {
@@ -20,6 +16,7 @@ namespace CafeShop {
         private void fAdmin_Shown(object sender,EventArgs e) {
             SetUpFoodsTab();
             SetUpCategorysTab();
+            SetUpTablesTab();
         }
 
         #region Food Tab
@@ -147,8 +144,6 @@ namespace CafeShop {
 
         }
 
-
-
         #endregion
 
         #region Event
@@ -196,9 +191,11 @@ namespace CafeShop {
             var senderGrid = (DataGridView)sender;
 
 
-            Food food = TempListFoods[e.RowIndex];
+
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            Food food = TempListFoods[e.RowIndex];
             if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Edit")) {
+
                 fFoodAction fFoodAction = new fFoodAction(food);
              var result =  fFoodAction.ShowDialog();
                 if (result == DialogResult.OK) {
@@ -239,7 +236,6 @@ namespace CafeShop {
             TempListCategorys = ListCategorys;
             DiplayCategorys(TempListCategorys);
             txbCategoryName.Text = "";
-
         }
 
         public void DiplayCategorys(List<Category> list) {
@@ -257,13 +253,11 @@ namespace CafeShop {
              
                 if (dgvFoodCategory.Columns.Contains("Edit")) {
                     dgvFoodCategory.Columns.Remove("Edit");
-
                 }
+
                 if (dgvFoodCategory.Columns.Contains("Delete")) {
                     dgvFoodCategory.Columns.Remove("Delete");
-
                 }
-
      
                 DataGridViewButtonColumn editcol = new DataGridViewButtonColumn() {
                     Name = "Edit",
@@ -281,18 +275,11 @@ namespace CafeShop {
                     FlatStyle = FlatStyle.Standard,
                     UseColumnTextForButtonValue = true
                 };
-
+                dgvFoodCategory.Columns["name"].Width =(int) (dgvFoodCategory.Width * 0.67) ;
                 dgvFoodCategory.Columns.Add(editcol);
-                dgvFoodCategory.Columns.Add(deletecol);
-                dgvFoodCategory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-             
+                dgvFoodCategory.Columns.Add(deletecol);                          
             }
-
-
         }
-
-
-
 
         #endregion
 
@@ -301,8 +288,9 @@ namespace CafeShop {
             var senderGrid = (DataGridView)sender;
 
 
-            Category category = TempListCategorys[e.RowIndex];
+          
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            Category category = TempListCategorys[e.RowIndex];
             if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Edit")) {
                 fCategoryAction fCategoryAction = new fCategoryAction(category.Id);
                 var result = fCategoryAction.ShowDialog();
@@ -331,8 +319,48 @@ namespace CafeShop {
 
         #endregion
 
-        #region
+        #region Table Tab
+        #region Function
+        public void SetUpTablesTab() {
+            flpTables.Controls.Clear();
+            List<Table> tableList = DAO.TableDAO.Instance.LoadTableList();
+            foreach (Table table in tableList) {
+                Button btnTable = new Button() {
+                    Width = 143,
+                    Height = 143,
+                    Text = table.Name
+                  + " " + Environment.NewLine + "In use: " + table.InUse
+                  ,
+                    FlatStyle = FlatStyle.Flat,
+                    FlatAppearance = { BorderSize = 1 },
+                    BackgroundImage = Image.FromFile(@"D:\.Net Project\CafeShop\Image\Logo\TableLogo (Custom).png"),
+                    ForeColor = Color.White,
+                    Font = new Font(Font.FontFamily,10)
+                };
+                btnTable.Click += btn_Click;
+                btnTable.Tag = table;
+                switch (table.InUse) {
+                    case false:
+                        btnTable.BackColor = Color.Firebrick;
+                        break;
 
+                    default:
+                        btnTable.BackColor = Color.Green;
+                        break;
+                }
+                flpTables.Controls.Add(btnTable);
+            }
+        }
+
+
+        #endregion
+
+        #region Event
+        private void btn_Click(object sender,EventArgs e) {
+            Table table = (sender as Button).Tag as Table;
+
+        }
+        #endregion
         #endregion
 
         #region

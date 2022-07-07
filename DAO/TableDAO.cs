@@ -26,19 +26,10 @@ namespace CafeShop.DAO {
 
         public  List<Table> LoadTableList() {
             String sql = "EXEC dbo.USP_GetTableList";
-
             List<Table> tableList = new List<Table>();
-          
                 DataTable dataTable = DataProvider.Instance.ExecuteQuery(sql);
                 tableList = (from DataRow row in dataTable.Rows
-                             select new Table() {
-                                 Id = Convert.ToInt32(row[0]),
-                                 Name = row[1].ToString(),
-                                 Status = row[2].ToString()
-
-                             }).ToList();
-      
-
+                             select new Table(row)).ToList();
             return tableList;
         }
 
@@ -47,6 +38,12 @@ namespace CafeShop.DAO {
         //    int result = DAO.DataProvider.Instance.ExecuteNonQuery(sql);
 
         //}
+
+        public void ChangeTableInUse(int tableId, bool inUse) {
+            String sql = $"UPDATE [dbo].[TableFood] SET [inUse] = ? WHERE id = {tableId} ; ";
+            int result = DAO.DataProvider.Instance.ExecuteNonQuery(sql);
+
+        }
 
         //public void SwitchTable(int id1,int id2) {
         //    String sql = $"EXEC dbo.USP_SwitchTable @idTable1 ={id1} , @idTable2 ={id2}";

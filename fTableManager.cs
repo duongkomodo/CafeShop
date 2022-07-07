@@ -65,13 +65,13 @@ namespace CafeShop {
 
         void LoadTable() {
             flpTables.Controls.Clear();
-            List<Table> tables = DAO.TableDAO.Instance.LoadTableList();
-            foreach (var item in tables) {
-                Button btn = new Button() {
+            List<Table> tableList = DAO.TableDAO.Instance.LoadTableList();
+            foreach (Table table in tableList) {
+                Button btnTable = new Button() {
                     Width = 143,
                     Height = 143,
-                    Text = item.Name
-                  + " " + Environment.NewLine + "Status: " + item.Status
+                    Text = table.Name
+                  + " " + Environment.NewLine + "Status: " + table.Status
                   ,
                     FlatStyle = FlatStyle.Flat,
                     FlatAppearance = { BorderSize = 1 },
@@ -79,18 +79,18 @@ namespace CafeShop {
                     ForeColor = Color.White,
                     Font = new Font(Font.FontFamily, 10)
             };
-                btn.Click += btn_Click;
-                btn.Tag = item;
-                switch (item.Status) {
+                btnTable.Click += btn_Click;
+                btnTable.Tag = table;
+                switch (table.Status) {
                     case "Empty":
-                        btn.BackColor = Color.Firebrick;
+                        btnTable.BackColor = Color.Firebrick;
                         break;
 
                     default:
-                        btn.BackColor = Color.Green;
+                        btnTable.BackColor = Color.Green;
                         break;
                 }
-                flpTables.Controls.Add(btn);
+                flpTables.Controls.Add(btnTable);
             }
         }
 
@@ -151,7 +151,7 @@ namespace CafeShop {
         private void btnAddFood_Click(object sender,EventArgs e) {
             Table table = lsvBill.Tag as Table;
             if (table != null) {
-                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id, false);
                 int foodID = (lbxFoods.SelectedItem as Food).Id;
                 int addCount = (int)nmrQuantity.Value;
 
@@ -172,10 +172,28 @@ namespace CafeShop {
 
         }
 
+        private void btnClearBill_Click(object sender,EventArgs e) {
+            Table table = lsvBill.Tag as Table;
+            if (table != null) {
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id,false);
+            
+
+                if (idBill == -1) {
+                    MessageBox.Show("No bill to clear !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                } else {
+                    int result = BillInfoDAO.Instance.RemoveAllBillInfoByBillId(idBill);
+                }
+
+                LoadBill(table.Id);
+                LoadTable();
+            } else {
+                MessageBox.Show("Choose a table first !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+        }
         private void btnRemove_Click(object sender,EventArgs e) {
             Table table = lsvBill.Tag as Table;
             if (table != null) {
-                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id,false);
                 int foodID = (lbxFoods.SelectedItem as Food).Id;
                 int subtractCount = (int)nmrQuantity.Value * (-1);
 
@@ -208,7 +226,7 @@ namespace CafeShop {
         private void btnCheckout_Click(object sender,EventArgs e) {
             Table table = lsvBill.Tag as Table;
             if (table != null) {
-                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id);
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.Id, true);
                 int discount = (int)nmrDiscount.Value;
 
                 decimal totalPrice = Convert.ToDecimal(tbTotalPrice.Text);
@@ -222,7 +240,7 @@ namespace CafeShop {
                         LoadTable();
                     }
                 } else {
-                    MessageBox.Show($"This {table.Name} is empty !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show($"This {table.Name} have no bill !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
             } else {
                 MessageBox.Show("Choose a table first !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -244,8 +262,9 @@ namespace CafeShop {
             this.Show();
         }
 
+
         #endregion
 
-
+   
     }
 }

@@ -41,6 +41,10 @@ namespace CafeShop {
             // 
             // dgvBill
             // 
+            this.dgvBill.AllowUserToAddRows = false;
+            this.dgvBill.AllowUserToDeleteRows = false;
+            this.dgvBill.AllowUserToResizeColumns = false;
+            this.dgvBill.AllowUserToResizeRows = false;
             this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBill.Location = new System.Drawing.Point(12, 88);
             this.dgvBill.Name = "dgvBill";

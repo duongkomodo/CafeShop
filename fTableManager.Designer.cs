@@ -55,6 +55,7 @@ namespace CafeShop {
             this.label = new System.Windows.Forms.Label();
             this.lbDisplayTable = new System.Windows.Forms.Label();
             this.flpTables = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnClearBill = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
@@ -103,6 +104,7 @@ namespace CafeShop {
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.btnClearBill);
             this.panel1.Controls.Add(this.btnSubtract);
             this.panel1.Controls.Add(this.lbxFoods);
             this.panel1.Controls.Add(this.nmrQuantity);
@@ -367,6 +369,18 @@ namespace CafeShop {
             this.flpTables.Size = new System.Drawing.Size(749, 728);
             this.flpTables.TabIndex = 1;
             // 
+            // btnClearBill
+            // 
+            this.btnClearBill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClearBill.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnClearBill.Location = new System.Drawing.Point(570, 47);
+            this.btnClearBill.Name = "btnClearBill";
+            this.btnClearBill.Size = new System.Drawing.Size(124, 68);
+            this.btnClearBill.TabIndex = 8;
+            this.btnClearBill.Text = "Clear Bill";
+            this.btnClearBill.UseVisualStyleBackColor = true;
+            this.btnClearBill.Click += new System.EventHandler(this.btnClearBill_Click);
+            // 
             // fTableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -434,5 +448,6 @@ namespace CafeShop {
         private System.Windows.Forms.Button btnSubtract;
         private System.Windows.Forms.ToolStripMenuItem billToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flpTables;
+        private System.Windows.Forms.Button btnClearBill;
     }
 }

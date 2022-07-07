@@ -22,8 +22,8 @@ namespace CafeShop.DAO {
         private BillDAO() {
             }
 
-        public int GetUncheckBillIDByTableID(int TableId) {
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.Bill WHERE idTable = " + TableId + " AND status = 0");
+        public int GetUncheckBillIDByTableID(int TableId, bool isCheckOut) {
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.Bill WHERE idTable = "+ TableId +" AND status = 0 " + (isCheckOut == true? "AND total > 0":"") );
 
             if (data.Rows.Count > 0) {
                 Bill bill = new Bill(data.Rows[0]);
