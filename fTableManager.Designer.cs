@@ -30,6 +30,7 @@ namespace CafeShop {
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnClearBill = new System.Windows.Forms.Button();
             this.btnSubtract = new System.Windows.Forms.Button();
             this.lbxFoods = new System.Windows.Forms.ListBox();
             this.nmrQuantity = new System.Windows.Forms.NumericUpDown();
@@ -50,12 +51,15 @@ namespace CafeShop {
             this.label2 = new System.Windows.Forms.Label();
             this.btnDiscount = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnRemoveTakeaway = new System.Windows.Forms.Button();
+            this.btnAddTakeawayBill = new System.Windows.Forms.Button();
+            this.btnTakeAway = new System.Windows.Forms.Button();
             this.lbTableName = new System.Windows.Forms.Label();
             this.lbTableStatus = new System.Windows.Forms.Label();
-            this.label = new System.Windows.Forms.Label();
-            this.lbDisplayTable = new System.Windows.Forms.Label();
+            this.lbStatus = new System.Windows.Forms.Label();
+            this.lbTitle = new System.Windows.Forms.Label();
             this.flpTables = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnClearBill = new System.Windows.Forms.Button();
+            this.lbListCount = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
@@ -115,6 +119,18 @@ namespace CafeShop {
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(713, 197);
             this.panel1.TabIndex = 2;
+            // 
+            // btnClearBill
+            // 
+            this.btnClearBill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClearBill.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnClearBill.Location = new System.Drawing.Point(570, 47);
+            this.btnClearBill.Name = "btnClearBill";
+            this.btnClearBill.Size = new System.Drawing.Size(124, 68);
+            this.btnClearBill.TabIndex = 8;
+            this.btnClearBill.Text = "Clear Bill";
+            this.btnClearBill.UseVisualStyleBackColor = true;
+            this.btnClearBill.Click += new System.EventHandler(this.btnClearBill_Click);
             // 
             // btnSubtract
             // 
@@ -238,6 +254,7 @@ namespace CafeShop {
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.lbListCount);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.btnCheckout);
             this.panel3.Controls.Add(this.nmrDiscount);
@@ -310,14 +327,55 @@ namespace CafeShop {
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.btnRemoveTakeaway);
+            this.panel4.Controls.Add(this.btnAddTakeawayBill);
+            this.panel4.Controls.Add(this.btnTakeAway);
             this.panel4.Controls.Add(this.lbTableName);
             this.panel4.Controls.Add(this.lbTableStatus);
-            this.panel4.Controls.Add(this.label);
-            this.panel4.Controls.Add(this.lbDisplayTable);
+            this.panel4.Controls.Add(this.lbStatus);
+            this.panel4.Controls.Add(this.lbTitle);
             this.panel4.Location = new System.Drawing.Point(12, 31);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(749, 77);
             this.panel4.TabIndex = 5;
+            // 
+            // btnRemoveTakeaway
+            // 
+            this.btnRemoveTakeaway.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRemoveTakeaway.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnRemoveTakeaway.Location = new System.Drawing.Point(499, 2);
+            this.btnRemoveTakeaway.Name = "btnRemoveTakeaway";
+            this.btnRemoveTakeaway.Size = new System.Drawing.Size(116, 68);
+            this.btnRemoveTakeaway.TabIndex = 11;
+            this.btnRemoveTakeaway.Text = "Remove TakeAway";
+            this.btnRemoveTakeaway.UseVisualStyleBackColor = true;
+            this.btnRemoveTakeaway.Visible = false;
+            this.btnRemoveTakeaway.Click += new System.EventHandler(this.btnRemoveTakeaway_Click);
+            // 
+            // btnAddTakeawayBill
+            // 
+            this.btnAddTakeawayBill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddTakeawayBill.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAddTakeawayBill.Location = new System.Drawing.Point(372, 2);
+            this.btnAddTakeawayBill.Name = "btnAddTakeawayBill";
+            this.btnAddTakeawayBill.Size = new System.Drawing.Size(121, 68);
+            this.btnAddTakeawayBill.TabIndex = 10;
+            this.btnAddTakeawayBill.Text = "New TakeAway";
+            this.btnAddTakeawayBill.UseVisualStyleBackColor = true;
+            this.btnAddTakeawayBill.Visible = false;
+            this.btnAddTakeawayBill.Click += new System.EventHandler(this.btnAddTakeawayBill_Click);
+            // 
+            // btnTakeAway
+            // 
+            this.btnTakeAway.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTakeAway.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnTakeAway.Location = new System.Drawing.Point(621, 3);
+            this.btnTakeAway.Name = "btnTakeAway";
+            this.btnTakeAway.Size = new System.Drawing.Size(121, 68);
+            this.btnTakeAway.TabIndex = 9;
+            this.btnTakeAway.Text = "List TakeAway";
+            this.btnTakeAway.UseVisualStyleBackColor = true;
+            this.btnTakeAway.Click += new System.EventHandler(this.btnTakeAway_Click);
             // 
             // lbTableName
             // 
@@ -338,25 +396,25 @@ namespace CafeShop {
             this.lbTableStatus.Size = new System.Drawing.Size(0, 23);
             this.lbTableStatus.TabIndex = 2;
             // 
-            // label
+            // lbStatus
             // 
-            this.label.AutoSize = true;
-            this.label.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label.Location = new System.Drawing.Point(107, 47);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(62, 23);
-            this.label.TabIndex = 1;
-            this.label.Text = "Status:";
+            this.lbStatus.AutoSize = true;
+            this.lbStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lbStatus.Location = new System.Drawing.Point(107, 47);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(62, 23);
+            this.lbStatus.TabIndex = 1;
+            this.lbStatus.Text = "Status:";
             // 
-            // lbDisplayTable
+            // lbTitle
             // 
-            this.lbDisplayTable.AutoSize = true;
-            this.lbDisplayTable.Font = new System.Drawing.Font("Segoe UI Semibold", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.lbDisplayTable.Location = new System.Drawing.Point(3, 9);
-            this.lbDisplayTable.Name = "lbDisplayTable";
-            this.lbDisplayTable.Size = new System.Drawing.Size(179, 38);
-            this.lbDisplayTable.TabIndex = 0;
-            this.lbDisplayTable.Text = "Table Name:";
+            this.lbTitle.AutoSize = true;
+            this.lbTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lbTitle.Location = new System.Drawing.Point(3, 9);
+            this.lbTitle.Name = "lbTitle";
+            this.lbTitle.Size = new System.Drawing.Size(179, 38);
+            this.lbTitle.TabIndex = 0;
+            this.lbTitle.Text = "Table Name:";
             // 
             // flpTables
             // 
@@ -369,17 +427,15 @@ namespace CafeShop {
             this.flpTables.Size = new System.Drawing.Size(749, 728);
             this.flpTables.TabIndex = 1;
             // 
-            // btnClearBill
+            // lbListCount
             // 
-            this.btnClearBill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClearBill.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnClearBill.Location = new System.Drawing.Point(570, 47);
-            this.btnClearBill.Name = "btnClearBill";
-            this.btnClearBill.Size = new System.Drawing.Size(124, 68);
-            this.btnClearBill.TabIndex = 8;
-            this.btnClearBill.Text = "Clear Bill";
-            this.btnClearBill.UseVisualStyleBackColor = true;
-            this.btnClearBill.Click += new System.EventHandler(this.btnClearBill_Click);
+            this.lbListCount.AutoSize = true;
+            this.lbListCount.Location = new System.Drawing.Point(386, 12);
+            this.lbListCount.Name = "lbListCount";
+            this.lbListCount.Size = new System.Drawing.Size(69, 20);
+            this.lbListCount.TabIndex = 9;
+            this.lbListCount.Text = "list count";
+            this.lbListCount.Visible = false;
             // 
             // fTableManager
             // 
@@ -425,10 +481,10 @@ namespace CafeShop {
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label lbDisplayTable;
+        private System.Windows.Forms.Label lbTitle;
         private System.Windows.Forms.Label lbTableName;
         private System.Windows.Forms.Label lbTableStatus;
-        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.Label lbStatus;
         private System.Windows.Forms.PictureBox ptbFood;
         private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.Button btnAddFood;
@@ -449,5 +505,9 @@ namespace CafeShop {
         private System.Windows.Forms.ToolStripMenuItem billToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flpTables;
         private System.Windows.Forms.Button btnClearBill;
+        private System.Windows.Forms.Button btnTakeAway;
+        private System.Windows.Forms.Button btnAddTakeawayBill;
+        private System.Windows.Forms.Button btnRemoveTakeaway;
+        private System.Windows.Forms.Label lbListCount;
     }
 }

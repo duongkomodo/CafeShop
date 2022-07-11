@@ -50,15 +50,8 @@ namespace CafeShop.DAO {
         }
 
         public int RemoveAllBillInfoByBillId(int idBill) {
-            //SqlParameter p1 = new SqlParameter("@idBill",SqlDbType.Int);
-            //p1.Value = idBill;
-            //SqlParameter p2 = new SqlParameter("@idFood",SqlDbType.Int);
-            //p2.Value = idFood;
-            //SqlParameter p3= new SqlParameter("@count",SqlDbType.Int);
-            //p3.Value = count;
-            //DataProvider.Instance.ExecuteNonQuery("USP_InsertBillInfo @idBill , @idFood , @count",new SqlParameter[] { p1, p2, p3 });
 
-            return DataProvider.Instance.ExecuteNonQuery($"delete billinfo where idBill =  {idBill} ;");
+            return DataProvider.Instance.ExecuteNonQuery($" [dbo].[USP_DeleteBill] @idBill = {idBill} ;");
         }
     }
 }

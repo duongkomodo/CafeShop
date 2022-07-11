@@ -22,8 +22,8 @@ namespace CafeShop.DAO {
         private BillDAO() {
             }
 
-        public int GetUncheckBillIDByTableID(int TableId, bool isCheckOut) {
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.Bill WHERE idTable = "+ TableId +" AND status = 0 " + (isCheckOut == true? "AND total > 0":"") );
+        public int GetUncheckBillIDByTableID(int TableId) {
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.Bill WHERE idTable = "+ TableId +" AND status = 0 " );
 
             if (data.Rows.Count > 0) {
                 Bill bill = new Bill(data.Rows[0]);
@@ -44,10 +44,23 @@ namespace CafeShop.DAO {
             return null;
         }
 
+        public List<Bill> GetBillTakeAway() {
+
+            List<Bill> tableBill = new List<Bill>();
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery($"SELECT * FROM dbo.Bill WHERE IdTable = 1 AND status = 0");
+            tableBill = (from DataRow row in dataTable.Rows
+                         select new Bill(row)).ToList();
+  
+
+            return tableBill;
+        }
+
         public int InsertBill(int idTable) {
             int result = (int)DataProvider.Instance.ExecuteScalar($"exec USP_InsertBill {idTable} ; ");
             return result;
         }
+
+
 
         public DataTable GetCheckOutBillsByDate(String fromDate, String toDate) {
 
@@ -60,6 +73,11 @@ namespace CafeShop.DAO {
 
         public void CheckOut(int billId, int discount,decimal total) {
             string sql = $"Update Bill SET status = 1, discount = {discount}, DateCheckOut = GETDATE(), total = {total} where Bill.id = {billId}" ;
+            DataProvider.Instance.ExecuteNonQuery(sql);
+        }
+
+        public void RemoveTakeawayBill(int billId) {
+            string sql = $"[dbo].[USP_RemoveTakeAwayBill] @billId =  {billId}";
             DataProvider.Instance.ExecuteNonQuery(sql);
         }
     }

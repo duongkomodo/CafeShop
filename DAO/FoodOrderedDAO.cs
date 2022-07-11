@@ -20,7 +20,31 @@ namespace CafeShop.DAO {
 
         private FoodOrderedDAO() {
         }
-        public List<FoodOrdered> GetListMenu(int id) {
+        public List<FoodOrdered> GetListFoodOrder(int id) {
+
+            List<FoodOrdered> listMenu = new List<FoodOrdered>();
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery($"EXEC dbo.USP_GetTableBill @tableid = {id}");
+            foreach (DataRow item in dataTable.Rows) {
+                FoodOrdered menu = new FoodOrdered(item);
+                listMenu.Add(menu);
+            }
+
+            return listMenu;
+        }
+
+        public List<FoodOrdered> GetListFoodOrderTakeAway(int id) {
+
+            List<FoodOrdered> listMenu = new List<FoodOrdered>();
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery($"exec [dbo].[USP_GetTakeAwayBill] @billid = {id}");
+            foreach (DataRow item in dataTable.Rows) {
+                FoodOrdered menu = new FoodOrdered(item);
+                listMenu.Add(menu);
+            }
+
+            return listMenu;
+        }
+
+        public List<FoodOrdered> GetListMenu(int id,bool isTakeAway) {
 
             List<FoodOrdered> listMenu = new List<FoodOrdered>();
             DataTable dataTable = DataProvider.Instance.ExecuteQuery($"EXEC dbo.USP_GetTableBill @tableid = {id}");
