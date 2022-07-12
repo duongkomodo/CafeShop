@@ -323,7 +323,7 @@ namespace CafeShop {
         #region Function
         public void SetUpTablesTab() {
             flpTables.Controls.Clear();
-            List<Table> tableList = DAO.TableDAO.Instance.LoadTableList();
+            List<Table> tableList = DAO.TableDAO.Instance.LoadTableList(true);
             foreach (Table table in tableList) {
                 Button btnTable = new Button() {
                     Width = 143,
@@ -358,9 +358,53 @@ namespace CafeShop {
         #region Event
         private void btn_Click(object sender,EventArgs e) {
             Table table = (sender as Button).Tag as Table;
+            tbTableName.Text = table.Name.Trim();
+            tbTableName.Tag = table;
+            if (table.InUse) {
+                rbtnActive.Checked = true;
+
+            } else {
+                rbtnInactive.Checked = true;
+            }
 
         }
+        private void btnUpdateTable_Click(object sender,EventArgs e) {
+            if (tbTableName.Tag != null) {
+                Table table = tbTableName.Tag as Table;
+                if (table.Status.Equals("Taken")) {
+                    MessageBox.Show("This table is still working!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+                if (table.Id == 1) {
+                    MessageBox.Show("You cannot deactive takeaway, this will cause fatal damage to the system!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+                bool inUse = false;
+                if (rbtnActive.Checked) {
+                    inUse = true;
+                }
+                string tableName = tbTableName.Text.Trim();
+                DAO.TableDAO.Instance.UpdateTable(table.Id,tableName,inUse);
+                SetUpTablesTab();
+            } else {
+                MessageBox.Show("Select a table first!","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnResetTable_Click(object sender,EventArgs e) {
+            if (tbTableName.Tag != null) {
+                Table table = tbTableName.Tag as Table;
+                tbTableName.Text = table.Name.Trim();
+                if (table.InUse) {
+                    rbtnActive.Checked = true;
+
+                } else {
+                    rbtnInactive.Checked = true;
+                }
+            }
+        }
         #endregion
+
         #endregion
 
         #region

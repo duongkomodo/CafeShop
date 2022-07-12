@@ -18,8 +18,6 @@ namespace CafeShop {
       
 
         #region Function
-
-
         Account Login(string username,string password) {
 
             return DAO.AccountDAO.Instance.Login(username,password);
@@ -37,7 +35,7 @@ namespace CafeShop {
                 this.Hide();
                 fTable.ShowDialog();
                 this.Show();
-                MessageBox.Show("Success");
+         
             } else {
                 MessageBox.Show("Wrong username or password!");
             }

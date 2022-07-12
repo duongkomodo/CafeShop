@@ -9,6 +9,7 @@ namespace CafeShop.DTO {
         private int status;
         private int discount;
         private decimal total;
+        private int idAccount;
 
       
 
@@ -26,6 +27,7 @@ namespace CafeShop.DTO {
                 this.Discount = (int)row["discount"];
             }
             this.total = (decimal)row["total"];
+            this.IdAccount = (int)row["idAccount"];
         }
 
         public int Id {
@@ -51,6 +53,10 @@ namespace CafeShop.DTO {
         public decimal Total {
             get => total;
             set => total = value;
+        }
+        public int IdAccount {
+            get => idAccount;
+            set => idAccount = value;
         }
     }
 }

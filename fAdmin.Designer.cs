@@ -56,16 +56,15 @@ namespace CafeShop {
             this.label13 = new System.Windows.Forms.Label();
             this.flpTables = new System.Windows.Forms.FlowLayoutPanel();
             this.panel20 = new System.Windows.Forms.Panel();
-            this.btnAddTable = new System.Windows.Forms.Button();
+            this.btnResetTable = new System.Windows.Forms.Button();
+            this.btnUpdateTable = new System.Windows.Forms.Button();
             this.panel23 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.rbtnInactive = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
+            this.rbtnActive = new System.Windows.Forms.RadioButton();
             this.panel21 = new System.Windows.Forms.Panel();
             this.table = new System.Windows.Forms.Label();
-            this.txbTableName = new System.Windows.Forms.TextBox();
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txbTableId = new System.Windows.Forms.TextBox();
+            this.tbTableName = new System.Windows.Forms.TextBox();
             this.tpAccounts = new System.Windows.Forms.TabPage();
             this.panel24 = new System.Windows.Forms.Panel();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
@@ -88,15 +87,15 @@ namespace CafeShop {
             this.txbUsername = new System.Windows.Forms.TextBox();
             this.tbpBill = new System.Windows.Forms.TabPage();
             this.dgvBill = new System.Windows.Forms.DataGridView();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
-            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.tbTotal = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.tcAdmin.SuspendLayout();
             this.tpFoods.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoods)).BeginInit();
@@ -114,7 +113,6 @@ namespace CafeShop {
             this.panel20.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel21.SuspendLayout();
-            this.panel22.SuspendLayout();
             this.tpAccounts.SuspendLayout();
             this.panel24.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
@@ -462,6 +460,7 @@ namespace CafeShop {
             // 
             // flpTables
             // 
+            this.flpTables.AutoScroll = true;
             this.flpTables.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flpTables.Location = new System.Drawing.Point(6, 61);
             this.flpTables.Name = "flpTables";
@@ -471,60 +470,90 @@ namespace CafeShop {
             // panel20
             // 
             this.panel20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel20.Controls.Add(this.btnAddTable);
+            this.panel20.Controls.Add(this.btnResetTable);
+            this.panel20.Controls.Add(this.btnUpdateTable);
             this.panel20.Controls.Add(this.panel23);
             this.panel20.Controls.Add(this.panel21);
-            this.panel20.Controls.Add(this.panel22);
             this.panel20.Location = new System.Drawing.Point(815, 61);
             this.panel20.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(358, 585);
+            this.panel20.Size = new System.Drawing.Size(358, 241);
             this.panel20.TabIndex = 9;
             // 
-            // btnAddTable
+            // btnResetTable
             // 
-            this.btnAddTable.Location = new System.Drawing.Point(6, 200);
-            this.btnAddTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnAddTable.Name = "btnAddTable";
-            this.btnAddTable.Size = new System.Drawing.Size(98, 62);
-            this.btnAddTable.TabIndex = 1;
-            this.btnAddTable.Text = "Add";
-            this.btnAddTable.UseVisualStyleBackColor = true;
+            this.btnResetTable.Location = new System.Drawing.Point(212, 136);
+            this.btnResetTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnResetTable.Name = "btnResetTable";
+            this.btnResetTable.Size = new System.Drawing.Size(128, 85);
+            this.btnResetTable.TabIndex = 10;
+            this.btnResetTable.Text = "Reset";
+            this.btnResetTable.UseVisualStyleBackColor = true;
+            this.btnResetTable.Click += new System.EventHandler(this.btnResetTable_Click);
+            // 
+            // btnUpdateTable
+            // 
+            this.btnUpdateTable.Location = new System.Drawing.Point(15, 136);
+            this.btnUpdateTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnUpdateTable.Name = "btnUpdateTable";
+            this.btnUpdateTable.Size = new System.Drawing.Size(128, 85);
+            this.btnUpdateTable.TabIndex = 1;
+            this.btnUpdateTable.Text = "Update ";
+            this.btnUpdateTable.UseVisualStyleBackColor = true;
+            this.btnUpdateTable.Click += new System.EventHandler(this.btnUpdateTable_Click);
             // 
             // panel23
             // 
-            this.panel23.Controls.Add(this.comboBox1);
+            this.panel23.Controls.Add(this.rbtnInactive);
             this.panel23.Controls.Add(this.label9);
-            this.panel23.Location = new System.Drawing.Point(3, 134);
+            this.panel23.Controls.Add(this.rbtnActive);
+            this.panel23.Location = new System.Drawing.Point(3, 70);
             this.panel23.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel23.Name = "panel23";
             this.panel23.Size = new System.Drawing.Size(352, 58);
             this.panel23.TabIndex = 9;
             // 
-            // comboBox1
+            // rbtnInactive
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(93, 15);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(236, 28);
-            this.comboBox1.TabIndex = 8;
+            this.rbtnInactive.AutoSize = true;
+            this.rbtnInactive.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rbtnInactive.ForeColor = System.Drawing.Color.Red;
+            this.rbtnInactive.Location = new System.Drawing.Point(236, 15);
+            this.rbtnInactive.Name = "rbtnInactive";
+            this.rbtnInactive.Size = new System.Drawing.Size(93, 29);
+            this.rbtnInactive.TabIndex = 11;
+            this.rbtnInactive.TabStop = true;
+            this.rbtnInactive.Text = "Inactive";
+            this.rbtnInactive.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(3, 15);
+            this.label9.Location = new System.Drawing.Point(3, 21);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 20);
             this.label9.TabIndex = 2;
             this.label9.Text = "Status";
             // 
+            // rbtnActive
+            // 
+            this.rbtnActive.AutoSize = true;
+            this.rbtnActive.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rbtnActive.ForeColor = System.Drawing.Color.DarkGreen;
+            this.rbtnActive.Location = new System.Drawing.Point(102, 15);
+            this.rbtnActive.Name = "rbtnActive";
+            this.rbtnActive.Size = new System.Drawing.Size(81, 29);
+            this.rbtnActive.TabIndex = 10;
+            this.rbtnActive.TabStop = true;
+            this.rbtnActive.Text = "Active";
+            this.rbtnActive.UseVisualStyleBackColor = true;
+            // 
             // panel21
             // 
             this.panel21.Controls.Add(this.table);
-            this.panel21.Controls.Add(this.txbTableName);
-            this.panel21.Location = new System.Drawing.Point(3, 69);
+            this.panel21.Controls.Add(this.tbTableName);
+            this.panel21.Location = new System.Drawing.Point(3, 4);
             this.panel21.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(352, 58);
@@ -540,50 +569,17 @@ namespace CafeShop {
             this.table.TabIndex = 2;
             this.table.Text = "Table";
             // 
-            // txbTableName
+            // tbTableName
             // 
-            this.txbTableName.AcceptsTab = true;
-            this.txbTableName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txbTableName.Location = new System.Drawing.Point(93, 12);
-            this.txbTableName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txbTableName.MaxLength = 30;
-            this.txbTableName.Name = "txbTableName";
-            this.txbTableName.Size = new System.Drawing.Size(236, 24);
-            this.txbTableName.TabIndex = 7;
-            this.txbTableName.TabStop = false;
-            // 
-            // panel22
-            // 
-            this.panel22.Controls.Add(this.label8);
-            this.panel22.Controls.Add(this.txbTableId);
-            this.panel22.Location = new System.Drawing.Point(3, 4);
-            this.panel22.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(352, 58);
-            this.panel22.TabIndex = 5;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(3, 15);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(28, 20);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "ID";
-            // 
-            // txbTableId
-            // 
-            this.txbTableId.AcceptsTab = true;
-            this.txbTableId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txbTableId.Location = new System.Drawing.Point(93, 12);
-            this.txbTableId.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txbTableId.MaxLength = 30;
-            this.txbTableId.Name = "txbTableId";
-            this.txbTableId.ReadOnly = true;
-            this.txbTableId.Size = new System.Drawing.Size(236, 24);
-            this.txbTableId.TabIndex = 7;
-            this.txbTableId.TabStop = false;
+            this.tbTableName.AcceptsTab = true;
+            this.tbTableName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbTableName.Location = new System.Drawing.Point(93, 12);
+            this.tbTableName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbTableName.MaxLength = 30;
+            this.tbTableName.Name = "tbTableName";
+            this.tbTableName.Size = new System.Drawing.Size(236, 24);
+            this.tbTableName.TabIndex = 7;
+            this.tbTableName.TabStop = false;
             // 
             // tpAccounts
             // 
@@ -824,42 +820,6 @@ namespace CafeShop {
             this.dgvBill.Size = new System.Drawing.Size(1085, 491);
             this.dgvBill.TabIndex = 10;
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(3, 34);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(60, 28);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "From";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(3, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(34, 28);
-            this.label15.TabIndex = 5;
-            this.label15.Text = "To";
-            // 
-            // dtpToDate
-            // 
-            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpToDate.Location = new System.Drawing.Point(83, 37);
-            this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(210, 27);
-            this.dtpToDate.TabIndex = 1;
-            // 
-            // dtpFromDate
-            // 
-            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFromDate.Location = new System.Drawing.Point(83, 3);
-            this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(210, 27);
-            this.dtpFromDate.TabIndex = 2;
-            // 
             // btnExport
             // 
             this.btnExport.Location = new System.Drawing.Point(996, 44);
@@ -913,6 +873,42 @@ namespace CafeShop {
             this.tableLayoutPanel2.Size = new System.Drawing.Size(376, 68);
             this.tableLayoutPanel2.TabIndex = 11;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label14.Location = new System.Drawing.Point(3, 34);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 28);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "From";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(3, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(34, 28);
+            this.label15.TabIndex = 5;
+            this.label15.Text = "To";
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpToDate.Location = new System.Drawing.Point(83, 37);
+            this.dtpToDate.Name = "dtpToDate";
+            this.dtpToDate.Size = new System.Drawing.Size(210, 27);
+            this.dtpToDate.TabIndex = 1;
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFromDate.Location = new System.Drawing.Point(83, 3);
+            this.dtpFromDate.Name = "dtpFromDate";
+            this.dtpFromDate.Size = new System.Drawing.Size(210, 27);
+            this.dtpFromDate.TabIndex = 2;
+            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -952,8 +948,6 @@ namespace CafeShop {
             this.panel23.PerformLayout();
             this.panel21.ResumeLayout(false);
             this.panel21.PerformLayout();
-            this.panel22.ResumeLayout(false);
-            this.panel22.PerformLayout();
             this.tpAccounts.ResumeLayout(false);
             this.panel24.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
@@ -1028,16 +1022,12 @@ namespace CafeShop {
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.FlowLayoutPanel flpTables;
         private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Button btnAddTable;
+        private System.Windows.Forms.Button btnUpdateTable;
         private System.Windows.Forms.Panel panel23;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel21;
         private System.Windows.Forms.Label table;
-        private System.Windows.Forms.TextBox txbTableName;
-        private System.Windows.Forms.Panel panel22;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txbTableId;
+        private System.Windows.Forms.TextBox tbTableName;
         private System.Windows.Forms.DataGridView dgvBill;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnSearch;
@@ -1048,5 +1038,8 @@ namespace CafeShop {
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DateTimePicker dtpToDate;
         private System.Windows.Forms.DateTimePicker dtpFromDate;
+        private System.Windows.Forms.RadioButton rbtnInactive;
+        private System.Windows.Forms.RadioButton rbtnActive;
+        private System.Windows.Forms.Button btnResetTable;
     }
 }

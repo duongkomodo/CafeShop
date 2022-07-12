@@ -109,6 +109,7 @@ namespace CafeShop {
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(270, 27);
             this.tbUserName.TabIndex = 2;
+            this.tbUserName.Text = "duong123";
             // 
             // tbPassWord
             // 
@@ -117,6 +118,7 @@ namespace CafeShop {
             this.tbPassWord.Name = "tbPassWord";
             this.tbPassWord.Size = new System.Drawing.Size(270, 27);
             this.tbPassWord.TabIndex = 3;
+            this.tbPassWord.Text = "123456";
             this.tbPassWord.UseSystemPasswordChar = true;
             // 
             // label1

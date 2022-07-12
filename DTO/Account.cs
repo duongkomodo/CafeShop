@@ -7,23 +7,18 @@ using System.Threading.Tasks;
 
 namespace CafeShop.DTO {
    public class Account {
+        private int id;
         private string userName;
         private string displayName;
         private string passWord;
-        private string type;
-
-        public Account(string userName,string displayName,string passWord,string type) {
-            this.userName = userName;
-            this.displayName = displayName;
-            this.passWord = passWord;
-            this.type = type;
-        }
+        private int type;
 
         public Account(DataRow row) {
+            this.Id = (int)row["id"];
             this.userName = row["userName"].ToString();
             this.displayName = row["displayName"].ToString();
             this.passWord = row["passWord"].ToString();
-            this.type = row["type"].ToString();
+            this.type = (int)row["type"];
         }
 
         public Account() {
@@ -41,9 +36,13 @@ namespace CafeShop.DTO {
             get => passWord;
             set => passWord = value;
         }
-        public string Type {
+        public int Type {
             get => type;
             set => type = value;
+        }
+        public int Id {
+            get => id;
+            set => id = value;
         }
     }
 }

@@ -69,15 +69,16 @@ namespace CafeShop {
 
                 lsvBill.Items.Add(listViewItem);
             }
-            CultureInfo culture = new CultureInfo("vi-VN");
+
             tbTotalPrice.Text = totalBill.ToString("#,##0.#####");
 
 
         }
 
+
         void LoadTable() {
             flpTables.Controls.Clear();
-            List<Table> tableList = DAO.TableDAO.Instance.LoadTableList();
+            List<Table> tableList = DAO.TableDAO.Instance.LoadTableList(false);
             foreach (Table table in tableList) {
                 Button btnTable = new Button() {
                     Width = 143,
@@ -110,13 +111,12 @@ namespace CafeShop {
         void LoadTakeaway() {
             flpTables.Controls.Clear();
             List<Bill> billList = DAO.BillDAO.Instance.GetBillTakeAway();
-            int i = 1;
+ 
             foreach (Bill bill in billList) {
                 Button btnBill = new Button() {
                     Width = 143,
                     Height = 143,
-                    Text = $"Take Away {i}" 
-                  ,
+                    Text = "Take Away" + Environment.NewLine + "Bill ID: " + bill.Id,
                     FlatStyle = FlatStyle.Flat,
                     FlatAppearance = { BorderSize = 1 },
                     BackgroundImage = Image.FromFile(@"D:\.Net Project\CafeShop\Image\Logo\TableLogo (Custom).png"),
@@ -135,7 +135,7 @@ namespace CafeShop {
                         break;
                 }
                 flpTables.Controls.Add(btnBill);
-                i++;
+         
             }
         }
 
@@ -146,9 +146,15 @@ namespace CafeShop {
         #region Events
 
         bool isTakeAway = false;
+
+        private void fTableManager_Load(object sender,EventArgs e) {
+            if (AccountDAO.Instance.LoginedUser.Type == 0) {
+                adminToolStripMenuItem.Visible = false;
+            }
+        }
         private void btnTakeAway_Click(object sender,EventArgs e) {
             if (isTakeAway) {
-                btnTakeAway.Text = "Tables List";
+                btnTakeAway.Text = "TakeAway";
                 lbTitle.Text = "Table Name:";
                 lbStatus.Text = "Status:";
                 lbTableName.Text = "";
@@ -157,8 +163,8 @@ namespace CafeShop {
                 btnRemoveTakeaway.Visible = false;
                 LoadTable();
             } else {
-                btnTakeAway.Text = "TakeAway List";
-                lbTitle.Text = "Take Away:";
+                btnTakeAway.Text = "Tables";
+                lbTitle.Text = "TakeAway ID:";
                 lbStatus.Text = "";
                 lbTableName.Text = "";
                 lbTableStatus.Text = "";
@@ -182,13 +188,13 @@ namespace CafeShop {
                 }
         }
         private void btnAddTakeawayBill_Click(object sender,EventArgs e) {
-            int idBillMax = BillDAO.Instance.InsertBill(1);
+            int idBillMax = BillDAO.Instance.InsertBill(1, AccountDAO.Instance.LoginedUser.Id);
             refreshTakeaway(idBillMax);
 
         }
         private void BtnBill_Click(object sender,EventArgs e) {
             Bill currbill = ((sender as Button).Tag as Bill);
-            lbTableName.Text = (sender as Button).Text;
+            lbTableName.Text =$"{currbill.Id}" ;
             lsvBill.Tag = (sender as Button).Tag;
             LoadBill(currbill.Id);
         }
@@ -264,7 +270,7 @@ namespace CafeShop {
                     int addCount = (int)nmrQuantity.Value;
 
                     if (idBill == -1) {
-                        int idBillMax = BillDAO.Instance.InsertBill(table.Id);
+                        int idBillMax = BillDAO.Instance.InsertBill(table.Id, AccountDAO.Instance.LoginedUser.Id);
 
                         BillInfoDAO.Instance.InsertBillInfo(idBillMax,foodID,addCount);
                     } else {
@@ -330,7 +336,7 @@ namespace CafeShop {
                     int subtractCount = (int)nmrQuantity.Value * (-1);
 
                     if (idBill == -1) {
-                        int idBillMax = BillDAO.Instance.InsertBill(table.Id);
+                        int idBillMax = BillDAO.Instance.InsertBill(table.Id, AccountDAO.Instance.LoginedUser.Id);
 
                         BillInfoDAO.Instance.InsertBillInfo(idBillMax,foodID,subtractCount);
                     } else {
@@ -374,6 +380,8 @@ namespace CafeShop {
                         lbTableName.Text = "";
                         lsvBill.Tag = null;
                         refreshTakeaway(bill.Id);
+                        fBillDetail detail = new fBillDetail(bill.Id);
+                        detail.Show();
                     }
          
                 } else {
@@ -393,6 +401,8 @@ namespace CafeShop {
                         if (MessageBox.Show($"Do you really want to checkout {table.Name}\n {totalPrice} - ({totalPrice} / 100) x {discount} = {finalTotalPrice}","Caution",MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK) {
                             BillDAO.Instance.CheckOut(idBill,discount,finalTotalPrice);
                             refreshTable(table.Id);
+                            fBillDetail detail = new fBillDetail(idBill);
+                            detail.Show();
                         }
                     } else {
                         MessageBox.Show($"This {table.Name} have no item !","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -419,12 +429,8 @@ namespace CafeShop {
             this.Show();
         }
 
-
-
-
-
         #endregion
 
-
+ 
     }
 }

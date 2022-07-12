@@ -24,8 +24,11 @@ namespace CafeShop.DAO {
         private TableDAO() {
         }
 
-        public  List<Table> LoadTableList() {
+        public  List<Table> LoadTableList(bool isAdmin) {
             String sql = "EXEC dbo.USP_GetTableList";
+            if (isAdmin) {
+                sql = "SELECT * FROM dbo.TableFood where id != 1";
+            }
             List<Table> tableList = new List<Table>();
                 DataTable dataTable = DataProvider.Instance.ExecuteQuery(sql);
                 tableList = (from DataRow row in dataTable.Rows
@@ -33,11 +36,11 @@ namespace CafeShop.DAO {
             return tableList;
         }
 
-        //public void ChangeTableStatus(int tableId) {
-        //    String sql = $"EXEC dbo.USP_ChangeTableStatus @tableid = {tableId} ";
-        //    int result = DAO.DataProvider.Instance.ExecuteNonQuery(sql);
+        public void UpdateTable(int tableId, string name, bool inUse) {
+            String sql = $"UPDATE [dbo].[TableFood] SET [name] = '{name}' , [inUse] = '{inUse}' WHERE [id] = {tableId}";
+            int result = DAO.DataProvider.Instance.ExecuteNonQuery(sql);
 
-        //}
+        }
 
         public void ChangeTableInUse(int tableId, bool inUse) {
             String sql = $"UPDATE [dbo].[TableFood] SET [inUse] = ? WHERE id = {tableId} ; ";

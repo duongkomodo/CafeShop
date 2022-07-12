@@ -55,8 +55,8 @@ namespace CafeShop.DAO {
             return tableBill;
         }
 
-        public int InsertBill(int idTable) {
-            int result = (int)DataProvider.Instance.ExecuteScalar($"exec USP_InsertBill {idTable} ; ");
+        public int InsertBill(int idTable, int accountId) {
+            int result = (int)DataProvider.Instance.ExecuteScalar($"exec USP_InsertBill {idTable} , {accountId} ; ");
             return result;
         }
 

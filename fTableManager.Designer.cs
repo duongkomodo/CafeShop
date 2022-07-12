@@ -44,6 +44,7 @@ namespace CafeShop {
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lbListCount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCheckout = new System.Windows.Forms.Button();
             this.nmrDiscount = new System.Windows.Forms.NumericUpDown();
@@ -59,7 +60,6 @@ namespace CafeShop {
             this.lbStatus = new System.Windows.Forms.Label();
             this.lbTitle = new System.Windows.Forms.Label();
             this.flpTables = new System.Windows.Forms.FlowLayoutPanel();
-            this.lbListCount = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
@@ -266,6 +266,16 @@ namespace CafeShop {
             this.panel3.Size = new System.Drawing.Size(713, 89);
             this.panel3.TabIndex = 4;
             // 
+            // lbListCount
+            // 
+            this.lbListCount.AutoSize = true;
+            this.lbListCount.Location = new System.Drawing.Point(386, 12);
+            this.lbListCount.Name = "lbListCount";
+            this.lbListCount.Size = new System.Drawing.Size(69, 20);
+            this.lbListCount.TabIndex = 9;
+            this.lbListCount.Text = "list count";
+            this.lbListCount.Visible = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -336,18 +346,18 @@ namespace CafeShop {
             this.panel4.Controls.Add(this.lbTitle);
             this.panel4.Location = new System.Drawing.Point(12, 31);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(749, 77);
+            this.panel4.Size = new System.Drawing.Size(749, 98);
             this.panel4.TabIndex = 5;
             // 
             // btnRemoveTakeaway
             // 
             this.btnRemoveTakeaway.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRemoveTakeaway.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnRemoveTakeaway.Location = new System.Drawing.Point(499, 2);
+            this.btnRemoveTakeaway.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.btnRemoveTakeaway.Location = new System.Drawing.Point(445, 56);
             this.btnRemoveTakeaway.Name = "btnRemoveTakeaway";
-            this.btnRemoveTakeaway.Size = new System.Drawing.Size(116, 68);
+            this.btnRemoveTakeaway.Size = new System.Drawing.Size(109, 35);
             this.btnRemoveTakeaway.TabIndex = 11;
-            this.btnRemoveTakeaway.Text = "Remove TakeAway";
+            this.btnRemoveTakeaway.Text = "Remove";
             this.btnRemoveTakeaway.UseVisualStyleBackColor = true;
             this.btnRemoveTakeaway.Visible = false;
             this.btnRemoveTakeaway.Click += new System.EventHandler(this.btnRemoveTakeaway_Click);
@@ -355,12 +365,12 @@ namespace CafeShop {
             // btnAddTakeawayBill
             // 
             this.btnAddTakeawayBill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddTakeawayBill.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnAddTakeawayBill.Location = new System.Drawing.Point(372, 2);
+            this.btnAddTakeawayBill.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.btnAddTakeawayBill.Location = new System.Drawing.Point(325, 56);
             this.btnAddTakeawayBill.Name = "btnAddTakeawayBill";
-            this.btnAddTakeawayBill.Size = new System.Drawing.Size(121, 68);
+            this.btnAddTakeawayBill.Size = new System.Drawing.Size(114, 35);
             this.btnAddTakeawayBill.TabIndex = 10;
-            this.btnAddTakeawayBill.Text = "New TakeAway";
+            this.btnAddTakeawayBill.Text = "New";
             this.btnAddTakeawayBill.UseVisualStyleBackColor = true;
             this.btnAddTakeawayBill.Visible = false;
             this.btnAddTakeawayBill.Click += new System.EventHandler(this.btnAddTakeawayBill_Click);
@@ -368,12 +378,12 @@ namespace CafeShop {
             // btnTakeAway
             // 
             this.btnTakeAway.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTakeAway.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnTakeAway.Location = new System.Drawing.Point(621, 3);
+            this.btnTakeAway.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.btnTakeAway.Location = new System.Drawing.Point(628, 2);
             this.btnTakeAway.Name = "btnTakeAway";
-            this.btnTakeAway.Size = new System.Drawing.Size(121, 68);
+            this.btnTakeAway.Size = new System.Drawing.Size(114, 45);
             this.btnTakeAway.TabIndex = 9;
-            this.btnTakeAway.Text = "List TakeAway";
+            this.btnTakeAway.Text = "TakeAway";
             this.btnTakeAway.UseVisualStyleBackColor = true;
             this.btnTakeAway.Click += new System.EventHandler(this.btnTakeAway_Click);
             // 
@@ -381,20 +391,22 @@ namespace CafeShop {
             // 
             this.lbTableName.AutoSize = true;
             this.lbTableName.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbTableName.ForeColor = System.Drawing.Color.Olive;
-            this.lbTableName.Location = new System.Drawing.Point(175, 11);
+            this.lbTableName.ForeColor = System.Drawing.Color.Orange;
+            this.lbTableName.Location = new System.Drawing.Point(183, 12);
             this.lbTableName.Name = "lbTableName";
-            this.lbTableName.Size = new System.Drawing.Size(0, 35);
+            this.lbTableName.Size = new System.Drawing.Size(125, 35);
             this.lbTableName.TabIndex = 3;
+            this.lbTableName.Text = "Example";
             // 
             // lbTableStatus
             // 
             this.lbTableStatus.AutoSize = true;
             this.lbTableStatus.Font = new System.Drawing.Font("Segoe UI", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.lbTableStatus.Location = new System.Drawing.Point(175, 47);
+            this.lbTableStatus.Location = new System.Drawing.Point(183, 47);
             this.lbTableStatus.Name = "lbTableStatus";
-            this.lbTableStatus.Size = new System.Drawing.Size(0, 23);
+            this.lbTableStatus.Size = new System.Drawing.Size(77, 23);
             this.lbTableStatus.TabIndex = 2;
+            this.lbTableStatus.Text = "Example";
             // 
             // lbStatus
             // 
@@ -410,7 +422,7 @@ namespace CafeShop {
             // 
             this.lbTitle.AutoSize = true;
             this.lbTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.lbTitle.Location = new System.Drawing.Point(3, 9);
+            this.lbTitle.Location = new System.Drawing.Point(-2, 8);
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(179, 38);
             this.lbTitle.TabIndex = 0;
@@ -422,20 +434,10 @@ namespace CafeShop {
             this.flpTables.BackgroundImage = global::CafeShop.Properties.Resources.background;
             this.flpTables.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.flpTables.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flpTables.Location = new System.Drawing.Point(12, 115);
+            this.flpTables.Location = new System.Drawing.Point(12, 135);
             this.flpTables.Name = "flpTables";
-            this.flpTables.Size = new System.Drawing.Size(749, 728);
+            this.flpTables.Size = new System.Drawing.Size(749, 708);
             this.flpTables.TabIndex = 1;
-            // 
-            // lbListCount
-            // 
-            this.lbListCount.AutoSize = true;
-            this.lbListCount.Location = new System.Drawing.Point(386, 12);
-            this.lbListCount.Name = "lbListCount";
-            this.lbListCount.Size = new System.Drawing.Size(69, 20);
-            this.lbListCount.TabIndex = 9;
-            this.lbListCount.Text = "list count";
-            this.lbListCount.Visible = false;
             // 
             // fTableManager
             // 
@@ -456,6 +458,7 @@ namespace CafeShop {
             this.Name = "fTableManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cafeshop System Manager";
+            this.Load += new System.EventHandler(this.fTableManager_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

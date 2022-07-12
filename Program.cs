@@ -15,7 +15,7 @@ namespace CafeShop {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new fTableManager());
-            Application.Run(new fTableManager());
+            Application.Run(new fLogin());
         }
     }
 }

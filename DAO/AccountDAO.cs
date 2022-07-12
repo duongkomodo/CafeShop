@@ -17,9 +17,17 @@ namespace CafeShop.DAO {
                 if (AccountDAO.instance == null) {
                     AccountDAO.instance = new AccountDAO();
                 } return AccountDAO.instance; }
-           private set => AccountDAO.instance = value;
+            private set => AccountDAO.instance = value;
         }
+        private Account loginedUser;
 
+        public Account LoginedUser {
+            get {
+                return loginedUser;
+            }
+
+ 
+        }
         private AccountDAO() {
         }
 
@@ -29,11 +37,24 @@ namespace CafeShop.DAO {
             DataTable data = DataProvider.Instance.ExecuteQuery(sql);
             if (data !=null && data.Rows.Count > 0) {      
                     Account account = new Account(data.Rows[0]);
+                loginedUser = account;
                     return account;           
             } else {
                 return null;
             }
         
+        }
+
+        public string CashierName(int accountId) {
+
+            string sql = $"Select displayName from Account where id = {accountId}";
+            string data = DataProvider.Instance.ExecuteScalar(sql).ToString();
+            return data;
+
+        }
+
+        public void InvalidateAccount() {
+            loginedUser = null;
         }
     }
 }

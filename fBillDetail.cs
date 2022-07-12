@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CafeShop.DAO;
 using CafeShop.DTO;
 namespace CafeShop {
     public partial class fBillDetail :Form {
@@ -36,6 +37,9 @@ namespace CafeShop {
             tbCheckin.Text = bill.DateCheckIn == null ? "" : bill.DateCheckIn.Value.ToString("dd-MMM-yyyy HH:mm");
             tbCheckout.Text  = bill.DateCheckOut == null ? "" : bill.DateCheckOut.Value.ToString("dd-MMM-yyyy HH:mm");
             Double totalBill = 0;
+            tbBillId.Text = bill.Id.ToString();
+            tbDiscount.Text = bill.Discount.ToString();
+            tbCashier.Text = AccountDAO.Instance.CashierName(bill.IdAccount);
             foreach (FoodOrdered item in billDetail) {
                 ListViewItem listViewItem = new ListViewItem(item.FoodName.ToString());
                 listViewItem.Tag = item;
@@ -52,5 +56,7 @@ namespace CafeShop {
         }
 
         #endregion
+
+
     }
 }
