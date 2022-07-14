@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace CafeShop {
             try {
              LoadTable();
              loadCategory();
+
+                tsmiAccountInfo.Text = DAO.AccountDAO.Instance.LoginedUser.DisplayName;
             } catch (Exception) {
 
                 throw;
@@ -80,6 +83,9 @@ namespace CafeShop {
             flpTables.Controls.Clear();
             List<Table> tableList = DAO.TableDAO.Instance.LoadTableList(false);
             foreach (Table table in tableList) {
+                if (table.Id == 1) {
+                    continue;
+                }
                 Button btnTable = new Button() {
                     Width = 143,
                     Height = 143,
@@ -118,22 +124,15 @@ namespace CafeShop {
                     Height = 143,
                     Text = "Take Away" + Environment.NewLine + "Bill ID: " + bill.Id,
                     FlatStyle = FlatStyle.Flat,
-                    FlatAppearance = { BorderSize = 1 },
+                    FlatAppearance = { BorderSize = 2 },
                     BackgroundImage = Image.FromFile(@"D:\.Net Project\CafeShop\Image\Logo\TableLogo (Custom).png"),
                     ForeColor = Color.White,
                     Font = new Font(Font.FontFamily,10)
+                    
                 };
                 btnBill.Click += BtnBill_Click;
                 btnBill.Tag = bill;
-                switch (bill.Status) {
-                    case 0:
-                        btnBill.BackColor = Color.Firebrick;
-                        break;
-
-                    default:
-                        btnBill.BackColor = Color.Green;
-                        break;
-                }
+                btnBill.BackColor = Color.DarkViolet;
                 flpTables.Controls.Add(btnBill);
          
             }
@@ -148,7 +147,7 @@ namespace CafeShop {
         bool isTakeAway = false;
 
         private void fTableManager_Load(object sender,EventArgs e) {
-            if (AccountDAO.Instance.LoginedUser.Type == 0) {
+            if (AccountDAO.Instance.LoginedUser.Id != 1) {
                 adminToolStripMenuItem.Visible = false;
             }
         }
@@ -178,7 +177,7 @@ namespace CafeShop {
     
                 Bill currBill = lsvBill.Tag as Bill;
                 if (currBill != null) {
-                    if (MessageBox.Show($"Do you really want to remove this takeaway bill ? ","Caution",MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.OK) {
+                    if (MessageBox.Show($"Do you really want to remove takeaway bill {currBill.Id}? ","Caution",MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.OK) {
                         BillInfoDAO.Instance.RemoveAllBillInfoByBillId(currBill.Id);
                     BillDAO.Instance.RemoveTakeawayBill(currBill.Id);
                     refreshTakeaway(currBill.Id);
@@ -241,9 +240,15 @@ namespace CafeShop {
 
         private void lbxFoods_SelectedIndexChanged(object sender,EventArgs e) {
             Food selectFood = lbxFoods.SelectedItem as Food;
+           
             if (selectFood != null) {
-                ptbFood.BackgroundImage = Image.FromFile(selectFood.Image);
+                string path = selectFood.Image;
+                if (!File.Exists(path)) {
+                    path = @"Image\Food\placeholder (Custom).png";
+                }
+                ptbFood.BackgroundImage = Image.FromFile(path);
                 ptbFood.BackgroundImageLayout = ImageLayout.Stretch;
+
             }
            
         }
@@ -427,6 +432,8 @@ namespace CafeShop {
             this.Hide();
             fAdmin.ShowDialog();
             this.Show();
+            LoadTable();
+            loadCategory();
         }
 
         #endregion

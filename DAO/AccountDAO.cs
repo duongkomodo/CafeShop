@@ -33,20 +33,95 @@ namespace CafeShop.DAO {
 
        public Account Login(string username,string password) {
 
-            string sql = $"EXEC dbo.USP_Login {username} , {password} ";
+            string sql = $"EXEC dbo.USP_Login {username} ";
             DataTable data = DataProvider.Instance.ExecuteQuery(sql);
             if (data !=null && data.Rows.Count > 0) {      
                     Account account = new Account(data.Rows[0]);
-                loginedUser = account;
-                    return account;           
+                bool verified = BCrypt.Net.BCrypt.Verify(password,account.PassWord);
+                if (verified is true) {
+                    loginedUser = account;
+                    return account;
+                } else {
+                    return null;
+                }
+                   
             } else {
                 return null;
             }
         
         }
 
-        public string CashierName(int accountId) {
+        public Account GetAccountById(int id) {
 
+            string sql = $"select * from Account where id = {id} ";
+            DataTable data = DataProvider.Instance.ExecuteQuery(sql);
+            if (data != null && data.Rows.Count > 0) {
+                Account account = new Account(data.Rows[0]);
+                loginedUser = account;
+                return account;
+            } else {
+                return null;
+            }
+
+
+        }
+
+
+        public int removeAccount(int id) {
+            string sql = $"UPDATE [dbo].[Food] SET [inUse] = 0 WHERE dbo.Food.id = {id}";
+
+            return DataProvider.Instance.ExecuteNonQuery(sql);
+
+        }
+        public int addAccount(Account account) {
+            string sql = $"INSERT INTO [dbo].[Account]([UserName] ,[DisplayName],[PassWord] ,[roleId],[avatar])" +
+                $" VALUES (N'{account.UserName}',N'{account.DisplayName}',N'{account.PassWord}',{account.RoleId},N'{account.Avatar}')";
+
+            return DataProvider.Instance.ExecuteNonQuery(sql);
+
+        }
+        public int checkExistAccount(string username) {
+            string sql = $"Select count(*) from account where inUse = 1 and username = '{username}'";
+
+            return Convert.ToInt32(DataProvider.Instance.ExecuteScalar(sql));
+
+        }
+
+        public int DeleteAccount(int id) {
+            string sql = $"[dbo].[USP_RemoveAccount] @accountId = {id} ";
+
+            return Convert.ToInt32(DataProvider.Instance.ExecuteScalar(sql));
+
+        }
+
+        public int updateAccount(Account account) {
+            string sql = $"UPDATE [dbo].[Account] SET" +
+                $" [UserName] = N'{account.UserName}',[DisplayName] = N'{account.DisplayName}' ," +
+                $"[PassWord] = N'{account.PassWord}',[roleId] = {account.RoleId},[avatar] = N '{account.Avatar}' " +
+                $"WHERE Account.id = {account.Id}";
+
+
+            return DataProvider.Instance.ExecuteNonQuery(sql);
+
+        }
+        public List<Account> LoadAllAccount() {
+
+            string sql = $"USP_GetAccountList";
+            List<Account> list = new List<Account>();
+            DataTable data = DataProvider.Instance.ExecuteQuery(sql);
+            if (data != null && data.Rows.Count > 0) {
+                foreach (DataRow item in data.Rows) {
+                    Account account = new Account(item);
+                    list.Add(account);
+                }
+          
+            } else {
+                return null;
+            }
+
+            return list;
+        }
+        public string CashierName(int accountId) {
             string sql = $"Select displayName from Account where id = {accountId}";
             string data = DataProvider.Instance.ExecuteScalar(sql).ToString();
             return data;

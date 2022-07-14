@@ -69,33 +69,25 @@ namespace CafeShop {
             this.panel24 = new System.Windows.Forms.Panel();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
             this.panel25 = new System.Windows.Forms.Panel();
-            this.panel26 = new System.Windows.Forms.Panel();
-            this.btnViewAccount = new System.Windows.Forms.Button();
-            this.btnUpdateAccount = new System.Windows.Forms.Button();
-            this.btnDeleteAccount = new System.Windows.Forms.Button();
             this.btnAddAccount = new System.Windows.Forms.Button();
-            this.panel27 = new System.Windows.Forms.Panel();
-            this.btnChangePassword = new System.Windows.Forms.Button();
-            this.panel28 = new System.Windows.Forms.Panel();
-            this.cbAccountType = new System.Windows.Forms.ComboBox();
+            this.panel26 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel29 = new System.Windows.Forms.Panel();
+            this.tpBill = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cbTables = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.txbDisplayName = new System.Windows.Forms.TextBox();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.user = new System.Windows.Forms.Label();
-            this.txbUsername = new System.Windows.Forms.TextBox();
-            this.tbpBill = new System.Windows.Forms.TabPage();
-            this.dgvBill = new System.Windows.Forms.DataGridView();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.tbTotal = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnDeletebill = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.dgvBill = new System.Windows.Forms.DataGridView();
+            this.label16 = new System.Windows.Forms.Label();
+            this.tbTotal = new System.Windows.Forms.TextBox();
             this.tcAdmin.SuspendLayout();
             this.tpFoods.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoods)).BeginInit();
@@ -116,14 +108,12 @@ namespace CafeShop {
             this.tpAccounts.SuspendLayout();
             this.panel24.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
+            this.panel25.SuspendLayout();
             this.panel26.SuspendLayout();
-            this.panel27.SuspendLayout();
-            this.panel28.SuspendLayout();
-            this.panel29.SuspendLayout();
-            this.panel30.SuspendLayout();
-            this.tbpBill.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
+            this.tpBill.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
             this.SuspendLayout();
             // 
             // tcAdmin
@@ -132,13 +122,14 @@ namespace CafeShop {
             this.tcAdmin.Controls.Add(this.tpCategory);
             this.tcAdmin.Controls.Add(this.tpTables);
             this.tcAdmin.Controls.Add(this.tpAccounts);
-            this.tcAdmin.Controls.Add(this.tbpBill);
+            this.tcAdmin.Controls.Add(this.tpBill);
             this.tcAdmin.Location = new System.Drawing.Point(2, 5);
             this.tcAdmin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tcAdmin.Name = "tcAdmin";
             this.tcAdmin.SelectedIndex = 0;
             this.tcAdmin.Size = new System.Drawing.Size(1187, 690);
             this.tcAdmin.TabIndex = 1;
+            this.tcAdmin.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcAdmin_Selecting);
             // 
             // tpFoods
             // 
@@ -586,7 +577,6 @@ namespace CafeShop {
             this.tpAccounts.Controls.Add(this.panel24);
             this.tpAccounts.Controls.Add(this.panel25);
             this.tpAccounts.Controls.Add(this.panel26);
-            this.tpAccounts.Controls.Add(this.panel27);
             this.tpAccounts.Location = new System.Drawing.Point(4, 29);
             this.tpAccounts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tpAccounts.Name = "tpAccounts";
@@ -602,282 +592,158 @@ namespace CafeShop {
             this.panel24.Location = new System.Drawing.Point(5, 84);
             this.panel24.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(801, 562);
+            this.panel24.Size = new System.Drawing.Size(1165, 562);
             this.panel24.TabIndex = 16;
             // 
             // dgvAccount
             // 
+            this.dgvAccount.AllowUserToAddRows = false;
+            this.dgvAccount.AllowUserToDeleteRows = false;
+            this.dgvAccount.AllowUserToOrderColumns = true;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccount.Location = new System.Drawing.Point(0, 4);
             this.dgvAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvAccount.Name = "dgvAccount";
             this.dgvAccount.RowHeadersWidth = 51;
             this.dgvAccount.RowTemplate.Height = 24;
-            this.dgvAccount.Size = new System.Drawing.Size(798, 554);
+            this.dgvAccount.Size = new System.Drawing.Size(1162, 554);
             this.dgvAccount.TabIndex = 0;
+            this.dgvAccount.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccount_CellContentClick);
             // 
             // panel25
             // 
+            this.panel25.Controls.Add(this.btnAddAccount);
             this.panel25.Location = new System.Drawing.Point(812, 2);
             this.panel25.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(338, 70);
+            this.panel25.Size = new System.Drawing.Size(358, 74);
             this.panel25.TabIndex = 15;
-            // 
-            // panel26
-            // 
-            this.panel26.Controls.Add(this.btnViewAccount);
-            this.panel26.Controls.Add(this.btnUpdateAccount);
-            this.panel26.Controls.Add(this.btnDeleteAccount);
-            this.panel26.Controls.Add(this.btnAddAccount);
-            this.panel26.Location = new System.Drawing.Point(5, 2);
-            this.panel26.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(801, 70);
-            this.panel26.TabIndex = 14;
-            // 
-            // btnViewAccount
-            // 
-            this.btnViewAccount.Location = new System.Drawing.Point(346, 4);
-            this.btnViewAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnViewAccount.Name = "btnViewAccount";
-            this.btnViewAccount.Size = new System.Drawing.Size(75, 62);
-            this.btnViewAccount.TabIndex = 4;
-            this.btnViewAccount.Text = "View";
-            this.btnViewAccount.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateAccount
-            // 
-            this.btnUpdateAccount.Location = new System.Drawing.Point(236, 4);
-            this.btnUpdateAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnUpdateAccount.Name = "btnUpdateAccount";
-            this.btnUpdateAccount.Size = new System.Drawing.Size(75, 62);
-            this.btnUpdateAccount.TabIndex = 3;
-            this.btnUpdateAccount.Text = "Update";
-            this.btnUpdateAccount.UseVisualStyleBackColor = true;
-            // 
-            // btnDeleteAccount
-            // 
-            this.btnDeleteAccount.Location = new System.Drawing.Point(122, 4);
-            this.btnDeleteAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDeleteAccount.Name = "btnDeleteAccount";
-            this.btnDeleteAccount.Size = new System.Drawing.Size(75, 62);
-            this.btnDeleteAccount.TabIndex = 2;
-            this.btnDeleteAccount.Text = "Delete";
-            this.btnDeleteAccount.UseVisualStyleBackColor = true;
             // 
             // btnAddAccount
             // 
-            this.btnAddAccount.Location = new System.Drawing.Point(3, 4);
+            this.btnAddAccount.Location = new System.Drawing.Point(153, 6);
             this.btnAddAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddAccount.Name = "btnAddAccount";
-            this.btnAddAccount.Size = new System.Drawing.Size(75, 62);
+            this.btnAddAccount.Size = new System.Drawing.Size(202, 62);
             this.btnAddAccount.TabIndex = 1;
-            this.btnAddAccount.Text = "Add";
+            this.btnAddAccount.Text = "Create new Account";
             this.btnAddAccount.UseVisualStyleBackColor = true;
+            this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
-            // panel27
+            // panel26
             // 
-            this.panel27.Controls.Add(this.btnChangePassword);
-            this.panel27.Controls.Add(this.panel28);
-            this.panel27.Controls.Add(this.panel29);
-            this.panel27.Controls.Add(this.panel30);
-            this.panel27.Location = new System.Drawing.Point(812, 84);
-            this.panel27.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(361, 562);
-            this.panel27.TabIndex = 13;
-            // 
-            // btnChangePassword
-            // 
-            this.btnChangePassword.Location = new System.Drawing.Point(226, 200);
-            this.btnChangePassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(129, 62);
-            this.btnChangePassword.TabIndex = 10;
-            this.btnChangePassword.Text = "Change Password";
-            this.btnChangePassword.UseVisualStyleBackColor = true;
-            // 
-            // panel28
-            // 
-            this.panel28.Controls.Add(this.cbAccountType);
-            this.panel28.Controls.Add(this.label7);
-            this.panel28.Location = new System.Drawing.Point(3, 134);
-            this.panel28.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(355, 58);
-            this.panel28.TabIndex = 9;
-            // 
-            // cbAccountType
-            // 
-            this.cbAccountType.FormattingEnabled = true;
-            this.cbAccountType.Location = new System.Drawing.Point(135, 15);
-            this.cbAccountType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cbAccountType.Name = "cbAccountType";
-            this.cbAccountType.Size = new System.Drawing.Size(217, 28);
-            this.cbAccountType.TabIndex = 8;
+            this.panel26.Controls.Add(this.label7);
+            this.panel26.Location = new System.Drawing.Point(5, 2);
+            this.panel26.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(801, 74);
+            this.panel26.TabIndex = 14;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(3, 15);
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(3, 10);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 18);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Type";
+            this.label7.Size = new System.Drawing.Size(254, 54);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "List accounts";
             // 
-            // panel29
+            // tpBill
             // 
-            this.panel29.Controls.Add(this.label10);
-            this.panel29.Controls.Add(this.txbDisplayName);
-            this.panel29.Location = new System.Drawing.Point(3, 69);
-            this.panel29.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(355, 58);
-            this.panel29.TabIndex = 8;
+            this.tpBill.Controls.Add(this.label8);
+            this.tpBill.Controls.Add(this.panel1);
+            this.tpBill.Controls.Add(this.dgvBill);
+            this.tpBill.Controls.Add(this.label16);
+            this.tpBill.Controls.Add(this.tbTotal);
+            this.tpBill.Location = new System.Drawing.Point(4, 29);
+            this.tpBill.Name = "tpBill";
+            this.tpBill.Padding = new System.Windows.Forms.Padding(3);
+            this.tpBill.Size = new System.Drawing.Size(1179, 657);
+            this.tpBill.TabIndex = 5;
+            this.tpBill.Text = "Bill Manager";
+            this.tpBill.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(6, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(173, 54);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "List Bills";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.cbTables);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.tableLayoutPanel2);
+            this.panel1.Controls.Add(this.btnDeletebill);
+            this.panel1.Controls.Add(this.btnExport);
+            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Location = new System.Drawing.Point(874, 82);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(295, 568);
+            this.panel1.TabIndex = 17;
+            // 
+            // cbTables
+            // 
+            this.cbTables.FormattingEnabled = true;
+            this.cbTables.Location = new System.Drawing.Point(72, 109);
+            this.cbTables.Name = "cbTables";
+            this.cbTables.Size = new System.Drawing.Size(210, 28);
+            this.cbTables.TabIndex = 18;
+            this.cbTables.SelectedIndexChanged += new System.EventHandler(this.cbTables_SelectedIndexChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(3, 15);
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(0, 105);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(112, 18);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Display Name";
-            // 
-            // txbDisplayName
-            // 
-            this.txbDisplayName.AcceptsTab = true;
-            this.txbDisplayName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txbDisplayName.Location = new System.Drawing.Point(135, 12);
-            this.txbDisplayName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txbDisplayName.MaxLength = 30;
-            this.txbDisplayName.Name = "txbDisplayName";
-            this.txbDisplayName.Size = new System.Drawing.Size(217, 24);
-            this.txbDisplayName.TabIndex = 7;
-            this.txbDisplayName.TabStop = false;
-            // 
-            // panel30
-            // 
-            this.panel30.Controls.Add(this.user);
-            this.panel30.Controls.Add(this.txbUsername);
-            this.panel30.Location = new System.Drawing.Point(3, 4);
-            this.panel30.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(355, 58);
-            this.panel30.TabIndex = 5;
-            // 
-            // user
-            // 
-            this.user.AutoSize = true;
-            this.user.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.user.Location = new System.Drawing.Point(3, 15);
-            this.user.Name = "user";
-            this.user.Size = new System.Drawing.Size(93, 18);
-            this.user.TabIndex = 2;
-            this.user.Text = "User Name";
-            // 
-            // txbUsername
-            // 
-            this.txbUsername.AcceptsTab = true;
-            this.txbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txbUsername.Location = new System.Drawing.Point(135, 12);
-            this.txbUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txbUsername.MaxLength = 30;
-            this.txbUsername.Name = "txbUsername";
-            this.txbUsername.ReadOnly = true;
-            this.txbUsername.Size = new System.Drawing.Size(217, 24);
-            this.txbUsername.TabIndex = 7;
-            this.txbUsername.TabStop = false;
-            // 
-            // tbpBill
-            // 
-            this.tbpBill.Controls.Add(this.dgvBill);
-            this.tbpBill.Controls.Add(this.btnExport);
-            this.tbpBill.Controls.Add(this.btnSearch);
-            this.tbpBill.Controls.Add(this.label16);
-            this.tbpBill.Controls.Add(this.tbTotal);
-            this.tbpBill.Controls.Add(this.tableLayoutPanel2);
-            this.tbpBill.Location = new System.Drawing.Point(4, 29);
-            this.tbpBill.Name = "tbpBill";
-            this.tbpBill.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpBill.Size = new System.Drawing.Size(1179, 657);
-            this.tbpBill.TabIndex = 5;
-            this.tbpBill.Text = "Bill Manager";
-            this.tbpBill.UseVisualStyleBackColor = true;
-            // 
-            // dgvBill
-            // 
-            this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBill.Location = new System.Drawing.Point(45, 82);
-            this.dgvBill.Name = "dgvBill";
-            this.dgvBill.ReadOnly = true;
-            this.dgvBill.RowHeadersWidth = 51;
-            this.dgvBill.RowTemplate.Height = 29;
-            this.dgvBill.ShowEditingIcon = false;
-            this.dgvBill.Size = new System.Drawing.Size(1085, 491);
-            this.dgvBill.TabIndex = 10;
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(996, 44);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(134, 29);
-            this.btnExport.TabIndex = 15;
-            this.btnExport.Text = "Export to excel";
-            this.btnExport.UseVisualStyleBackColor = true;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(427, 6);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(155, 70);
-            this.btnSearch.TabIndex = 14;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(783, 11);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(131, 23);
-            this.label16.TabIndex = 12;
-            this.label16.Text = "Revenue (VNĐ)";
-            // 
-            // tbTotal
-            // 
-            this.tbTotal.Location = new System.Drawing.Point(920, 11);
-            this.tbTotal.Name = "tbTotal";
-            this.tbTotal.ReadOnly = true;
-            this.tbTotal.Size = new System.Drawing.Size(210, 27);
-            this.tbTotal.TabIndex = 13;
+            this.label10.Size = new System.Drawing.Size(71, 28);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Tables";
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.35231F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.64769F));
-            this.tableLayoutPanel2.Controls.Add(this.label14, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label15, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.dtpToDate, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.dtpFromDate, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(45, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label14, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label15, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(376, 68);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(323, 99);
             this.tableLayoutPanel2.TabIndex = 11;
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpToDate.Location = new System.Drawing.Point(71, 52);
+            this.dtpToDate.Name = "dtpToDate";
+            this.dtpToDate.Size = new System.Drawing.Size(210, 27);
+            this.dtpToDate.TabIndex = 1;
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFromDate.Location = new System.Drawing.Point(71, 3);
+            this.dtpFromDate.Name = "dtpFromDate";
+            this.dtpFromDate.Size = new System.Drawing.Size(210, 27);
+            this.dtpFromDate.TabIndex = 2;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(3, 34);
+            this.label14.Location = new System.Drawing.Point(3, 49);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(60, 28);
             this.label14.TabIndex = 4;
@@ -893,21 +759,68 @@ namespace CafeShop {
             this.label15.TabIndex = 5;
             this.label15.Text = "To";
             // 
-            // dtpToDate
+            // btnDeletebill
             // 
-            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpToDate.Location = new System.Drawing.Point(83, 37);
-            this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(210, 27);
-            this.dtpToDate.TabIndex = 1;
+            this.btnDeletebill.Location = new System.Drawing.Point(170, 152);
+            this.btnDeletebill.Name = "btnDeletebill";
+            this.btnDeletebill.Size = new System.Drawing.Size(112, 56);
+            this.btnDeletebill.TabIndex = 16;
+            this.btnDeletebill.Text = "Delete";
+            this.btnDeletebill.UseVisualStyleBackColor = true;
+            this.btnDeletebill.Click += new System.EventHandler(this.btnDeletebill_Click);
             // 
-            // dtpFromDate
+            // btnExport
             // 
-            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFromDate.Location = new System.Drawing.Point(83, 3);
-            this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(210, 27);
-            this.dtpFromDate.TabIndex = 2;
+            this.btnExport.Location = new System.Drawing.Point(4, 529);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(134, 29);
+            this.btnExport.TabIndex = 15;
+            this.btnExport.Text = "Export to excel";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(4, 152);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(122, 56);
+            this.btnSearch.TabIndex = 14;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // dgvBill
+            // 
+            this.dgvBill.AllowUserToAddRows = false;
+            this.dgvBill.AllowUserToDeleteRows = false;
+            this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBill.Location = new System.Drawing.Point(6, 82);
+            this.dgvBill.Name = "dgvBill";
+            this.dgvBill.ReadOnly = true;
+            this.dgvBill.RowHeadersWidth = 51;
+            this.dgvBill.RowTemplate.Height = 29;
+            this.dgvBill.ShowEditingIcon = false;
+            this.dgvBill.Size = new System.Drawing.Size(862, 569);
+            this.dgvBill.TabIndex = 10;
+            this.dgvBill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBill_CellContentClick);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label16.Location = new System.Drawing.Point(521, 47);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(131, 23);
+            this.label16.TabIndex = 12;
+            this.label16.Text = "Revenue (VNĐ)";
+            // 
+            // tbTotal
+            // 
+            this.tbTotal.Location = new System.Drawing.Point(658, 46);
+            this.tbTotal.Name = "tbTotal";
+            this.tbTotal.ReadOnly = true;
+            this.tbTotal.Size = new System.Drawing.Size(210, 27);
+            this.tbTotal.TabIndex = 13;
             // 
             // fAdmin
             // 
@@ -951,19 +864,16 @@ namespace CafeShop {
             this.tpAccounts.ResumeLayout(false);
             this.panel24.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
+            this.panel25.ResumeLayout(false);
             this.panel26.ResumeLayout(false);
-            this.panel27.ResumeLayout(false);
-            this.panel28.ResumeLayout(false);
-            this.panel28.PerformLayout();
-            this.panel29.ResumeLayout(false);
-            this.panel29.PerformLayout();
-            this.panel30.ResumeLayout(false);
-            this.panel30.PerformLayout();
-            this.tbpBill.ResumeLayout(false);
-            this.tbpBill.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
+            this.panel26.PerformLayout();
+            this.tpBill.ResumeLayout(false);
+            this.tpBill.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -994,22 +904,8 @@ namespace CafeShop {
         private System.Windows.Forms.DataGridView dgvAccount;
         private System.Windows.Forms.Panel panel25;
         private System.Windows.Forms.Panel panel26;
-        private System.Windows.Forms.Button btnViewAccount;
-        private System.Windows.Forms.Button btnUpdateAccount;
-        private System.Windows.Forms.Button btnDeleteAccount;
         private System.Windows.Forms.Button btnAddAccount;
-        private System.Windows.Forms.Panel panel27;
-        private System.Windows.Forms.Button btnChangePassword;
-        private System.Windows.Forms.Panel panel28;
-        private System.Windows.Forms.ComboBox cbAccountType;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel29;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txbDisplayName;
-        private System.Windows.Forms.Panel panel30;
-        private System.Windows.Forms.Label user;
-        private System.Windows.Forms.TextBox txbUsername;
-        private System.Windows.Forms.TabPage tbpBill;
+        private System.Windows.Forms.TabPage tpBill;
         private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.Button btnResetFood;
         private System.Windows.Forms.Label label11;
@@ -1041,5 +937,11 @@ namespace CafeShop {
         private System.Windows.Forms.RadioButton rbtnInactive;
         private System.Windows.Forms.RadioButton rbtnActive;
         private System.Windows.Forms.Button btnResetTable;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnDeletebill;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox cbTables;
+        private System.Windows.Forms.Label label10;
     }
 }

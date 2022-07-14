@@ -96,20 +96,25 @@ namespace CafeShop {
                         data.InsertTable(currDataTable);
                         wbSheet.Columns("A","O").AdjustToContents();
 
-                        var total = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(), "D");
-                        var total2 = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"E");
-                       
+                        var total = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"E");
+                        var total2 = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"F");
+
                         wbSheet.Range(total,total2).Merge();
-                        var total3 = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"F");
+                        var total3 = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"G");
                         total.Value = $"Tổng doanh thu:";
-                        total3.Value = $"{tbTotal.Text}";
+                        total.Style.Font.FontName = "Times New Roman";
+                        total.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+                        total.Style.Font.Bold = true;
+                        total.Style.Font.FontSize = 16;
+                        total3.Value = $"{tbTotal.Text} VNĐ";
+
                         wb.SaveAs(sfd.FileName);
                         new Process {
                             StartInfo = new ProcessStartInfo(sfd.FileName) {
                                 UseShellExecute = true
                             }
                         }.Start();
-                    
+
                     }
 
                 }
@@ -131,6 +136,13 @@ namespace CafeShop {
               
                 view.ShowDialog();
        
+            }
+            if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Detail")) {
+                //TODO - Button Clicked - Execute Code Here
+                fBillDetail view = new fBillDetail((int)senderGrid.Rows[e.RowIndex].Cells[0].Value);
+
+                view.ShowDialog();
+
             }
         }
         #endregion

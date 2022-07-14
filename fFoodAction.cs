@@ -40,7 +40,7 @@ namespace CafeShop {
                     ptbFood.BackgroundImage = Image.FromFile(currFood.Image);
                     ptbFood.Tag = currFood.Image;
                 } else {
-                    ptbFood.BackgroundImage = Image.FromFile(@"D:\.Net Project\CafeShop\Image\Food\placeholder (Custom).png");
+                    ptbFood.BackgroundImage = Image.FromFile(@"Image\Food\placeholder (Custom).png");
 
                 }
            

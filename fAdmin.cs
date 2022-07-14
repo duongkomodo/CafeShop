@@ -1,7 +1,9 @@
 ﻿using CafeShop.DTO;
+using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,10 +15,34 @@ namespace CafeShop {
             InitializeComponent();
             tcAdmin.SelectTab(0);
         }
+
+        private void tcAdmin_Selecting(object sender,TabControlCancelEventArgs e) {
+            TabPage current = (sender as TabControl).SelectedTab;
+            switch (current.Name) {
+                case "tpFoods":
+                    SetUpFoodsTab();
+                    break;
+                case "tpAccounts":
+                    SetUpAccountsTab();
+                    break;
+                case "tpCategory":
+                    SetUpCategorysTab();
+                    break;
+                case "tpTables":
+                    SetUpTablesTab();
+                    break;
+                case "tpBill":
+                    SetupBillsTab();
+                    break;
+
+            }
+
+            // Validate the current page. To cancel the select, use:
+
+        }
         private void fAdmin_Shown(object sender,EventArgs e) {
             SetUpFoodsTab();
-            SetUpCategorysTab();
-            SetUpTablesTab();
+
         }
 
         #region Food Tab
@@ -90,7 +116,7 @@ namespace CafeShop {
                     } 
 
                     item.Height = 150;
-                    DataGridViewImageCell cell = item.Cells[1] as DataGridViewImageCell;
+                    DataGridViewImageCell cell = item.Cells["FoodImage"] as DataGridViewImageCell;
                     cell.Value = img;
 
                 }
@@ -325,6 +351,9 @@ namespace CafeShop {
             flpTables.Controls.Clear();
             List<Table> tableList = DAO.TableDAO.Instance.LoadTableList(true);
             foreach (Table table in tableList) {
+                if (table.Id == 1) {
+                    continue;
+                }
                 Button btnTable = new Button() {
                     Width = 143,
                     Height = 143,
@@ -407,10 +436,276 @@ namespace CafeShop {
 
         #endregion
 
-        #region
+        #region Account Tab
+        #region Function
+        public List<Account> ListAccounts {
+            get; set;
+        }
+
+        public List<Account> TempListAccounts {
+            get; set;
+        }
+        public void SetUpAccountsTab() {
+            ListAccounts = DAO.AccountDAO.Instance.LoadAllAccount();
+            DiplayAccounts(ListAccounts);
+
+        }
+        public void DiplayAccounts(List<Account> list) {
+
+            if (list.Count != 0) {
+                dgvAccount.DataSource = null;
+
+                dgvAccount.DataSource = list;
+
+
+
+                dgvAccount.Columns["id"].Visible = false;
+                dgvAccount.Columns["password"].Visible = false;
+                dgvAccount.Columns["avatar"].Visible = false;
+                dgvAccount.Columns["roleid"].Visible = false;
+                //dgvAccount.Columns["avatar"].Visible = false;
+
+                if (dgvAccount.Columns.Contains("Edit")) {
+                    dgvAccount.Columns.Remove("Edit");
+                }
+
+                if (dgvAccount.Columns.Contains("Delete")) {
+                    dgvAccount.Columns.Remove("Delete");
+                }
+
+                DataGridViewButtonColumn editcol = new DataGridViewButtonColumn() {
+                    Name = "Edit",
+                    Text = "Edit",
+                    Width = 100,
+                    FlatStyle = FlatStyle.Standard,
+                    UseColumnTextForButtonValue = true
+                };
+
+
+                DataGridViewButtonColumn deletecol = new DataGridViewButtonColumn() {
+                    Name = "Delete",
+                    Text = "Delete",
+                    Width = 100,
+                    FlatStyle = FlatStyle.Standard,
+                    UseColumnTextForButtonValue = true
+                };
+                
+                dgvAccount.Columns.Add(editcol);
+                dgvAccount.Columns.Add(deletecol);
+                dgvAccount.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                
+            }
+        }
+        #endregion
+
+        #region Event
+        private void dgvAccount_CellContentClick(object sender,DataGridViewCellEventArgs e) {
+            var senderGrid = (DataGridView)sender;
+
+
+
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            Account account = ListAccounts[e.RowIndex];
+            if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Edit")) {
+
+                fAccountAction action = new fAccountAction(account.Id);
+                var result = action.ShowDialog();
+                if (result == DialogResult.OK) {
+                    SetUpAccountsTab();
+                }
+            }
+            if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Delete")) {
+                /* TODO - Button Clicked - Execute Code Here*/
+                if (MessageBox.Show($"Delete {account.UserName} ?","Waring",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes) {
+
+                    DAO.AccountDAO.Instance.DeleteAccount(account.Id);
+                    SetUpAccountsTab();
+                }
+            }
+        }
+        private void btnAddAccount_Click(object sender,EventArgs e) {
+            fAccountAction action = new fAccountAction();
+            var result = action.ShowDialog();
+            if (result == DialogResult.OK) {
+                SetUpAccountsTab();
+            }
+        }
+
 
         #endregion
 
+        #endregion
+
+        #region Bill Tab
+        #region Function
+
+        public DataTable currDataTable {
+            get; set;
+        }
+
+
+        public void FilterBills() {
+            currDataTable = DAO.BillDAO.Instance.GetCheckOutBillsByDate(dtpFromDate.Value.ToString("yyyy-MM-dd"),dtpToDate.Value.ToString("yyyy-MM-dd"));
+
+            string TableName = ((Table)cbTables.SelectedItem).Name;
+   
+            if ((int)cbTables.SelectedValue != -1) {
+
+                dgvBill.DataSource = null;
+                dgvBill.DataSource = currDataTable;
+                (dgvBill.DataSource as DataTable).DefaultView.RowFilter = string.Format("[Table Name] = '{0}'",TableName);
+
+            } else {
+                dgvBill.DataSource = currDataTable;
+            }
+
+          
+          
+
+            decimal revenue = 0;
+            foreach (DataRow row in currDataTable.Rows) {
+                revenue += Convert.ToDecimal(row["Total Price"]);
+            }
+
+            if (dgvBill.Columns.Contains("Detail")) {
+                dgvBill.Columns.Remove("Detail");
+            }
+ 
+            DataGridViewButtonColumn detailcol = new DataGridViewButtonColumn() {
+                Name = "Detail",
+                Text = "Detail",
+                Width = 100,
+                FlatStyle = FlatStyle.Standard,
+                UseColumnTextForButtonValue = true
+            };
+            dgvBill.Columns.Add(detailcol);
+            tbTotal.Text = revenue.ToString("#,###.##");
+            dgvBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+
+        public void SetupBillsTab() {
+            DateTime myDate = DateTime.Now;
+            DateTime startOfYear = new DateTime(myDate.Year,1,1);
+            DateTime endOfYear = new DateTime(myDate.Year,12,31);
+            dtpFromDate.Value = startOfYear;
+            dtpToDate.Value = endOfYear;
+            List<Table> tables = DAO.TableDAO.Instance.LoadTableList(false);
+            tables.Insert(0,new Table() { Id = -1,Name = "--Show All--" });
+            cbTables.DataSource = tables;
+            cbTables.ValueMember = "id";
+            cbTables.DisplayMember = "Name";
+            FilterBills();
+
+            setupbilltab = true;
+        }
+        #endregion
+        #region Event
+
+        bool setupbilltab = false;
+        private void btnSearch_Click(object sender,EventArgs e) {
+            FilterBills();
+        }
+
+
+        private void cbTables_SelectedIndexChanged(object sender,EventArgs e) {
+            if (setupbilltab is true) {
+                FilterBills();
+            }
+         
+        }
+
+        private void btnExport_Click(object sender,EventArgs e) {
+            if (currDataTable.Rows.Count != 0) {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Excel Files|*.xlsx;*.xlsm;*.xltx;*.xltm";
+                sfd.FileName = "Doanh_thu_thang_.xlsx";
+                if (sfd.ShowDialog() == DialogResult.OK) {
+
+                    using (var wb = new XLWorkbook()) {
+                        wb.Worksheets.Add("Sheet1");
+                        var wbSheet = wb.Worksheet(1);
+
+                        var title1 = wbSheet.Cell("A1");
+                        title1.Value = $"BÁO CÁO DOANH THU";
+                        title1.Style.Font.Bold = true;
+                        title1.Style.Font.FontName = "Times New Roman";
+                        title1.Style.Font.FontSize = 16;
+                        title1.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        title1.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                        wbSheet.Range("A1:F1").Merge();
+
+                        var title2 = wbSheet.Cell("A2");
+                        title2.Value = $"Từ ngày {dtpFromDate.Value}      Đến ngày {dtpToDate.Value}";
+                        title2.Style.Font.FontName = "Times New Roman";
+                        title2.Style.Font.FontSize = 12;
+                        title2.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        title2.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                        wbSheet.Range("A2:F2").Merge();
+
+                        var data = wbSheet.Cell("A5");
+                        data.InsertTable(currDataTable);
+                        wbSheet.Columns("A","O").AdjustToContents();
+
+                        var total = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"E");
+                        var total2 = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"F");
+
+                        wbSheet.Range(total,total2).Merge();
+                        var total3 = wbSheet.Cell(wbSheet.LastRowUsed().RowBelow().RowNumber(),"G");
+                        total.Value = $"Tổng doanh thu:";
+                        total.Style.Font.FontName = "Times New Roman";
+                        total.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+                        total.Style.Font.Bold = true;
+                        total.Style.Font.FontSize = 16;
+                        total3.Value = $"{tbTotal.Text} VNĐ";
+                       
+                        wb.SaveAs(sfd.FileName);
+                        new Process {
+                            StartInfo = new ProcessStartInfo(sfd.FileName) {
+                                UseShellExecute = true
+                            }
+                        }.Start();
+
+                    }
+
+                }
+            } else {
+                MessageBox.Show("No bill exists in the table!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
+            }
+        }
+
+        private void dgvBill_CellContentClick(object sender,DataGridViewCellEventArgs e) {
+            var senderGrid = (DataGridView)sender;
+
+
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Detail")) {
+                //TODO - Button Clicked - Execute Code Here
+                fBillDetail view = new fBillDetail((int)senderGrid.Rows[e.RowIndex].Cells["id"].Value);
+
+                view.ShowDialog();
+
+            }
+        }
+
+        private void btnDeletebill_Click(object sender,EventArgs e) {
+            if (dgvBill.SelectedRows.Count == 0 ) {
+                MessageBox.Show("No bill selected!","Noti",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                return;
+            }
+            if (MessageBox.Show($"Do you really want delete {dgvBill.SelectedRows.Count} bill(s)? ","Caution",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.OK)
+                foreach (DataGridViewRow item in dgvBill.SelectedRows) {
+                int selectedBill = Convert.ToInt32(item.Cells["id"].Value);
+                DAO.BillInfoDAO.Instance.RemoveAllBillInfoByBillId(selectedBill);
+                    SetupBillsTab();
+            }
+
+        }
+
+        #endregion
+
+        #endregion
 
     }
 

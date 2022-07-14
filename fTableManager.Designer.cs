@@ -26,7 +26,7 @@ namespace CafeShop {
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fTableManager));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.accountInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAccountInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -75,7 +75,7 @@ namespace CafeShop {
             this.menuStrip1.BackColor = System.Drawing.Color.Tan;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.accountInfoToolStripMenuItem,
+            this.tsmiAccountInfo,
             this.adminToolStripMenuItem,
             this.billToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -84,11 +84,11 @@ namespace CafeShop {
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // accountInfoToolStripMenuItem
+            // tsmiAccountInfo
             // 
-            this.accountInfoToolStripMenuItem.Name = "accountInfoToolStripMenuItem";
-            this.accountInfoToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
-            this.accountInfoToolStripMenuItem.Text = "Account Info";
+            this.tsmiAccountInfo.Name = "tsmiAccountInfo";
+            this.tsmiAccountInfo.Size = new System.Drawing.Size(107, 24);
+            this.tsmiAccountInfo.Text = "Account Info";
             // 
             // adminToolStripMenuItem
             // 
@@ -478,7 +478,7 @@ namespace CafeShop {
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem accountInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAccountInfo;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;

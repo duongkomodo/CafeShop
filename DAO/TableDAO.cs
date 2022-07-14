@@ -25,9 +25,9 @@ namespace CafeShop.DAO {
         }
 
         public  List<Table> LoadTableList(bool isAdmin) {
-            String sql = "EXEC dbo.USP_GetTableList";
+            String sql = "SELECT * FROM dbo.TableFood where inUse = 1 ";
             if (isAdmin) {
-                sql = "SELECT * FROM dbo.TableFood where id != 1";
+                sql = "SELECT * FROM dbo.TableFood";
             }
             List<Table> tableList = new List<Table>();
                 DataTable dataTable = DataProvider.Instance.ExecuteQuery(sql);

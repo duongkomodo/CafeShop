@@ -174,7 +174,7 @@ namespace CafeShop {
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(16, 75);
+            this.label6.Location = new System.Drawing.Point(26, 75);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 28);
             this.label6.TabIndex = 14;
@@ -184,7 +184,7 @@ namespace CafeShop {
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(399, 75);
+            this.label7.Location = new System.Drawing.Point(404, 75);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(75, 28);
             this.label7.TabIndex = 15;
@@ -200,7 +200,6 @@ namespace CafeShop {
             this.tbCashier.Size = new System.Drawing.Size(273, 20);
             this.tbCashier.TabIndex = 16;
             this.tbCashier.Text = "name";
-
             // 
             // tbBillId
             // 
@@ -238,10 +237,10 @@ namespace CafeShop {
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 22.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(446, 9);
+            this.label9.Font = new System.Drawing.Font("Britannic Bold", 28.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(374, 9);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(161, 50);
+            this.label9.Size = new System.Drawing.Size(197, 52);
             this.label9.TabIndex = 20;
             this.label9.Text = "RECEIPT";
             // 
@@ -251,7 +250,7 @@ namespace CafeShop {
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel1.Location = new System.Drawing.Point(16, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(247, 68);
+            this.panel1.Size = new System.Drawing.Size(254, 72);
             this.panel1.TabIndex = 21;
             // 
             // fBillDetail
