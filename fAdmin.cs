@@ -350,6 +350,9 @@ namespace CafeShop {
         public void SetUpTablesTab() {
             flpTables.Controls.Clear();
             List<Table> tableList = DAO.TableDAO.Instance.LoadTableList(true);
+            if (tbSearchTable.Text != "") {
+                tableList = (from s in tableList where s.Name.ToLower().Trim().Contains(tbSearchTable.Text.ToLower()) select s).ToList();
+            }
             foreach (Table table in tableList) {
                 if (table.Id == 1) {
                     continue;
@@ -385,6 +388,11 @@ namespace CafeShop {
         #endregion
 
         #region Event
+
+
+        private void tbSearchTable_TextChanged(object sender,EventArgs e) {
+            SetUpTablesTab();
+        }
         private void btn_Click(object sender,EventArgs e) {
             Table table = (sender as Button).Tag as Table;
             tbTableName.Text = table.Name.Trim();
@@ -551,10 +559,9 @@ namespace CafeShop {
    
             if ((int)cbTables.SelectedValue != -1) {
 
-                dgvBill.DataSource = null;
-                dgvBill.DataSource = currDataTable;
-                (dgvBill.DataSource as DataTable).DefaultView.RowFilter = string.Format("[Table Name] = '{0}'",TableName);
+                currDataTable.DefaultView.RowFilter = string.Format("[Table Name] = '{0}'",TableName);
 
+                dgvBill.DataSource = currDataTable;
             } else {
                 dgvBill.DataSource = currDataTable;
             }

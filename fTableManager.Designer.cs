@@ -89,6 +89,7 @@ namespace CafeShop {
             this.tsmiAccountInfo.Name = "tsmiAccountInfo";
             this.tsmiAccountInfo.Size = new System.Drawing.Size(107, 24);
             this.tsmiAccountInfo.Text = "Account Info";
+            this.tsmiAccountInfo.Click += new System.EventHandler(this.tsmiAccountInfo_Click);
             // 
             // adminToolStripMenuItem
             // 

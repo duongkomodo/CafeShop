@@ -142,6 +142,7 @@ namespace CafeShop {
             // 
             // cbRole
             // 
+            this.cbRole.Enabled = false;
             this.cbRole.FormattingEnabled = true;
             this.cbRole.Location = new System.Drawing.Point(157, 99);
             this.cbRole.Name = "cbRole";
@@ -293,7 +294,7 @@ namespace CafeShop {
             // tbPhonenumber
             // 
             this.tbPhonenumber.Location = new System.Drawing.Point(157, 134);
-            this.tbPhonenumber.MaxLength = 12;
+            this.tbPhonenumber.MaxLength = 11;
             this.tbPhonenumber.Name = "tbPhonenumber";
             this.tbPhonenumber.Size = new System.Drawing.Size(174, 27);
             this.tbPhonenumber.TabIndex = 9;

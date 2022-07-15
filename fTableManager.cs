@@ -436,8 +436,13 @@ namespace CafeShop {
             loadCategory();
         }
 
+        private void tsmiAccountInfo_Click(object sender,EventArgs e) {
+            fAccountAction accountAction = new fAccountAction(AccountDAO.Instance.LoginedUser.Id);
+            accountAction.ShowDialog();
+        }
+
         #endregion
 
- 
+
     }
 }

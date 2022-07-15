@@ -31,15 +31,20 @@ namespace CafeShop {
         public void SetUp() {
         
             if (currAccount != null) {
-                this.Text = $"Update account {currAccount.UserName} ";
+                if (currAccount.RoleId == 1) {
+                    cbRole.Enabled = true;
+                }
+                this.Text = $"{currAccount.DisplayName}'s detail ";
                 pnIsUpdatePassword.Visible = true;
                 pnUpdatePassword.Enabled = false;
+             
                 cbRole.DataSource = DAO.RolesDAO.Instance.LoadAllRoles();
                 cbRole.DisplayMember = "roleName";
                 cbRole.ValueMember = "id";
                 cbRole.SelectedValue = currAccount.RoleId;
                 tbDisplayName.Text = currAccount.DisplayName;
                 tbUsername.Text = currAccount.UserName;
+                tbUsername.Enabled = false;
                 tbPhonenumber.Text = currAccount.PhoneNumber;
                 if (File.Exists(currAccount.Avatar)) {
                     ptbAvatar.BackgroundImage = Image.FromFile(currAccount.Avatar);
@@ -52,8 +57,12 @@ namespace CafeShop {
             } else {
                 this.Text = $"Create new account ";
                 cbRole.DataSource = DAO.RolesDAO.Instance.LoadAllRoles();
+                if (currAccount.RoleId == 1) {
+                    cbRole.Enabled = true;
+                }
                 cbRole.DisplayMember = "roleName";
                 cbRole.ValueMember = "id";
+
                 pnCreateAccount.Visible = true;
                 ptbAvatar.BackgroundImage = Image.FromFile(@"Image\Food\placeholder (Custom).png");
             }
@@ -75,11 +84,8 @@ namespace CafeShop {
                 MessageBox.Show("Username cannot be empty","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
-            if (DAO.AccountDAO.Instance.checkExistAccount(userName) > 0) {
-                MessageBox.Show("Username exist, try again!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                return;
-            }
-            if (phoneNumber == "" && phoneNumber.Length < 12) {
+
+            if (phoneNumber == "" || phoneNumber.Length > 11) {
                 MessageBox.Show("Phone number is wrong","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }

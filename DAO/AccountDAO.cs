@@ -74,8 +74,8 @@ namespace CafeShop.DAO {
 
         }
         public int addAccount(Account account) {
-            string sql = $"INSERT INTO [dbo].[Account]([UserName] ,[DisplayName],[PassWord] ,[roleId],[avatar])" +
-                $" VALUES (N'{account.UserName}',N'{account.DisplayName}',N'{account.PassWord}',{account.RoleId},N'{account.Avatar}')";
+            string sql = $"INSERT INTO [dbo].[Account]([UserName] ,[DisplayName],[PassWord] ,[roleId],[avatar],[phoneNumber])" +
+                $" VALUES (N'{account.UserName}',N'{account.DisplayName}',N'{account.PassWord}',{account.RoleId},N'{account.Avatar}',N'{account.PhoneNumber}')";
 
             return DataProvider.Instance.ExecuteNonQuery(sql);
 
@@ -97,7 +97,7 @@ namespace CafeShop.DAO {
         public int updateAccount(Account account) {
             string sql = $"UPDATE [dbo].[Account] SET" +
                 $" [UserName] = N'{account.UserName}',[DisplayName] = N'{account.DisplayName}' ," +
-                $"[PassWord] = N'{account.PassWord}',[roleId] = {account.RoleId},[avatar] = N '{account.Avatar}' " +
+                $"[PassWord] = N'{account.PassWord}',[roleId] = {account.RoleId},[avatar] = N'{account.Avatar}',[phoneNumber] =N'{account.PhoneNumber}' " +
                 $"WHERE Account.id = {account.Id}";
 
 
