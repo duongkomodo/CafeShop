@@ -118,8 +118,8 @@ namespace CafeShop {
             this.nmrFoodPrice.Location = new System.Drawing.Point(270, 71);
             this.nmrFoodPrice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.nmrFoodPrice.Maximum = new decimal(new int[] {
-            276447232,
-            23283,
+            10000000,
+            0,
             0,
             0});
             this.nmrFoodPrice.Minimum = new decimal(new int[] {

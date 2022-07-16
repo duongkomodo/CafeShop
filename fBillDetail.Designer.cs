@@ -61,7 +61,7 @@ namespace CafeShop {
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(12, 142);
             this.lsvBill.Name = "lsvBill";
-            this.lsvBill.Size = new System.Drawing.Size(641, 508);
+            this.lsvBill.Size = new System.Drawing.Size(641, 511);
             this.lsvBill.TabIndex = 1;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
@@ -237,10 +237,10 @@ namespace CafeShop {
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Britannic Bold", 28.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(374, 9);
+            this.label9.Font = new System.Drawing.Font("Britannic Bold", 36F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(345, 9);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(197, 52);
+            this.label9.Size = new System.Drawing.Size(253, 67);
             this.label9.TabIndex = 20;
             this.label9.Text = "RECEIPT";
             // 

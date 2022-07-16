@@ -126,7 +126,7 @@ namespace CafeShop {
             // tbUsername
             // 
             this.tbUsername.Location = new System.Drawing.Point(157, 64);
-            this.tbUsername.MaxLength = 60;
+            this.tbUsername.MaxLength = 30;
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(174, 27);
             this.tbUsername.TabIndex = 8;
@@ -134,7 +134,7 @@ namespace CafeShop {
             // tbUpdOldPassword
             // 
             this.tbUpdOldPassword.Location = new System.Drawing.Point(149, 6);
-            this.tbUpdOldPassword.MaxLength = 50;
+            this.tbUpdOldPassword.MaxLength = 20;
             this.tbUpdOldPassword.Name = "tbUpdOldPassword";
             this.tbUpdOldPassword.Size = new System.Drawing.Size(168, 27);
             this.tbUpdOldPassword.TabIndex = 10;
@@ -183,7 +183,7 @@ namespace CafeShop {
             // tbUpdConfirmPassword
             // 
             this.tbUpdConfirmPassword.Location = new System.Drawing.Point(149, 73);
-            this.tbUpdConfirmPassword.MaxLength = 50;
+            this.tbUpdConfirmPassword.MaxLength = 20;
             this.tbUpdConfirmPassword.Name = "tbUpdConfirmPassword";
             this.tbUpdConfirmPassword.Size = new System.Drawing.Size(168, 27);
             this.tbUpdConfirmPassword.TabIndex = 12;
@@ -192,7 +192,7 @@ namespace CafeShop {
             // tbUpdNewPassword
             // 
             this.tbUpdNewPassword.Location = new System.Drawing.Point(149, 40);
-            this.tbUpdNewPassword.MaxLength = 50;
+            this.tbUpdNewPassword.MaxLength = 20;
             this.tbUpdNewPassword.Name = "tbUpdNewPassword";
             this.tbUpdNewPassword.Size = new System.Drawing.Size(168, 27);
             this.tbUpdNewPassword.TabIndex = 11;
@@ -240,6 +240,7 @@ namespace CafeShop {
             // tbCreateconfirmpassword
             // 
             this.tbCreateconfirmpassword.Location = new System.Drawing.Point(139, 44);
+            this.tbCreateconfirmpassword.MaxLength = 20;
             this.tbCreateconfirmpassword.Name = "tbCreateconfirmpassword";
             this.tbCreateconfirmpassword.Size = new System.Drawing.Size(178, 27);
             this.tbCreateconfirmpassword.TabIndex = 12;
@@ -248,6 +249,7 @@ namespace CafeShop {
             // tbCreatepassword
             // 
             this.tbCreatepassword.Location = new System.Drawing.Point(139, 11);
+            this.tbCreatepassword.MaxLength = 20;
             this.tbCreatepassword.Name = "tbCreatepassword";
             this.tbCreatepassword.Size = new System.Drawing.Size(178, 27);
             this.tbCreatepassword.TabIndex = 11;
@@ -305,6 +307,7 @@ namespace CafeShop {
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 430);
+            this.Controls.Add(this.pnCreateAccount);
             this.Controls.Add(this.tbPhonenumber);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnUploadAvatar);
@@ -318,7 +321,6 @@ namespace CafeShop {
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnIsUpdatePassword);
-            this.Controls.Add(this.pnCreateAccount);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "fAccountAction";

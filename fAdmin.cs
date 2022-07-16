@@ -11,11 +11,20 @@ using System.Windows.Forms;
 
 namespace CafeShop {
     public partial class fAdmin :Form {
+        public Account loginedUser {
+            get;
+        }
         public fAdmin() {
+            loginedUser = DAO.AccountDAO.Instance.LoginedUser;
             InitializeComponent();
             tcAdmin.SelectTab(0);
         }
 
+        private void fAdmin_Load(object sender,EventArgs e) {
+            if (loginedUser.RoleId != 1) {
+                this.Close();
+            }
+        }
         private void tcAdmin_Selecting(object sender,TabControlCancelEventArgs e) {
             TabPage current = (sender as TabControl).SelectedTab;
             switch (current.Name) {
@@ -713,6 +722,7 @@ namespace CafeShop {
         #endregion
 
         #endregion
+
 
     }
 

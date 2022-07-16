@@ -57,7 +57,7 @@ namespace CafeShop.DAO {
             DataTable data = DataProvider.Instance.ExecuteQuery(sql);
             if (data != null && data.Rows.Count > 0) {
                 Account account = new Account(data.Rows[0]);
-                loginedUser = account;
+          
                 return account;
             } else {
                 return null;

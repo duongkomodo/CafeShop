@@ -14,13 +14,17 @@ using System.Windows.Forms;
 
 namespace CafeShop {
     public partial class fTableManager :Form {
+        public Account loginedUser {
+            get;
+        }
         public fTableManager() {
             InitializeComponent();
             try {
+                loginedUser = DAO.AccountDAO.Instance.LoginedUser;
              LoadTable();
              loadCategory();
 
-                tsmiAccountInfo.Text = DAO.AccountDAO.Instance.LoginedUser.DisplayName;
+                tsmiAccountInfo.Text = loginedUser.DisplayName;
             } catch (Exception) {
 
                 throw;
@@ -28,6 +32,7 @@ namespace CafeShop {
          
         }
 
+     
 
         #region Function
         void refreshTakeaway(int billId) {
@@ -147,7 +152,7 @@ namespace CafeShop {
         bool isTakeAway = false;
 
         private void fTableManager_Load(object sender,EventArgs e) {
-            if (AccountDAO.Instance.LoginedUser.Id != 1) {
+            if (loginedUser.Id != 1) {
                 adminToolStripMenuItem.Visible = false;
             }
         }
@@ -187,7 +192,7 @@ namespace CafeShop {
                 }
         }
         private void btnAddTakeawayBill_Click(object sender,EventArgs e) {
-            int idBillMax = BillDAO.Instance.InsertBill(1, AccountDAO.Instance.LoginedUser.Id);
+            int idBillMax = BillDAO.Instance.InsertBill(1, loginedUser.Id);
             refreshTakeaway(idBillMax);
 
         }
@@ -275,7 +280,7 @@ namespace CafeShop {
                     int addCount = (int)nmrQuantity.Value;
 
                     if (idBill == -1) {
-                        int idBillMax = BillDAO.Instance.InsertBill(table.Id, AccountDAO.Instance.LoginedUser.Id);
+                        int idBillMax = BillDAO.Instance.InsertBill(table.Id, loginedUser.Id);
 
                         BillInfoDAO.Instance.InsertBillInfo(idBillMax,foodID,addCount);
                     } else {
@@ -341,7 +346,7 @@ namespace CafeShop {
                     int subtractCount = (int)nmrQuantity.Value * (-1);
 
                     if (idBill == -1) {
-                        int idBillMax = BillDAO.Instance.InsertBill(table.Id, AccountDAO.Instance.LoginedUser.Id);
+                        int idBillMax = BillDAO.Instance.InsertBill(table.Id, loginedUser.Id);
 
                         BillInfoDAO.Instance.InsertBillInfo(idBillMax,foodID,subtractCount);
                     } else {
@@ -437,7 +442,7 @@ namespace CafeShop {
         }
 
         private void tsmiAccountInfo_Click(object sender,EventArgs e) {
-            fAccountAction accountAction = new fAccountAction(AccountDAO.Instance.LoginedUser.Id);
+            fAccountAction accountAction = new fAccountAction(loginedUser.Id);
             accountAction.ShowDialog();
         }
 

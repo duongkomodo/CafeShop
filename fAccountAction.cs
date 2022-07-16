@@ -13,42 +13,44 @@ using System.Windows.Forms;
 namespace CafeShop {
     public partial class fAccountAction :Form {
         public fAccountAction() {
+            loginedUser = DAO.AccountDAO.Instance.LoginedUser;
             InitializeComponent();
         }
 
-        public Account currAccount {
+        public Account currEditAccount {
             get;
         }
 
-
+        public Account loginedUser {
+            get;
+        }
         public fAccountAction(int id) {
-            currAccount = DAO.AccountDAO.Instance.GetAccountById(id);
+            loginedUser = DAO.AccountDAO.Instance.LoginedUser;
+            currEditAccount = DAO.AccountDAO.Instance.GetAccountById(id);
             InitializeComponent();
 
         }
 
         #region Function
         public void SetUp() {
+            
+            if (currEditAccount != null) {
         
-            if (currAccount != null) {
-                if (currAccount.RoleId == 1) {
-                    cbRole.Enabled = true;
-                }
-                this.Text = $"{currAccount.DisplayName}'s detail ";
+                this.Text = $"{currEditAccount.DisplayName}'s detail ";
                 pnIsUpdatePassword.Visible = true;
                 pnUpdatePassword.Enabled = false;
              
                 cbRole.DataSource = DAO.RolesDAO.Instance.LoadAllRoles();
                 cbRole.DisplayMember = "roleName";
                 cbRole.ValueMember = "id";
-                cbRole.SelectedValue = currAccount.RoleId;
-                tbDisplayName.Text = currAccount.DisplayName;
-                tbUsername.Text = currAccount.UserName;
+                cbRole.SelectedValue = currEditAccount.RoleId;
+                tbDisplayName.Text = currEditAccount.DisplayName;
+                tbUsername.Text = currEditAccount.UserName;
                 tbUsername.Enabled = false;
-                tbPhonenumber.Text = currAccount.PhoneNumber;
-                if (File.Exists(currAccount.Avatar)) {
-                    ptbAvatar.BackgroundImage = Image.FromFile(currAccount.Avatar);
-                    ptbAvatar.Tag = currAccount.Avatar;
+                tbPhonenumber.Text = currEditAccount.PhoneNumber;
+                if (File.Exists(currEditAccount.Avatar)) {
+                    ptbAvatar.BackgroundImage = Image.FromFile(currEditAccount.Avatar);
+                    ptbAvatar.Tag = currEditAccount.Avatar;
                 } else {
                     ptbAvatar.BackgroundImage = Image.FromFile(@"Image\Food\placeholder (Custom).png");
 
@@ -57,19 +59,21 @@ namespace CafeShop {
             } else {
                 this.Text = $"Create new account ";
                 cbRole.DataSource = DAO.RolesDAO.Instance.LoadAllRoles();
-                if (currAccount.RoleId == 1) {
+                if (loginedUser.RoleId == 1) {
                     cbRole.Enabled = true;
                 }
                 cbRole.DisplayMember = "roleName";
                 cbRole.ValueMember = "id";
+                cbRole.SelectedIndex = 1;
 
                 pnCreateAccount.Visible = true;
                 ptbAvatar.BackgroundImage = Image.FromFile(@"Image\Food\placeholder (Custom).png");
             }
+ 
             ptbAvatar.BackgroundImageLayout = ImageLayout.Zoom;
         }
 
-
+        public bool checkAccountSaveChanges = false;
         public void updateAccount() {
             String displayName = tbDisplayName.Text.Trim();
             String userName = tbUsername.Text.Trim();
@@ -92,7 +96,7 @@ namespace CafeShop {
     
 
 
-            string password = currAccount.PassWord;
+            string password = currEditAccount.PassWord;
 
             if (chxbChangePassword.Checked) {
                 String oldPassword = tbUpdOldPassword.Text.Trim();
@@ -119,7 +123,7 @@ namespace CafeShop {
                     return;
                 }
 
-                bool verified = BCrypt.Net.BCrypt.Verify(oldPassword,currAccount.PassWord);
+                bool verified = BCrypt.Net.BCrypt.Verify(oldPassword,currEditAccount.PassWord);
                 if (verified is false) {
                     MessageBox.Show("Old password not match the current password!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                     return;
@@ -132,11 +136,13 @@ namespace CafeShop {
             if (ptbAvatar.Tag != null) {
                 avatarPath = ptbAvatar.Tag.ToString();
             }
-         
+
+
             int roleId = (int)cbRole.SelectedValue;
-            Account account = new Account(currAccount.Id,userName,displayName,password,roleId,avatarPath,phoneNumber);
+            Account account = new Account(currEditAccount.Id,userName,displayName,password,roleId,avatarPath,phoneNumber);
             int updateResult = DAO.AccountDAO.Instance.updateAccount(account);
             if (updateResult > 0) {
+                checkAccountSaveChanges = true;
                 MessageBox.Show("Update account successfully!","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
         }
@@ -186,10 +192,20 @@ namespace CafeShop {
                 avatarPath = ptbAvatar.Tag.ToString();
             }
             int roleId = (int)cbRole.SelectedValue;
+            if (roleId == 1) {
+                fConfirm confirm = new fConfirm();
+                confirm.ShowDialog();
+                if (confirm.DialogResult != DialogResult.Yes) {
+                    return;
+                }
+            }
+
             confirmPassword = BCrypt.Net.BCrypt.HashPassword(confirmPassword);
             Account account = new Account(0,userName,displayName,confirmPassword,roleId,avatarPath,phoneNumber);
             int createResult = DAO.AccountDAO.Instance.addAccount(account);
+ 
             if (createResult >0) {
+                checkAccountSaveChanges = true;
                 MessageBox.Show("Create account successfully!","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
         }
@@ -198,11 +214,14 @@ namespace CafeShop {
 
         #region Event
         private void fAccountAction_Load(object sender,EventArgs e) {
+            if (loginedUser.RoleId != 1){
+                this.Close();
+            }
             SetUp();
         }
 
         private void chxbChangePassword_CheckedChanged(object sender,EventArgs e) {
-            if (currAccount != null && chxbChangePassword.Checked is true) {
+            if (currEditAccount != null && chxbChangePassword.Checked is true) {
                 pnUpdatePassword.Enabled = true;
             } else {
                 pnUpdatePassword.Enabled = false;
@@ -234,14 +253,16 @@ namespace CafeShop {
         }
 
         private void btnSaveChanges_Click(object sender,EventArgs e) {
-            if (currAccount != null) {
+            if (currEditAccount != null) {
                 updateAccount();
-                this.Close();
-                this.DialogResult = DialogResult.OK;
+          
             } else {
                 CreateAccount();
-                this.Close();
+              
+            }
+            if (checkAccountSaveChanges is true) {
                 this.DialogResult = DialogResult.OK;
+                this.Close();
             }
         }
 

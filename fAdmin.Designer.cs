@@ -50,8 +50,8 @@ namespace CafeShop {
             this.panel15 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.txbCategoryName = new System.Windows.Forms.TextBox();
             this.btnAddCategory = new System.Windows.Forms.Button();
+            this.txbCategoryName = new System.Windows.Forms.TextBox();
             this.tpTables = new System.Windows.Forms.TabPage();
             this.tbSearchTable = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -243,8 +243,8 @@ namespace CafeShop {
             this.nmrFoodPrice.Location = new System.Drawing.Point(108, 16);
             this.nmrFoodPrice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.nmrFoodPrice.Maximum = new decimal(new int[] {
-            276447232,
-            23283,
+            10000000,
+            0,
             0,
             0});
             this.nmrFoodPrice.Name = "nmrFoodPrice";
@@ -404,6 +404,17 @@ namespace CafeShop {
             this.label5.TabIndex = 2;
             this.label5.Text = "Name";
             // 
+            // btnAddCategory
+            // 
+            this.btnAddCategory.Location = new System.Drawing.Point(3, 54);
+            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAddCategory.Name = "btnAddCategory";
+            this.btnAddCategory.Size = new System.Drawing.Size(128, 62);
+            this.btnAddCategory.TabIndex = 1;
+            this.btnAddCategory.Text = "Add";
+            this.btnAddCategory.UseVisualStyleBackColor = true;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
+            // 
             // txbCategoryName
             // 
             this.txbCategoryName.AcceptsTab = true;
@@ -415,17 +426,6 @@ namespace CafeShop {
             this.txbCategoryName.Size = new System.Drawing.Size(247, 24);
             this.txbCategoryName.TabIndex = 7;
             this.txbCategoryName.TabStop = false;
-            // 
-            // btnAddCategory
-            // 
-            this.btnAddCategory.Location = new System.Drawing.Point(3, 54);
-            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(128, 62);
-            this.btnAddCategory.TabIndex = 1;
-            this.btnAddCategory.Text = "Add";
-            this.btnAddCategory.UseVisualStyleBackColor = true;
-            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
             // 
             // tpTables
             // 
@@ -446,6 +446,7 @@ namespace CafeShop {
             // tbSearchTable
             // 
             this.tbSearchTable.Location = new System.Drawing.Point(556, 24);
+            this.tbSearchTable.MaxLength = 30;
             this.tbSearchTable.Name = "tbSearchTable";
             this.tbSearchTable.Size = new System.Drawing.Size(242, 27);
             this.tbSearchTable.TabIndex = 16;
@@ -830,7 +831,7 @@ namespace CafeShop {
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(521, 47);
+            this.label16.Location = new System.Drawing.Point(486, 47);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(131, 23);
             this.label16.TabIndex = 12;
@@ -838,10 +839,10 @@ namespace CafeShop {
             // 
             // tbTotal
             // 
-            this.tbTotal.Location = new System.Drawing.Point(658, 46);
+            this.tbTotal.Location = new System.Drawing.Point(623, 46);
             this.tbTotal.Name = "tbTotal";
             this.tbTotal.ReadOnly = true;
-            this.tbTotal.Size = new System.Drawing.Size(210, 27);
+            this.tbTotal.Size = new System.Drawing.Size(245, 27);
             this.tbTotal.TabIndex = 13;
             // 
             // fAdmin
@@ -855,6 +856,7 @@ namespace CafeShop {
             this.Name = "fAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "System Management";
+            this.Load += new System.EventHandler(this.fAdmin_Load);
             this.Shown += new System.EventHandler(this.fAdmin_Shown);
             this.tcAdmin.ResumeLayout(false);
             this.tpFoods.ResumeLayout(false);
