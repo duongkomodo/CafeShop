@@ -240,7 +240,7 @@ namespace CafeShop {
 
             if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Delete")) {
                 //TODO - Button Clicked - Execute Code Here
-                if (MessageBox.Show($"Delete {food.Name} ?","Waring",MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes) {
+                if (MessageBox.Show($"Delete {food.Name} ?","Waring",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes) {
 
                     DAO.FoodDAO.Instance.removeFood(food.Id);
                     SetUpFoodsTab();

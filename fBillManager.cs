@@ -137,13 +137,7 @@ namespace CafeShop {
                 view.ShowDialog();
        
             }
-            if (senderGrid.Columns[e.ColumnIndex].Name.Equals("Detail")) {
-                //TODO - Button Clicked - Execute Code Here
-                fBillDetail view = new fBillDetail((int)senderGrid.Rows[e.RowIndex].Cells[0].Value);
 
-                view.ShowDialog();
-
-            }
         }
         #endregion
 

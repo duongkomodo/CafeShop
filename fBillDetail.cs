@@ -38,7 +38,7 @@ namespace CafeShop {
             tbCheckout.Text  = bill.DateCheckOut == null ? "" : bill.DateCheckOut.Value.ToString("dd-MMM-yyyy HH:mm");
             Double totalBill = 0;
             tbBillId.Text = bill.Id.ToString();
-            tbDiscount.Text = bill.Discount.ToString();
+       
             tbCashier.Text = AccountDAO.Instance.CashierName(bill.IdAccount);
             foreach (FoodOrdered item in billDetail) {
                 ListViewItem listViewItem = new ListViewItem(item.FoodName.ToString());
@@ -50,10 +50,15 @@ namespace CafeShop {
 
                 lsvBill.Items.Add(listViewItem);
             }
-   
-            tbTotalPrice.Text = totalBill.ToString("#,##0.#####");
+            double discountCash = (totalBill * bill.Discount) / 100;
+
+            tbDiscount.Text = $"Discount {bill.Discount}%:";
+            tbTotalPrice.Text = $"Total:";
+            lbDiscountnum.Text = $"{discountCash.ToString("#,##0.#####")} VNĐ";
+            lbTotalnum.Text = $"{bill.Total.ToString("#,##0.#####")} VNĐ";
 
         }
+
 
         #endregion
 

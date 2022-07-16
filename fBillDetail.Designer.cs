@@ -30,22 +30,20 @@ namespace CafeShop {
             this.count = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbTotalPrice = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tbTotalPrice = new System.Windows.Forms.Label();
             this.tbCheckout = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbCheckin = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.tbDiscount = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tbCashier = new System.Windows.Forms.TextBox();
             this.tbBillId = new System.Windows.Forms.TextBox();
-            this.tbDiscount = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbDiscountnum = new System.Windows.Forms.Label();
+            this.lbTotalnum = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lsvBill
@@ -61,7 +59,7 @@ namespace CafeShop {
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(12, 142);
             this.lsvBill.Name = "lsvBill";
-            this.lsvBill.Size = new System.Drawing.Size(641, 511);
+            this.lsvBill.Size = new System.Drawing.Size(641, 486);
             this.lsvBill.TabIndex = 1;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
@@ -86,37 +84,15 @@ namespace CafeShop {
             this.columnHeader4.Text = "Total";
             this.columnHeader4.Width = 180;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(550, 690);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 29);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "VNĐ";
-            // 
             // tbTotalPrice
             // 
-            this.tbTotalPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbTotalPrice.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tbTotalPrice.Location = new System.Drawing.Point(270, 683);
+            this.tbTotalPrice.AutoSize = true;
+            this.tbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tbTotalPrice.Location = new System.Drawing.Point(12, 671);
             this.tbTotalPrice.Name = "tbTotalPrice";
-            this.tbTotalPrice.ReadOnly = true;
-            this.tbTotalPrice.Size = new System.Drawing.Size(274, 36);
-            this.tbTotalPrice.TabIndex = 10;
-            this.tbTotalPrice.Text = "10000";
-            this.tbTotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(396, 656);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(148, 29);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Total Price:";
+            this.tbTotalPrice.Size = new System.Drawing.Size(178, 32);
+            this.tbTotalPrice.TabIndex = 9;
+            this.tbTotalPrice.Text = "Total Price: ";
             // 
             // tbCheckout
             // 
@@ -160,15 +136,15 @@ namespace CafeShop {
             this.tbCheckin.TabIndex = 6;
             this.tbCheckin.Text = "18/7/2002";
             // 
-            // label5
+            // tbDiscount
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(12, 658);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(101, 28);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Discount:";
+            this.tbDiscount.AutoSize = true;
+            this.tbDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbDiscount.Location = new System.Drawing.Point(12, 631);
+            this.tbDiscount.Name = "tbDiscount";
+            this.tbDiscount.Size = new System.Drawing.Size(182, 29);
+            this.tbDiscount.TabIndex = 13;
+            this.tbDiscount.Text = "Discount (10%):";
             // 
             // label6
             // 
@@ -212,28 +188,6 @@ namespace CafeShop {
             this.tbBillId.TabIndex = 17;
             this.tbBillId.Text = "2022";
             // 
-            // tbDiscount
-            // 
-            this.tbDiscount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbDiscount.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tbDiscount.Location = new System.Drawing.Point(110, 662);
-            this.tbDiscount.Name = "tbDiscount";
-            this.tbDiscount.ReadOnly = true;
-            this.tbDiscount.Size = new System.Drawing.Size(29, 24);
-            this.tbDiscount.TabIndex = 18;
-            this.tbDiscount.Text = "0";
-            this.tbDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(145, 659);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 28);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "%";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -253,27 +207,45 @@ namespace CafeShop {
             this.panel1.Size = new System.Drawing.Size(254, 72);
             this.panel1.TabIndex = 21;
             // 
+            // lbDiscountnum
+            // 
+            this.lbDiscountnum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbDiscountnum.Location = new System.Drawing.Point(455, 635);
+            this.lbDiscountnum.Name = "lbDiscountnum";
+            this.lbDiscountnum.Size = new System.Drawing.Size(198, 25);
+            this.lbDiscountnum.TabIndex = 22;
+            this.lbDiscountnum.Text = "100.000.000 VNĐ";
+            this.lbDiscountnum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbTotalnum
+            // 
+            this.lbTotalnum.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbTotalnum.Location = new System.Drawing.Point(464, 671);
+            this.lbTotalnum.Name = "lbTotalnum";
+            this.lbTotalnum.Size = new System.Drawing.Size(198, 29);
+            this.lbTotalnum.TabIndex = 23;
+            this.lbTotalnum.Text = "100.000.000 VNĐ";
+            this.lbTotalnum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // fBillDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 735);
+            this.ClientSize = new System.Drawing.Size(665, 721);
+            this.Controls.Add(this.lbTotalnum);
+            this.Controls.Add(this.lbDiscountnum);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tbCheckout);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.tbCashier);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.tbDiscount);
             this.Controls.Add(this.tbBillId);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.tbCheckin);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.tbDiscount);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.tbTotalPrice);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.lsvBill);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -293,21 +265,19 @@ namespace CafeShop {
         private System.Windows.Forms.ColumnHeader count;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbTotalPrice;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label tbTotalPrice;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbCheckout;
         private System.Windows.Forms.TextBox tbCheckin;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label tbDiscount;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbCashier;
         private System.Windows.Forms.TextBox tbBillId;
-        private System.Windows.Forms.TextBox tbDiscount;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lbDiscountnum;
+        private System.Windows.Forms.Label lbTotalnum;
     }
 }

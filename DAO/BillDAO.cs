@@ -72,7 +72,7 @@ namespace CafeShop.DAO {
         }
 
         public void CheckOut(int billId, int discount,decimal total) {
-            string sql = $"Update Bill SET status = 1, discount = {discount}, DateCheckOut = GETDATE(), total = {total} where Bill.id = {billId}" ;
+            string sql = $"[dbo].[USP_CheckOut] @billId = {billId}, @discount = {discount} , @total = {total}" ;
             DataProvider.Instance.ExecuteNonQuery(sql);
         }
 
